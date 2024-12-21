@@ -4,11 +4,11 @@ import {
   Box,
   Button,
   FormControl,
-  RadioGroup,
   FormLabel,
+  RadioGroup,
+  Typography,
   FormControlLabel,
   Radio,
-  Typography,
 } from "@mui/material";
 import { FormContext } from "../../../../context/FormContext";
 
@@ -74,18 +74,22 @@ export const WindowDecorationDetails = () => {
         height: "100%",
       }}
     >
-      {selectedFormValues.rooms.map((room, roomIndex) => (
-        <FormControl key={roomIndex}>
-          <Typography variant="body1">{room.name}</Typography>
-          <FormLabel>{getQuestions(room.windowDecoration || "")?.text}</FormLabel>
-          <RadioGroup value={room.windowDecorationDetails || ""} onChange={handleChange(roomIndex)}>
-            {getQuestions(room.windowDecoration || "")?.options.map((option, index) => (
-              <FormControlLabel key={index} value={option} control={<Radio />} label={option} />
-            ))}
-          </RadioGroup>
-        </FormControl>
-      ))}
-
+      {selectedFormValues.rooms
+        .filter((room) => room.windowDecoration !== "No window decoration needed")
+        .map((room, roomIndex) => (
+          <FormControl key={roomIndex}>
+            <Typography variant="body1">{room.name}</Typography>
+            <FormLabel>{room.windowDecoration}</FormLabel>
+            <RadioGroup
+              value={room.windowDecorationDetails || ""}
+              onChange={handleChange(roomIndex)}
+            >
+              {getQuestions(room.windowDecoration || "")?.options.map((option, index) => (
+                <FormControlLabel key={index} value={option} control={<Radio />} label={option} />
+              ))}
+            </RadioGroup>
+          </FormControl>
+        ))}
       <Box
         sx={{
           display: "flex",

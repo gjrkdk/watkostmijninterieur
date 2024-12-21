@@ -39,7 +39,7 @@ export const WindowDecoration = () => {
 
   const handleNext = () => {
     if (noWindowDecorationSelected) {
-      setActiveStep((prevActiveStep) => prevActiveStep + 2);
+      setActiveStep((prevActiveStep) => prevActiveStep + 3);
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
