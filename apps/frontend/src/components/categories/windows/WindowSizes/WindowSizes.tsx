@@ -22,14 +22,14 @@ export const WindowSizes = () => {
   const handleChange =
     (roomIndex: number, windowIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = event.target;
-      console.log("roomIndex", roomIndex, "windowIndex", windowIndex, "value", value);
+      console.log(roomIndex, windowIndex, value);
       setSelectedFormValues((prevValues) => {
         const updateRooms = [...prevValues.rooms];
-        const updateRoom = { ...updateRooms[roomIndex] };
-        const windowSizes = updateRoom.windowSizes || [];
+        const room = updateRooms[roomIndex];
+        const windowSizes = room.windowSizes || [];
         windowSizes[windowIndex] = value;
-        updateRoom.windowSizes = windowSizes;
-        updateRooms[roomIndex] = updateRoom;
+        room.windowSizes = windowSizes;
+        updateRooms[roomIndex] = room;
         return { ...prevValues, rooms: updateRooms };
       });
     };
