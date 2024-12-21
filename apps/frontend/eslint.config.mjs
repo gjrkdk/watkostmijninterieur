@@ -7,7 +7,6 @@ import pluginReact from "eslint-plugin-react";
 export default [
   {
     files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
-    ignores: ["node_modules", "dist", "build", "coverage"],
     settings: {
       react: {
         version: "detect",
@@ -29,5 +28,8 @@ export default [
     rules: {
       "react/react-in-jsx-scope": "off",
     },
+  },
+  {
+    ignores: ["node_modules", "dist", "build", "coverage", "webpack"],
   },
 ];

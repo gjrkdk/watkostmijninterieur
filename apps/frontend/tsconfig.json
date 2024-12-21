@@ -9,7 +9,7 @@
     "jsx": "react-jsx",                               
     "module": "ESNext",                               
     "moduleResolution": "Node",                     
-    "types": ["react", "react-dom", "@types/react", "@types/react-dom"],                                      
+    "types": ["react", "react-dom", "@types/react", "@types/react-dom", "@types/node"],                                      
     "resolveJsonModule": true,                       
     "isolatedModules": true,                          
     "esModuleInterop": true,                            
@@ -18,7 +18,7 @@
     "skipLibCheck": true,                     
     "allowJs": true,     
     "allowSyntheticDefaultImports": true,
-    "noEmit": true,     
+    "noEmit": false,     
   },
   "include": [
     "src",
