@@ -3,7 +3,8 @@
     "target": "ES6",                                  
     "lib": [
       "DOM",
-      "ESNext"
+      "ESNext",
+      "DOM.Iterable"
     ],                                        
     "jsx": "react-jsx",                               
     "module": "ESNext",                               
@@ -14,6 +15,14 @@
     "esModuleInterop": true,                            
     "forceConsistentCasingInFileNames": true,            
     "strict": true,                                      
-    "skipLibCheck": true                                
-  }
+    "skipLibCheck": true,                     
+    "allowJs": true,     
+    "allowSyntheticDefaultImports": true,
+    "noEmit": true,     
+  },
+  "include": [
+    "src",
+    "setupTests.ts",
+    "types.d.ts"
+  ],
 }
