@@ -8,6 +8,7 @@ import {
   WindowDecorationDetails,
   AmountWindows,
   WindowSizes,
+  CurtainSizes,
   Furniture,
 } from "../../categories/index";
 import { Contact } from "../Contact/Contact";
@@ -40,10 +41,12 @@ export const Steps = () => {
       case 7:
         return <WindowSizes />;
       case 8:
-        return <Furniture />;
+        return <CurtainSizes />;
       case 9:
-        return <Contact />;
+        return <Furniture />;
       case 10:
+        return <Contact />;
+      case 11:
         return <Confirmation />;
       default:
         return null;

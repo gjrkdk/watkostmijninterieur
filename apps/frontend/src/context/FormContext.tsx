@@ -19,7 +19,7 @@ interface IFormContextValue {
 export const FormContext = createContext<IFormContextValue | null>(null);
 
 export const FormProvider: React.FC<IFormContext> = ({ children }) => {
-  const [activeStep, setActiveStep] = useState<number>(4);
+  const [activeStep, setActiveStep] = useState<number>(6);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [price, setPrice] = useState<IPrice>({ min: 0, max: 0 });
   const [selectedFormValues, setSelectedFormValues] = useState<IFormData>({
@@ -29,7 +29,8 @@ export const FormProvider: React.FC<IFormContext> = ({ children }) => {
         floor: "Hardwood",
         roomSize: "Big (30 m² - 50 m²)",
         windowDecoration: "Pleated Curtains",
-        // amountWindows: "2",
+        windowDecorationDetails: "25mmm",
+        amountWindows: "2",
         // windowSizes: ["100cm B x 200cm HG", "200cm B x 150cm HG"],
         // furniture: ["Couch", "Armchair", "Coffee table"],
         // furnitureDetails: "Premium",
@@ -38,9 +39,9 @@ export const FormProvider: React.FC<IFormContext> = ({ children }) => {
         name: "Bedroom",
         floor: "Carpet",
         roomSize: "Big (30 m² - 50 m²)",
-        windowDecoration: "Inbetweens",
-        // windowDecorationDetails: "Comfort",
-        // amountWindows: "2",
+        windowDecoration: "Pleated Curtains",
+        windowDecorationDetails: "50mm",
+        amountWindows: "1",
         // windowSizes: ["550cm B", "400cm B"],
         // furniture: ["No furniture"],
       },

@@ -74,12 +74,12 @@ export const WindowDecorationDetails = () => {
         height: "100%",
       }}
     >
+      <Typography variant="h1">Make a selection</Typography>
       {selectedFormValues.rooms
         .filter((room) => room.windowDecoration !== "No window decoration needed")
         .map((room, roomIndex) => (
           <FormControl key={roomIndex}>
-            <Typography variant="body1">{room.name}</Typography>
-            <FormLabel>{room.windowDecoration}</FormLabel>
+            <FormLabel>{getQuestions(room.windowDecoration || "")?.text}</FormLabel>
             <RadioGroup
               value={room.windowDecorationDetails || ""}
               onChange={handleChange(roomIndex)}

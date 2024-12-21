@@ -1,6 +1,15 @@
 import React, { useContext } from "react";
 import { Questions } from "../../../../translations/questions";
-import { Box, Button, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Typography,
+  Select,
+  MenuItem,
+  SelectChangeEvent,
+} from "@mui/material";
 import { FormContext } from "../../../../context/FormContext";
 
 export const AmountWindows = () => {
@@ -10,7 +19,19 @@ export const AmountWindows = () => {
     return null;
   }
 
-  const { setActiveStep } = formContext;
+  const { setActiveStep, selectedFormValues, setSelectedFormValues } = formContext;
+
+  const handleChange = (roomIndex: number) => (event: SelectChangeEvent) => {
+    const { value } = event.target;
+    setSelectedFormValues((prevValues) => {
+      const updateRooms = [...prevValues.rooms];
+      updateRooms[roomIndex] = {
+        ...updateRooms[roomIndex],
+        amountWindows: value,
+      };
+      return { ...prevValues, rooms: updateRooms };
+    });
+  };
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -19,6 +40,10 @@ export const AmountWindows = () => {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
+
+  const noCurtainsOrInbetweens = selectedFormValues.rooms.filter(
+    (room) => room.windowDecoration !== "Curtains" && room.windowDecoration !== "Inbetweens",
+  );
 
   return (
     <Box
@@ -31,6 +56,18 @@ export const AmountWindows = () => {
       }}
     >
       <Typography variant="h1">{Questions[10].text}</Typography>
+      {noCurtainsOrInbetweens.map((room, roomIndex) => (
+        <FormControl key={roomIndex}>
+          <FormLabel>{room.name}</FormLabel>
+          <Select value={room.amountWindows || "1"} onChange={handleChange(roomIndex)}>
+            {Questions[10].options.map((amountWindows, index) => (
+              <MenuItem key={index} value={amountWindows}>
+                {amountWindows}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      ))}
       <Box
         sx={{
           display: "flex",
