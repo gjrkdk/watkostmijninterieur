@@ -41,9 +41,11 @@ export const AmountWindows = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const noCurtainsOrInbetweens = selectedFormValues.rooms.filter(
-    (room) => room.windowDecoration !== "Curtains" && room.windowDecoration !== "Inbetweens",
-  );
+  const noCurtainsOrInbetweens = selectedFormValues.rooms
+    .map((room, index) => ({ ...room, index: index }))
+    .filter(
+      (room) => room.windowDecoration !== "Curtains" && room.windowDecoration !== "Inbetweens",
+    );
 
   return (
     <Box
@@ -56,12 +58,12 @@ export const AmountWindows = () => {
       }}
     >
       <Typography variant="h1">{Questions[10].text}</Typography>
-      {noCurtainsOrInbetweens.map((room, roomIndex) => (
-        <FormControl key={roomIndex}>
+      {noCurtainsOrInbetweens.map((room, filteredRoomIndex) => (
+        <FormControl key={filteredRoomIndex}>
           <FormLabel>{room.name}</FormLabel>
-          <Select value={room.amountWindows || "1"} onChange={handleChange(roomIndex)}>
-            {Questions[10].options.map((amountWindows, index) => (
-              <MenuItem key={index} value={amountWindows}>
+          <Select value={room.amountWindows || "1"} onChange={handleChange(room.index)}>
+            {Questions[10].options.map((amountWindows, roomIndex) => (
+              <MenuItem key={roomIndex} value={amountWindows}>
                 {amountWindows}
               </MenuItem>
             ))}

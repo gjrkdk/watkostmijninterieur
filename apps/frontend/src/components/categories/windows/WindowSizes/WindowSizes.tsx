@@ -22,14 +22,13 @@ export const WindowSizes = () => {
   const handleChange =
     (roomIndex: number, windowIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = event.target;
-      console.log(roomIndex, windowIndex, value);
+      console.log("value", value, "roomIndex:", roomIndex, "windowIndex:", windowIndex);
       setSelectedFormValues((prevValues) => {
         const updateRooms = [...prevValues.rooms];
         const room = updateRooms[roomIndex];
         const windowSizes = room.windowSizes || [];
         windowSizes[windowIndex] = value;
-        room.windowSizes = windowSizes;
-        updateRooms[roomIndex] = room;
+        updateRooms[roomIndex] = { ...room, windowSizes };
         return { ...prevValues, rooms: updateRooms };
       });
     };
@@ -42,6 +41,12 @@ export const WindowSizes = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
+  const noCurtainsOrInbetweens = selectedFormValues.rooms
+    .map((room, index) => ({ ...room, index: index }))
+    .filter(
+      (room) => room.windowDecoration !== "Curtains" && room.windowDecoration !== "Inbetweens",
+    );
+
   return (
     <Box
       sx={{
@@ -53,16 +58,16 @@ export const WindowSizes = () => {
       }}
     >
       <Typography variant="h1">{Questions[11].text}</Typography>
-      {selectedFormValues.rooms.map((room, roomIndex) => (
-        <FormControl key={roomIndex}>
+      {noCurtainsOrInbetweens.map((room, filteredIndex) => (
+        <FormControl key={filteredIndex}>
           <Typography variant="subtitle1">{room.name}</Typography>
           {Array.from({ length: parseInt(room.amountWindows || "0") }).map((_, windowIndex) => (
             <Box key={windowIndex}>
               <Typography variant="subtitle1">{`Window ${windowIndex + 1}`}</Typography>
               <RadioGroup
-                name={`windowSizes-${roomIndex}-${windowIndex}`}
+                name={`windowSizes-${filteredIndex}-${windowIndex}`}
                 value={room.windowSizes?.[windowIndex] || ""}
-                onChange={handleChange(roomIndex, windowIndex)}
+                onChange={handleChange(room.index, windowIndex)}
               >
                 {Questions[11].options.map((windowSize, optionIndex) => (
                   <FormControlLabel
