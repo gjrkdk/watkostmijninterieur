@@ -2,16 +2,15 @@ import React, { useContext } from "react";
 import {
   Box,
   Typography,
+  Button,
   FormControl,
   FormControlLabel,
-  FormLabel,
-  FormGroup,
   Checkbox,
-  Button,
+  FormGroup,
+  FormLabel,
 } from "@mui/material";
 import { Questions } from "../../../../translations/questions";
 import { FormContext } from "../../../../context/FormContext";
-import { FurnitureQuality } from "../FurnitureQuality/FurnitureQuality";
 
 export const Furniture: React.FC = () => {
   const formContext = useContext(FormContext);
@@ -22,25 +21,18 @@ export const Furniture: React.FC = () => {
 
   const { setActiveStep, selectedFormValues, setSelectedFormValues } = formContext;
 
-  const handleChange = (roomName: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (roomIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
     setSelectedFormValues((prevValues) => {
-      const updatedRooms = prevValues.rooms.map((room) => {
-        if (room.name === roomName) {
-          let updatedFurniture = room.furniture || [];
-          if (name === "No furniture" && checked) {
-            updatedFurniture = ["No furniture"];
-          } else if (checked) {
-            updatedFurniture = updatedFurniture.filter((item) => item !== "No furniture");
-            updatedFurniture.push(name);
-          } else {
-            updatedFurniture = updatedFurniture.filter((item) => item !== name);
-          }
-          return { ...room, furniture: updatedFurniture };
-        }
-        return room;
-      });
-      return { ...prevValues, rooms: updatedRooms };
+      const updateRooms = [...prevValues.rooms];
+      const room = updateRooms[roomIndex];
+      if (checked) {
+        room.furniture = room.furniture ? [...room.furniture, name] : [name];
+      } else {
+        room.furniture = room.furniture?.filter((f) => f !== name);
+      }
+      updateRooms[roomIndex] = room;
+      return { ...prevValues, rooms: updateRooms };
     });
   };
 
@@ -65,27 +57,29 @@ export const Furniture: React.FC = () => {
       <Typography variant="h1">{Questions[13].text}</Typography>
       {selectedFormValues.rooms.map((room, roomIndex) => (
         <FormControl key={roomIndex}>
-          <FormLabel>{`Select the furniture for ${room.name}`}</FormLabel>
+          <FormLabel>{room.name}</FormLabel>
           <FormGroup>
-            {Questions[13].options.map((furniture, furnitureIndex) => (
-              <FormControlLabel
-                key={furnitureIndex}
-                label={furniture}
-                control={
-                  <Checkbox
-                    name={furniture}
-                    checked={room.furniture?.includes(furniture) || false}
-                    onChange={handleChange(room.name)}
+            {Questions[13].options.map((furniture, index) => {
+              const isSelected = room.furniture?.some((f) => f === furniture) || false;
+              return (
+                <FormControl key={index}>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={isSelected}
+                        onChange={handleChange(roomIndex)}
+                        name={furniture || ""}
+                      />
+                    }
+                    label={furniture}
                   />
-                }
-              />
-            ))}
+                </FormControl>
+              );
+            })}
           </FormGroup>
-          {!room.furniture?.includes("No furniture") &&
-            room.furniture &&
-            room.furniture.length > 0 && <FurnitureQuality roomName={room.name} />}
         </FormControl>
       ))}
+
       <Box
         sx={{
           display: "flex",
