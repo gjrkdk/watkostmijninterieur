@@ -24,6 +24,7 @@ export const WindowDecoration = () => {
   const noWindowDecorationSelected = selectedFormValues.rooms.every(
     (room) => room.windowDecoration === "No window decoration needed",
   );
+  console.log("noWindowDecorationSelected", noWindowDecorationSelected);
 
   const handleChange = (roomIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -39,7 +40,7 @@ export const WindowDecoration = () => {
 
   const handleNext = () => {
     if (noWindowDecorationSelected) {
-      setActiveStep((prevActiveStep) => prevActiveStep + 3);
+      setActiveStep((prevActiveStep) => prevActiveStep + 5);
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }

@@ -44,7 +44,10 @@ export const AmountWindows = () => {
   const noCurtainsOrInbetweens = selectedFormValues.rooms
     .map((room, index) => ({ ...room, index: index }))
     .filter(
-      (room) => room.windowDecoration !== "Curtains" && room.windowDecoration !== "Inbetweens",
+      (room) =>
+        room.windowDecoration !== "Curtains" &&
+        room.windowDecoration !== "Inbetweens" &&
+        room.windowDecoration !== "No window decoration needed",
     );
 
   return (
@@ -61,7 +64,7 @@ export const AmountWindows = () => {
       {noCurtainsOrInbetweens.map((room, filteredRoomIndex) => (
         <FormControl key={filteredRoomIndex}>
           <FormLabel>{room.name}</FormLabel>
-          <Select value={room.amountWindows || "1"} onChange={handleChange(room.index)}>
+          <Select value={room.amountWindows || "0"} onChange={handleChange(room.index)}>
             {Questions[10].options.map((amountWindows, roomIndex) => (
               <MenuItem key={roomIndex} value={amountWindows}>
                 {amountWindows}

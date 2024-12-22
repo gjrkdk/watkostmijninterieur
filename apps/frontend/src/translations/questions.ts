@@ -62,7 +62,7 @@ export const Questions: IQuestionItem[] = [
   {
     id: 10,
     text: "How many windows do you like to decorate in the selected room?",
-    options: ["1", "2", "3", "4", "5"],
+    options: ["0", "1", "2", "3", "4", "5"],
   },
   {
     id: 11,

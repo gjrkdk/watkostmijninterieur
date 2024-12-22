@@ -44,7 +44,10 @@ export const WindowSizes = () => {
   const noCurtainsOrInbetweens = selectedFormValues.rooms
     .map((room, index) => ({ ...room, index: index }))
     .filter(
-      (room) => room.windowDecoration !== "Curtains" && room.windowDecoration !== "Inbetweens",
+      (room) =>
+        room.windowDecoration !== "Curtains" &&
+        room.windowDecoration !== "Inbetweens" &&
+        room.windowDecoration !== "No window decoration needed",
     );
 
   return (

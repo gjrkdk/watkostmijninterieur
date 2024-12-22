@@ -34,7 +34,11 @@ export const WindowDecorationDetails = () => {
   };
 
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if (containsCurtainsInbetween) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 3);
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }
   };
 
   const handleBack = () => {
@@ -62,7 +66,18 @@ export const WindowDecorationDetails = () => {
     }
   };
 
-  console.log(selectedFormValues);
+  const containsCurtainsInbetween = selectedFormValues.rooms.every(
+    (room) =>
+      room.windowDecoration === "Curtains" ||
+      room.windowDecoration === "Inbetweens" ||
+      room.windowDecoration === "No window decoration needed",
+  );
+  console.log("containsCurtainsOrInbetweens", containsCurtainsInbetween);
+
+  const onlyWindowDecoration = selectedFormValues.rooms
+    .map((room, index) => ({ ...room, index: index }))
+    .filter((room) => room.windowDecoration !== "No window decoration needed");
+  console.log(onlyWindowDecoration);
 
   return (
     <Box
@@ -75,7 +90,20 @@ export const WindowDecorationDetails = () => {
       }}
     >
       <Typography variant="h1">Make a selection</Typography>
-      {selectedFormValues.rooms
+      {onlyWindowDecoration.map((room, roomIndex) => (
+        <FormControl key={roomIndex}>
+          <FormLabel>{getQuestions(room.windowDecoration || "")?.text}</FormLabel>
+          <RadioGroup
+            value={room.windowDecorationDetails || ""}
+            onChange={handleChange(room.index)}
+          >
+            {getQuestions(room.windowDecoration || "")?.options.map((option, index) => (
+              <FormControlLabel key={index} value={option} control={<Radio />} label={option} />
+            ))}
+          </RadioGroup>
+        </FormControl>
+      ))}
+      {/* {selectedFormValues.rooms
         .filter((room) => room.windowDecoration !== "No window decoration needed")
         .map((room, roomIndex) => (
           <FormControl key={roomIndex}>
@@ -89,7 +117,7 @@ export const WindowDecorationDetails = () => {
               ))}
             </RadioGroup>
           </FormControl>
-        ))}
+        ))} */}
       <Box
         sx={{
           display: "flex",
