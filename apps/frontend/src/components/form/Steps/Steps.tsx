@@ -14,6 +14,7 @@ import {
 import { Contact } from "../Contact/Contact";
 import { FormContext } from "../../../context/FormContext";
 import { Confirmation } from "../Confirmation/Confirmation";
+import { FurnitureDetails } from "../../categories/furniture/FurnitureDetails/FurnitureDetails";
 
 export const Steps = () => {
   const formContext = useContext(FormContext);
@@ -45,8 +46,10 @@ export const Steps = () => {
       case 9:
         return <Furniture />;
       case 10:
-        return <Contact />;
+        return <FurnitureDetails />;
       case 11:
+        return <Contact />;
+      case 12:
         return <Confirmation />;
       default:
         return null;

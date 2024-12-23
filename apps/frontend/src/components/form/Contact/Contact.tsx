@@ -64,8 +64,16 @@ export const Contact = () => {
   };
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    if (noFurnitureSelected) {
+      setActiveStep((prevActiveStep) => prevActiveStep - 2);
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    }
   };
+
+  const noFurnitureSelected = selectedFormValues.rooms.every((room) =>
+    room.furniture?.includes("No furniture"),
+  );
 
   return (
     <form

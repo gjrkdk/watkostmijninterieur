@@ -12,7 +12,7 @@ import {
 import { Questions } from "../../../../translations/questions";
 import { FormContext } from "../../../../context/FormContext";
 
-export const Furniture: React.FC = () => {
+export const Furniture = () => {
   const formContext = useContext(FormContext);
 
   if (!formContext) {
@@ -41,8 +41,16 @@ export const Furniture: React.FC = () => {
   };
 
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if (noFurnitureSelected) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 2);
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }
   };
+
+  const noFurnitureSelected = selectedFormValues.rooms.every((room) =>
+    room.furniture?.includes("No furniture"),
+  );
 
   return (
     <Box

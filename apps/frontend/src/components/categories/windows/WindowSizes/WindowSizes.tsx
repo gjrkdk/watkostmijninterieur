@@ -38,7 +38,11 @@ export const WindowSizes = () => {
   };
 
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if (containsCurtainsInbetween) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep + 2);
+    }
   };
 
   const noCurtainsOrInbetweens = selectedFormValues.rooms
@@ -49,6 +53,13 @@ export const WindowSizes = () => {
         room.windowDecoration !== "Inbetweens" &&
         room.windowDecoration !== "No window decoration needed",
     );
+
+  const containsCurtainsInbetween = selectedFormValues.rooms.every(
+    (room) =>
+      room.windowDecoration === "Curtains" ||
+      room.windowDecoration === "Inbetweens" ||
+      room.windowDecoration === "No window decoration needed",
+  );
 
   return (
     <Box
