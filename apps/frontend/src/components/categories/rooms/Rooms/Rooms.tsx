@@ -1,75 +1,114 @@
-import React, { useContext } from "react";
-import { Questions } from "../../../../translations/questions";
-import {
-  Box,
-  Typography,
-  Button,
-  FormControl,
-  FormControlLabel,
-  Checkbox,
-  FormGroup,
-} from "@mui/material";
-import { FormContext } from "../../../../context/FormContext";
+import { useFormContext } from "../../../../context/FormContext";
+import { Box, Typography, FormControl, FormControlLabel, Checkbox, FormGroup } from "@mui/material";
 
 export const Rooms = () => {
-  const formContext = useContext(FormContext);
-
-  if (!formContext) {
-    return null;
-  }
-
-  const { setActiveStep, selectedFormValues, setSelectedFormValues } = formContext;
+  const { selectedFormValues, setSelectedFormValues } = useFormContext();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
+    console.log("name", name, "checked", checked);
     setSelectedFormValues((prevValues) => {
-      let updateRooms = [];
-      if (checked) {
-        updateRooms = [...prevValues.rooms, { name }];
-      } else {
-        updateRooms = prevValues.rooms.filter((room) => room.name !== name);
-      }
-      return { ...prevValues, rooms: updateRooms };
+      const updatedRooms = prevValues.rooms.map((room) => {
+        if (room.label === name) {
+          return { ...room, isSelected: checked };
+        }
+        return room;
+      });
+      return { ...prevValues, rooms: updatedRooms };
     });
   };
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 2, height: "100%" }}>
-      <Typography variant="h1">{Questions[0].text}</Typography>
-      {Questions[0].options.map((room, index) => {
-        const isSelected = selectedFormValues.rooms.some((r) => r.name === room);
-        return (
-          <FormControl key={index}>
-            <FormGroup>
-              <FormControlLabel
-                control={<Checkbox checked={isSelected} onChange={handleChange} name={room} />}
-                label={room}
-              />
-            </FormGroup>
-          </FormControl>
-        );
-      })}
-      <Box
-        sx={{
-          display: "flex",
-          width: "100%",
-          marginTop: "auto",
-          justifyContent: "space-between",
-        }}
-      >
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleNext}
-          sx={{ marginLeft: "auto" }}
-        >
-          Next
-        </Button>
-      </Box>
+    <Box>
+      <Typography variant="h6">Which room do you like to decorate?</Typography>
+      {selectedFormValues.rooms.map((room) => (
+        <FormControl key={room.id}>
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <Checkbox checked={room.isSelected} onChange={handleChange} name={room.label} />
+              }
+              label={room.label}
+            />
+          </FormGroup>
+        </FormControl>
+      ))}
     </Box>
   );
 };
+
+// import React, { useContext } from "react";
+// import { Questions } from "../../../../translations/questions";
+// import {
+//   Box,
+//   Typography,
+//   Button,
+//   FormControl,
+//   FormControlLabel,
+//   Checkbox,
+//   FormGroup,
+// } from "@mui/material";
+// import { FormContext } from "../../../../context/FormContext";
+
+// export const Rooms = () => {
+//   const formContext = useContext(FormContext);
+
+//   if (!formContext) {
+//     return null;
+//   }
+
+//   const { setActiveStep, selectedFormValues, setSelectedFormValues } = formContext;
+
+//   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+//     const { name, checked } = event.target;
+//     setSelectedFormValues((prevValues) => {
+//       let updateRooms = [];
+//       if (checked) {
+//         updateRooms = [...prevValues.rooms, { name }];
+//       } else {
+//         updateRooms = prevValues.rooms.filter((room) => room.name !== name);
+//       }
+//       return { ...prevValues, rooms: updateRooms };
+//     });
+//   };
+
+//   const handleNext = () => {
+//     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+//   };
+
+//   return (
+//     <Box sx={{ display: "flex", flexDirection: "column", gap: 2, height: "100%" }}>
+//       <Typography variant="h1">{Questions[0].text}</Typography>
+//       {Questions[0].options.map((room, index) => {
+//         const isSelected = selectedFormValues.rooms.some((r) => r.name === room);
+//         return (
+//           <FormControl key={index}>
+//             <FormGroup>
+//               <FormControlLabel
+//                 control={<Checkbox checked={isSelected} onChange={handleChange} name={room} />}
+//                 label={room}
+//               />
+//             </FormGroup>
+//           </FormControl>
+//         );
+//       })}
+//       <Box
+//         sx={{
+//           display: "flex",
+//           width: "100%",
+//           marginTop: "auto",
+//           justifyContent: "space-between",
+//         }}
+//       >
+//         <Button
+//           variant="contained"
+//           color="primary"
+//           onClick={handleNext}
+//           sx={{ marginLeft: "auto" }}
+//         >
+//           Next
+//         </Button>
+//       </Box>
+//     </Box>
+//   );
+// };

@@ -1,7 +1,7 @@
-import { Steps } from "./components/form/Steps/Steps";
-import { FormProvider } from "./context/FormContext";
 import { ThemeProvider } from "@mui/material/styles";
+import { FormProvider } from "./context/FormProvider";
 import { CssBaseline } from "@mui/material";
+import { MultiStep } from "./components/form/MultiStep/MultiStep";
 import { theme } from "./theme";
 
 export const App = () => {
@@ -9,7 +9,7 @@ export const App = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <FormProvider>
-        <Steps />
+        <MultiStep />
       </FormProvider>
     </ThemeProvider>
   );
