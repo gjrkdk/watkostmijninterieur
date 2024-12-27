@@ -1,3 +1,61 @@
+import { useFormContext } from "../../../../context/FormContext";
+import {
+  Box,
+  Typography,
+  FormControl,
+  RadioGroup,
+  FormLabel,
+  FormControlLabel,
+  Radio,
+} from "@mui/material";
+
+export const WindowDecoration = () => {
+  const { selectedFormValues, setSelectedFormValues } = useFormContext();
+
+  const handleChange = (roomLabel: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setSelectedFormValues((prevValues) => {
+      const updatedRooms = prevValues.rooms.map((room) => {
+        if (room.label === roomLabel) {
+          const updatedWindowDecoration = room.windowDecoration?.map((windowDecoration) => ({
+            ...windowDecoration,
+            isSelected: windowDecoration.label === value,
+          }));
+          return { ...room, windowDecoration: updatedWindowDecoration };
+        }
+        return room;
+      });
+      return { ...prevValues, rooms: updatedRooms };
+    });
+  };
+
+  return (
+    <Box>
+      <Typography variant="h6">Which window decoration would you like choose?</Typography>
+      {selectedFormValues.rooms
+        .filter((room) => room.isSelected)
+        .map((room) => (
+          <FormControl key={room.id}>
+            <FormLabel>{room.label}</FormLabel>
+            <RadioGroup
+              value={room.windowDecoration?.find((f) => f.isSelected)?.label || ""}
+              onChange={handleChange(room.label)}
+            >
+              {room.windowDecoration?.map((windowDecoration) => (
+                <FormControlLabel
+                  key={windowDecoration.id}
+                  value={windowDecoration.label}
+                  control={<Radio />}
+                  label={windowDecoration.label}
+                />
+              ))}
+            </RadioGroup>
+          </FormControl>
+        ))}
+    </Box>
+  );
+};
+
 // import React, { useContext } from "react";
 // import { Questions } from "../../../../translations/questions";
 // import {

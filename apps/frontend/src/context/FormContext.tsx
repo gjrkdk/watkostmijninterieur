@@ -1,5 +1,5 @@
 import { createContext, useContext, Dispatch, SetStateAction } from "react";
-import { IOptions } from "./initialState";
+import { IOptions } from "./initialRoomState";
 
 export interface IFormContext {
   activeStep: number;

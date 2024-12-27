@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FormContext, IFormDataType, IContactDetails } from "./FormContext";
-import { initialRoomState } from "./initialState";
+import { initialRoomState } from "./initialRoomState";
 
 interface IFormContext {
   children: React.ReactNode;
