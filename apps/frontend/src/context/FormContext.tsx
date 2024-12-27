@@ -1,5 +1,5 @@
 import { createContext, useContext, Dispatch, SetStateAction } from "react";
-import { IOption } from "./initialState";
+import { IOptions } from "./initialState";
 
 export interface IFormContext {
   activeStep: number;
@@ -11,16 +11,7 @@ export interface IFormContext {
 }
 
 export interface IFormDataType {
-  rooms: IOption[];
-  // floors: IOption;
-  // roomSizes: string;
-  // windowDecoration?: string;
-  // windowDecorationDetails?: string;
-  // curtainSize?: string;
-  // amountWindows?: string;
-  // windowSizes?: string[];
-  // furniture?: string[];
-  // furnitureDetails?: string;
+  rooms: IOptions[];
 }
 
 export interface IContactDetails {

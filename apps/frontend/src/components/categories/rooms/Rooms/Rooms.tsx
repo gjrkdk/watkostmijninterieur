@@ -6,7 +6,6 @@ export const Rooms = () => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
-    console.log("name", name, "checked", checked);
     setSelectedFormValues((prevValues) => {
       const updatedRooms = prevValues.rooms.map((room) => {
         if (room.label === name) {

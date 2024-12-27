@@ -1,4 +1,4 @@
-import { Rooms } from "../../categories/index";
+import { Rooms, Floors } from "../../categories/index";
 
 interface IStepConfig {
   id: number;
@@ -9,5 +9,9 @@ export const steps: IStepConfig[] = [
   {
     id: 0,
     component: Rooms,
+  },
+  {
+    id: 1,
+    component: Floors,
   },
 ];
