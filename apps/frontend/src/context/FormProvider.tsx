@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FormContext, IFormDataType, IContactDetails } from "./FormContext";
-import { initialState } from "./initialState";
+import { initialRoomState } from "./initialState";
 
 interface IFormContext {
   children: React.ReactNode;
@@ -9,7 +9,7 @@ interface IFormContext {
 export const FormProvider: React.FC<IFormContext> = ({ children }) => {
   const [activeStep, setActiveStep] = useState<number>(0);
   const [selectedFormValues, setSelectedFormValues] = useState<IFormDataType>({
-    rooms: initialState,
+    rooms: initialRoomState,
   });
   const [contactDetails, setContactDetails] = useState<IContactDetails>({
     firstName: "",
