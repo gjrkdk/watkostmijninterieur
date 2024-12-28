@@ -21,15 +21,9 @@ export const WindowDecoration = () => {
             ...decoration,
             isSelected: decoration.label === value,
           }));
-          const selectedDecoration = updatedWindowDecoration?.find((d) => d.isSelected);
-
           return {
             ...room,
             windowDecoration: updatedWindowDecoration,
-            windowDecorationDetails: room.windowDecorationDetails?.map((detail) => ({
-              ...detail,
-              isSelected: detail.label === selectedDecoration?.label,
-            })),
           };
         }
         return room;

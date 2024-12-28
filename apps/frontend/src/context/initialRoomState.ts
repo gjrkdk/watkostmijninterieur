@@ -33,7 +33,9 @@ const windowDecorations: IBase[] = [
   { id: 6, label: "No window decoration needed", isSelected: false },
 ];
 
-interface IWindowDecorationDetail extends IBase {
+interface IWindowDecorationDetail {
+  id: number;
+  label: string;
   details: IBase[];
 }
 
@@ -41,7 +43,6 @@ const windowDecorationDetails: IWindowDecorationDetail[] = [
   {
     id: 0,
     label: "Curtains",
-    isSelected: false,
     details: [
       { id: 0, label: "Essential", isSelected: false },
       { id: 1, label: "Comfort", isSelected: false },
@@ -51,7 +52,6 @@ const windowDecorationDetails: IWindowDecorationDetail[] = [
   {
     id: 1,
     label: "Wooden Blinds",
-    isSelected: false,
     details: [
       { id: 0, label: "50mm", isSelected: false },
       { id: 1, label: "60mm", isSelected: false },
@@ -60,7 +60,6 @@ const windowDecorationDetails: IWindowDecorationDetail[] = [
   {
     id: 2,
     label: "Aluminum Blinds",
-    isSelected: false,
     details: [
       { id: 0, label: "25mm", isSelected: false },
       { id: 1, label: "50mm", isSelected: false },
@@ -69,7 +68,6 @@ const windowDecorationDetails: IWindowDecorationDetail[] = [
   {
     id: 3,
     label: "Duet Curtains",
-    isSelected: false,
     details: [
       { id: 0, label: "25mm", isSelected: false },
       { id: 1, label: "32mm", isSelected: false },
@@ -78,7 +76,6 @@ const windowDecorationDetails: IWindowDecorationDetail[] = [
   {
     id: 4,
     label: "Pleated Curtains",
-    isSelected: false,
     details: [
       { id: 0, label: "20mm", isSelected: false },
       { id: 1, label: "32mm", isSelected: false },
@@ -87,7 +84,6 @@ const windowDecorationDetails: IWindowDecorationDetail[] = [
   {
     id: 5,
     label: "Inbetweens",
-    isSelected: false,
     details: [
       { id: 0, label: "Essential", isSelected: false },
       { id: 1, label: "Comfort", isSelected: false },
