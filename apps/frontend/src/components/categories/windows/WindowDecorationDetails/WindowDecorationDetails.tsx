@@ -12,43 +12,55 @@ import {
 export const WindowDecorationDetails = () => {
   const { selectedFormValues, setSelectedFormValues } = useFormContext();
 
-  const handleChange = (roomIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (roomLabel: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    console.log("value", value, "roomIndex", roomIndex);
     setSelectedFormValues((prevValues) => {
-      const updateRooms = [...prevValues.rooms];
-      updateRooms[roomIndex] = {
-        ...updateRooms[roomIndex],
-        windowDecorationDetails: updateRooms[roomIndex].windowDecorationDetails?.map((f) =>
-          f.label === value ? { ...f, isSelected: true } : { ...f, isSelected: false },
-        ),
-      };
-      return { ...prevValues, rooms: updateRooms };
+      const updatedRooms = prevValues.rooms.map((room) => {
+        if (room.label === roomLabel) {
+          const updatedDetails = room.windowDecorationDetails?.map((detail) => ({
+            ...detail,
+            isSelected: detail.label === value,
+          }));
+          return { ...room, windowDecorationDetails: updatedDetails };
+        }
+        return room;
+      });
+      return { ...prevValues, rooms: updatedRooms };
     });
   };
 
   return (
     <Box>
-      <Typography variant="h6">Make a selection</Typography>
+      <Typography variant="h6">Select details for your window decoration</Typography>
       {selectedFormValues.rooms
         .filter((room) => room.isSelected)
         .map((room) => (
-          <FormControl key={room.id}>
-            <FormLabel>{room.label}</FormLabel>
-            <RadioGroup
-              value={room.windowDecorationDetails?.find((f) => f.isSelected)?.label || ""}
-              onChange={handleChange(room.id)}
-            >
-              {room.windowDecorationDetails?.map((windowDecorationDetail) => (
-                <FormControlLabel
-                  key={windowDecorationDetail.id}
-                  value={windowDecorationDetail.label}
-                  control={<Radio />}
-                  label={windowDecorationDetail.label}
-                />
+          <Box key={room.id}>
+            <Typography variant="subtitle1">{room.label}</Typography>
+            {room.windowDecorationDetails
+              ?.filter(
+                (detail) =>
+                  room.windowDecoration?.find((d) => d.isSelected)?.label === detail.label,
+              )
+              .map((detail) => (
+                <FormControl key={detail.id}>
+                  <FormLabel>{detail.label}</FormLabel>
+                  <RadioGroup
+                    value={detail.details.find((d) => d.isSelected)?.label || ""}
+                    onChange={handleChange(room.label)}
+                  >
+                    {detail.details.map((subdetail) => (
+                      <FormControlLabel
+                        key={subdetail.id}
+                        value={subdetail.label}
+                        control={<Radio />}
+                        label={subdetail.label}
+                      />
+                    ))}
+                  </RadioGroup>
+                </FormControl>
               ))}
-            </RadioGroup>
-          </FormControl>
+          </Box>
         ))}
     </Box>
   );

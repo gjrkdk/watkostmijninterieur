@@ -17,11 +17,20 @@ export const WindowDecoration = () => {
     setSelectedFormValues((prevValues) => {
       const updatedRooms = prevValues.rooms.map((room) => {
         if (room.label === roomLabel) {
-          const updatedWindowDecoration = room.windowDecoration?.map((windowDecoration) => ({
-            ...windowDecoration,
-            isSelected: windowDecoration.label === value,
+          const updatedWindowDecoration = room.windowDecoration?.map((decoration) => ({
+            ...decoration,
+            isSelected: decoration.label === value,
           }));
-          return { ...room, windowDecoration: updatedWindowDecoration };
+          const selectedDecoration = updatedWindowDecoration?.find((d) => d.isSelected);
+
+          return {
+            ...room,
+            windowDecoration: updatedWindowDecoration,
+            windowDecorationDetails: room.windowDecorationDetails?.map((detail) => ({
+              ...detail,
+              isSelected: detail.label === selectedDecoration?.label,
+            })),
+          };
         }
         return room;
       });
@@ -31,22 +40,22 @@ export const WindowDecoration = () => {
 
   return (
     <Box>
-      <Typography variant="h6">Which window decoration would you like choose?</Typography>
+      <Typography variant="h6">Which window decoration would you like to choose?</Typography>
       {selectedFormValues.rooms
         .filter((room) => room.isSelected)
         .map((room) => (
           <FormControl key={room.id}>
             <FormLabel>{room.label}</FormLabel>
             <RadioGroup
-              value={room.windowDecoration?.find((f) => f.isSelected)?.label || ""}
+              value={room.windowDecoration?.find((d) => d.isSelected)?.label || ""}
               onChange={handleChange(room.label)}
             >
-              {room.windowDecoration?.map((windowDecoration) => (
+              {room.windowDecoration?.map((decoration) => (
                 <FormControlLabel
-                  key={windowDecoration.id}
-                  value={windowDecoration.label}
+                  key={decoration.id}
+                  value={decoration.label}
                   control={<Radio />}
-                  label={windowDecoration.label}
+                  label={decoration.label}
                 />
               ))}
             </RadioGroup>

@@ -8,7 +8,7 @@ export interface IOptions extends IBase {
   floors: IBase[];
   roomSizes: IBase[];
   windowDecoration?: IBase[];
-  windowDecorationDetails?: IBase[];
+  windowDecorationDetails?: IWindowDecorationDetail[];
 }
 
 const floors: IBase[] = [
