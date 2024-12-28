@@ -4,11 +4,24 @@ interface IBase {
   isSelected: boolean;
 }
 
+interface IWindowDecorationDetail {
+  id: number;
+  label: string;
+  details: IBase[];
+}
+
+interface IAmountWindows {
+  id: number;
+  amount: string;
+  isSelected: boolean;
+}
+
 export interface IOptions extends IBase {
   floors: IBase[];
   roomSizes: IBase[];
   windowDecoration?: IBase[];
   windowDecorationDetails?: IWindowDecorationDetail[];
+  amountWindows?: IAmountWindows[];
 }
 
 const floors: IBase[] = [
@@ -32,12 +45,6 @@ const windowDecorations: IBase[] = [
   { id: 5, label: "Inbetweens", isSelected: false },
   { id: 6, label: "No window decoration needed", isSelected: false },
 ];
-
-interface IWindowDecorationDetail {
-  id: number;
-  label: string;
-  details: IBase[];
-}
 
 const windowDecorationDetails: IWindowDecorationDetail[] = [
   {
@@ -92,6 +99,24 @@ const windowDecorationDetails: IWindowDecorationDetail[] = [
   },
 ];
 
+const amountWindows: IAmountWindows[] = [
+  { id: 0, amount: "1", isSelected: false },
+  { id: 1, amount: "2", isSelected: false },
+  { id: 2, amount: "3", isSelected: false },
+  { id: 3, amount: "4", isSelected: false },
+  { id: 4, amount: "5", isSelected: false },
+  { id: 5, amount: "6", isSelected: false },
+];
+
+// const generateAmountWindows = (): IAmountWindows[] => [
+//   { id: 0, amount: "1", isSelected: false },
+//   { id: 1, amount: "2", isSelected: false },
+//   { id: 2, amount: "3", isSelected: false },
+//   { id: 3, amount: "4", isSelected: false },
+//   { id: 4, amount: "5", isSelected: false },
+//   { id: 5, amount: "6", isSelected: false },
+// ];
+
 const rooms: string[] = ["Livingroom", "Bedroom", "Kitchen"];
 
 export const initialRoomState: IOptions[] = rooms.map((room, index) => ({
@@ -102,4 +127,5 @@ export const initialRoomState: IOptions[] = rooms.map((room, index) => ({
   roomSizes: [...roomSizes],
   windowDecoration: [...windowDecorations],
   windowDecorationDetails: [...windowDecorationDetails],
+  amountWindows: [...amountWindows],
 }));

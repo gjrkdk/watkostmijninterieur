@@ -1,3 +1,62 @@
+import { useFormContext } from "../../../../context/FormContext";
+import {
+  Box,
+  FormControl,
+  FormLabel,
+  Typography,
+  Select,
+  MenuItem,
+  SelectChangeEvent,
+} from "@mui/material";
+
+export const AmountWindows = () => {
+  const { selectedFormValues, setSelectedFormValues } = useFormContext();
+
+  const handleChange = (roomId: number) => (event: SelectChangeEvent) => {
+    const selectedAmount = event.target.value;
+
+    setSelectedFormValues((prevValues) => {
+      const updatedRooms = prevValues.rooms.map((room) => {
+        if (room.id === roomId) {
+          return {
+            ...room,
+            amountWindows: room.amountWindows?.map((window) => ({
+              ...window,
+              isSelected: window.amount === selectedAmount,
+            })),
+          };
+        }
+        return room;
+      });
+
+      return { ...prevValues, rooms: updatedRooms };
+    });
+  };
+
+  return (
+    <Box>
+      <Typography variant="h6">How many windows do you want to decorate?</Typography>
+      {selectedFormValues.rooms
+        .filter((room) => room.isSelected)
+        .map((room) => (
+          <FormControl key={room.id}>
+            <FormLabel>{room.label}</FormLabel>
+            <Select
+              value={room.amountWindows?.find((window) => window.isSelected)?.amount || "1"}
+              onChange={handleChange(room.id)}
+            >
+              {room.amountWindows?.map((window) => (
+                <MenuItem key={window.id} value={window.amount}>
+                  {window.amount}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        ))}
+    </Box>
+  );
+};
+
 // import React, { useContext } from "react";
 // import { Questions } from "../../../../translations/questions";
 // import {
