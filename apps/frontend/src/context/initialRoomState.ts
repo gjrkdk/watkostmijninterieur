@@ -22,6 +22,7 @@ export interface IOptions extends IBase {
   windowDecoration?: IBase[];
   windowDecorationDetails?: IWindowDecorationDetail[];
   amountWindows?: IAmountWindows[];
+  windowSizes?: string[];
 }
 
 const floors: IBase[] = [
@@ -108,15 +109,6 @@ const amountWindows: IAmountWindows[] = [
   { id: 5, amount: "6", isSelected: false },
 ];
 
-// const generateAmountWindows = (): IAmountWindows[] => [
-//   { id: 0, amount: "1", isSelected: false },
-//   { id: 1, amount: "2", isSelected: false },
-//   { id: 2, amount: "3", isSelected: false },
-//   { id: 3, amount: "4", isSelected: false },
-//   { id: 4, amount: "5", isSelected: false },
-//   { id: 5, amount: "6", isSelected: false },
-// ];
-
 const rooms: string[] = ["Livingroom", "Bedroom", "Kitchen"];
 
 export const initialRoomState: IOptions[] = rooms.map((room, index) => ({
@@ -128,4 +120,5 @@ export const initialRoomState: IOptions[] = rooms.map((room, index) => ({
   windowDecoration: [...windowDecorations],
   windowDecorationDetails: [...windowDecorationDetails],
   amountWindows: [...amountWindows],
+  windowSizes: [],
 }));
