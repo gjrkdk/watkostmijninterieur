@@ -109,6 +109,14 @@ const amountWindows: IAmountWindows[] = [
   { id: 5, amount: "6", isSelected: false },
 ];
 
+export const windowSizes: string[] = [
+  "100cm B x 200cm HG",
+  "200cm B x 150cm HG",
+  "150cm B x 100cm HG",
+  "70cm B x 250cm HG",
+  "250cm B x 200cm HG",
+];
+
 const rooms: string[] = ["Livingroom", "Bedroom", "Kitchen"];
 
 export const initialRoomState: IOptions[] = rooms.map((room, index) => ({

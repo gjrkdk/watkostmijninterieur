@@ -1,6 +1,6 @@
 import { useFormContext } from "../../../../context/FormContext";
 import { Box, Typography, RadioGroup, FormControlLabel, Radio, FormControl } from "@mui/material";
-import { Questions } from "../../../../translations/questions";
+import { windowSizes } from "../../../../context/initialRoomState";
 
 export const WindowSizes = () => {
   const { selectedFormValues, setSelectedFormValues } = useFormContext();
@@ -37,12 +37,12 @@ export const WindowSizes = () => {
                   value={room.windowSizes?.[windowIndex] || ""}
                   onChange={handleChange(roomIndex, windowIndex)}
                 >
-                  {Questions[11].options.map((windowSize, optionIndex) => (
+                  {windowSizes.map((windowSizes, index) => (
                     <FormControlLabel
-                      key={optionIndex}
-                      value={windowSize}
+                      key={index}
+                      value={windowSizes}
                       control={<Radio />}
-                      label={windowSize}
+                      label={windowSizes}
                     />
                   ))}
                 </RadioGroup>
