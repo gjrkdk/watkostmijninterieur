@@ -51,6 +51,12 @@ export const FormProvider: React.FC<IFormContext> = ({ children }) => {
           : index === 1
             ? ["250cm B x 200cm HG", "150cm B x 100cm HG"]
             : [],
+      curtainInbetweenSizes: room.curtainInbetweenSizes?.map((curtainAndInbetweenSize) => ({
+        ...curtainAndInbetweenSize,
+        isSelected:
+          (index === 0 && curtainAndInbetweenSize.label === "550cm B") ||
+          (index === 1 && curtainAndInbetweenSize.label === "250cm B"),
+      })),
     })),
   });
   const [contactDetails, setContactDetails] = useState<IContactDetails>({
