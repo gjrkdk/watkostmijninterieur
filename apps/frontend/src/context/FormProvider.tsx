@@ -82,6 +82,7 @@ export const FormProvider: React.FC<IFormContext> = ({ children }) => {
 
   console.log("selectedFormValues", selectedFormValues);
   console.log("activeStep", activeStep);
+  console.log("contactDetails", contactDetails);
 
   return (
     <FormContext.Provider

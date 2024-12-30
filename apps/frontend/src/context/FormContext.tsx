@@ -7,7 +7,7 @@ export interface IFormContext {
   selectedFormValues: IFormDataType;
   setSelectedFormValues: Dispatch<SetStateAction<IFormDataType>>;
   contactDetails: IContactDetails;
-  setContactDetails: (details: IContactDetails) => void;
+  setContactDetails: Dispatch<SetStateAction<IContactDetails>>;
 }
 
 export interface IFormDataType {

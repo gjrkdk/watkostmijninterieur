@@ -10,6 +10,7 @@ import {
   Furniture,
   FurnitureDetails,
 } from "../../categories/index";
+import { Contact } from "../Contact/Contact";
 
 interface IStepConfig {
   id: number;
@@ -56,5 +57,9 @@ export const steps: IStepConfig[] = [
   {
     id: 9,
     component: FurnitureDetails,
+  },
+  {
+    id: 10,
+    component: Contact,
   },
 ];
