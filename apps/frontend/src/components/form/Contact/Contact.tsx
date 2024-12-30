@@ -12,6 +12,9 @@ export const Contact = () => {
       ...prevValues,
       [name]: value,
     }));
+
+    // TODO: Implement validation
+    // TODO: Invoke Lambda function to save contact details and send email
   };
 
   return (

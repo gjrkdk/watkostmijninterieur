@@ -7,7 +7,7 @@ interface IFormContext {
 }
 
 export const FormProvider: React.FC<IFormContext> = ({ children }) => {
-  const [activeStep, setActiveStep] = useState<number>(7);
+  const [activeStep, setActiveStep] = useState<number>(10);
   const [selectedFormValues, setSelectedFormValues] = useState<IFormDataType>({
     // rooms: initialRoomState
     rooms: initialRoomState.map((room, index) => ({
