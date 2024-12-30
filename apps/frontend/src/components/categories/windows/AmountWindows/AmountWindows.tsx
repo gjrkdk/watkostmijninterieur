@@ -42,9 +42,19 @@ export const AmountWindows = () => {
           <FormControl key={room.id}>
             <FormLabel>{room.label}</FormLabel>
             <Select
-              value={room.amountWindows?.find((window) => window.isSelected)?.amount || "1"}
+              value={room.amountWindows?.find((window) => window.isSelected)?.amount || ""}
               onChange={handleChange(room.id)}
+              displayEmpty
+              renderValue={(selected) => {
+                if (selected === "") {
+                  return <em>Select amount</em>;
+                }
+                return selected;
+              }}
             >
+              <MenuItem disabled value="">
+                <em>Select amount</em>
+              </MenuItem>
               {room.amountWindows?.map((window) => (
                 <MenuItem key={window.id} value={window.amount}>
                   {window.amount}
