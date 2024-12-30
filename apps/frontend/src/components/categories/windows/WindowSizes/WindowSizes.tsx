@@ -23,7 +23,7 @@ export const WindowSizes = () => {
       <Typography variant="h6">Select sizes for each window</Typography>
       {selectedFormValues.rooms
         .filter((room) => room.isSelected)
-        .map((room, roomIndex) => (
+        .map((room) => (
           <Box key={room.id}>
             <Typography variant="subtitle1">{room.label}</Typography>
             {Array.from({
@@ -35,7 +35,7 @@ export const WindowSizes = () => {
                 <Typography variant="subtitle1">{`Window ${windowIndex + 1}`}</Typography>
                 <RadioGroup
                   value={room.windowSizes?.[windowIndex] || ""}
-                  onChange={handleChange(roomIndex, windowIndex)}
+                  onChange={handleChange(room.id, windowIndex)}
                 >
                   {windowSizes.map((windowSizes, index) => (
                     <FormControlLabel

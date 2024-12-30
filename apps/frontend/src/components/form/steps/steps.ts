@@ -6,6 +6,7 @@ import {
   WindowDecorationDetails,
   AmountWindows,
   WindowSizes,
+  CurtainSizes,
 } from "../../categories/index";
 
 interface IStepConfig {
@@ -41,5 +42,9 @@ export const steps: IStepConfig[] = [
   {
     id: 6,
     component: WindowSizes,
+  },
+  {
+    id: 7,
+    component: CurtainSizes,
   },
 ];
