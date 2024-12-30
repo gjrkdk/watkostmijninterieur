@@ -23,6 +23,7 @@ export interface IOptions extends IBase {
   windowDecorationDetails?: IWindowDecorationDetail[];
   amountWindows?: IAmountWindows[];
   windowSizes?: string[];
+  curtainInbetweenSizes?: IBase[];
 }
 
 const floors: IBase[] = [
@@ -117,6 +118,14 @@ export const windowSizes: string[] = [
   "250cm B x 200cm HG",
 ];
 
+export const curtainInbetweenSizes: IBase[] = [
+  { id: 0, label: "550cm B", isSelected: false },
+  { id: 1, label: "400cm B", isSelected: false },
+  { id: 2, label: "250cm B", isSelected: false },
+  { id: 3, label: "150cm B", isSelected: false },
+  { id: 4, label: "80cm B", isSelected: false },
+];
+
 const rooms: string[] = ["Livingroom", "Bedroom", "Kitchen"];
 
 export const initialRoomState: IOptions[] = rooms.map((room, index) => ({
@@ -129,4 +138,5 @@ export const initialRoomState: IOptions[] = rooms.map((room, index) => ({
   windowDecorationDetails: [...windowDecorationDetails],
   amountWindows: [...amountWindows],
   windowSizes: [],
+  curtainInbetweenSizes: [...curtainInbetweenSizes],
 }));
