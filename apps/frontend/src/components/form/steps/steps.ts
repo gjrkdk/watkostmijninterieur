@@ -8,6 +8,7 @@ import {
   WindowSizes,
   CurtainSizes,
   Furniture,
+  FurnitureDetails,
 } from "../../categories/index";
 
 interface IStepConfig {
@@ -51,5 +52,9 @@ export const steps: IStepConfig[] = [
   {
     id: 8,
     component: Furniture,
+  },
+  {
+    id: 9,
+    component: FurnitureDetails,
   },
 ];

@@ -25,6 +25,7 @@ export interface IOptions extends IBase {
   windowSizes?: string[];
   curtainInbetweenSizes?: IBase[];
   furniture?: IBase[];
+  furnitureDetails?: IBase[];
 }
 
 const floors: IBase[] = [
@@ -138,6 +139,12 @@ const furniture: IBase[] = [
   { id: 7, label: "No furniture", isSelected: false },
 ];
 
+export const furnitureDetails: IBase[] = [
+  { id: 0, label: "Essential", isSelected: false },
+  { id: 1, label: "Comfort", isSelected: false },
+  { id: 2, label: "Premium", isSelected: false },
+];
+
 const rooms: string[] = ["Livingroom", "Bedroom", "Kitchen"];
 
 export const initialRoomState: IOptions[] = rooms.map((room, index) => ({
@@ -152,4 +159,5 @@ export const initialRoomState: IOptions[] = rooms.map((room, index) => ({
   windowSizes: [],
   curtainInbetweenSizes: [...curtainInbetweenSizes],
   furniture: [...furniture],
+  furnitureDetails: [...furnitureDetails],
 }));

@@ -57,6 +57,18 @@ export const FormProvider: React.FC<IFormContext> = ({ children }) => {
           (index === 0 && curtainAndInbetweenSize.label === "550cm B") ||
           (index === 1 && curtainAndInbetweenSize.label === "250cm B"),
       })),
+      furniture: room.furniture?.map((furniture) => ({
+        ...furniture,
+        isSelected:
+          (index === 0 && furniture.label === "Couch") ||
+          (index === 1 && furniture.label === "Armhair"),
+      })),
+      furnitureDetails: room.furnitureDetails?.map((furnitureDetail) => ({
+        ...furnitureDetail,
+        isSelected:
+          (index === 0 && furnitureDetail.label === "Premium") ||
+          (index === 1 && furnitureDetail.label === "Essential"),
+      })),
     })),
   });
   const [contactDetails, setContactDetails] = useState<IContactDetails>({

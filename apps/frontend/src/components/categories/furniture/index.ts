@@ -1,2 +1,2 @@
 export { Furniture } from "./Furniture/Furniture";
-// export { FurnitureDetails } from "./FurnitureDetails/FurnitureDetails";
+export { FurnitureDetails } from "./FurnitureDetails/FurnitureDetails";
