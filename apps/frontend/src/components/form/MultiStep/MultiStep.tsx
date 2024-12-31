@@ -21,10 +21,17 @@ export const MultiStep = () => {
   }
 
   const shouldRenderWindowDecorationDetails = () => {
-    // Return true if any room has a selected window decoration other than "No window decoration needed"
     return selectedFormValues.rooms.some((room) =>
       room.windowDecoration?.some(
         (decoration) => decoration.isSelected && decoration.label !== "No window decoration needed",
+      ),
+    );
+  };
+
+  const shouldRenderFurnitureDetails = () => {
+    return selectedFormValues.rooms.some((room) =>
+      room.furniture?.some(
+        (furniture) => furniture.isSelected && furniture.label !== "No furniture",
       ),
     );
   };
@@ -50,6 +57,8 @@ export const MultiStep = () => {
         nextStep += 4;
       } else if (activeStep === 4 && !includesCurtainsInbetweens()) {
         nextStep += 3;
+      } else if (activeStep === 8 && !shouldRenderFurnitureDetails()) {
+        nextStep += 1;
       }
       setActiveStep(nextStep);
     }
@@ -63,6 +72,8 @@ export const MultiStep = () => {
         previousStep -= 4;
       } else if (activeStep === 7 && !includesCurtainsInbetweens()) {
         previousStep -= 2;
+      } else if (activeStep === 10 && !shouldRenderFurnitureDetails()) {
+        previousStep -= 1;
       }
 
       setActiveStep(previousStep);

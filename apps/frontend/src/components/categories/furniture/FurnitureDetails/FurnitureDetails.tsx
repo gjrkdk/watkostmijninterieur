@@ -30,7 +30,11 @@ export const FurnitureDetails = () => {
     <Box>
       <Typography variant="h1">Which furniture details would you like to choose?</Typography>
       {selectedFormValues.rooms
-        .filter((room) => room.isSelected)
+        .filter(
+          (room) =>
+            room.isSelected &&
+            room.furniture?.some((item) => item.isSelected && item.label !== "No furniture"),
+        )
         .map((room, roomIndex) => (
           <FormControl key={room.id}>
             <FormLabel>{room.label}</FormLabel>
