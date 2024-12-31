@@ -56,7 +56,7 @@ export const MultiStep = () => {
       if (activeStep === 3 && !shouldRenderWindowDecorationDetails()) {
         nextStep += 4;
       } else if (activeStep === 4 && !includesCurtainsInbetweens()) {
-        nextStep += 3;
+        nextStep += 2;
       } else if (activeStep === 8 && !shouldRenderFurnitureDetails()) {
         nextStep += 1;
       }
