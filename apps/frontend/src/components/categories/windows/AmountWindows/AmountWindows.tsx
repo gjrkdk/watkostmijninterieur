@@ -37,7 +37,16 @@ export const AmountWindows = () => {
     <Box>
       <Typography variant="h6">How many windows do you want to decorate?</Typography>
       {selectedFormValues.rooms
-        .filter((room) => room.isSelected)
+        .filter(
+          (room) =>
+            room.isSelected &&
+            room.windowDecoration?.some(
+              (decoration) =>
+                decoration.isSelected &&
+                decoration.label !== "Curtains" &&
+                decoration.label !== "Inbetweens",
+            ),
+        )
         .map((room) => (
           <FormControl key={room.id}>
             <FormLabel>{room.label}</FormLabel>

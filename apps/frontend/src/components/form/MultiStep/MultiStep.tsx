@@ -29,20 +29,44 @@ export const MultiStep = () => {
     );
   };
 
+  const includesCurtainsInbetweens = () => {
+    return selectedFormValues.rooms.some((room) =>
+      room.windowDecoration?.some(
+        (decoration) =>
+          decoration.isSelected &&
+          decoration.label !== "Curtains" &&
+          decoration.isSelected &&
+          decoration.label !== "Inbetweens",
+      ),
+    );
+  };
+
+  console.log(includesCurtainsInbetweens());
+
   const handleNextStep = () => {
     if (activeStep < steps.length - 1) {
+      let nextStep = activeStep + 1;
       if (activeStep === 3 && !shouldRenderWindowDecorationDetails()) {
-        // Skip WindowDecorationDetails if no room has a valid decoration
-        setActiveStep(activeStep + 2);
-      } else {
-        // Proceed to the next step as usual
-        setActiveStep(activeStep + 1);
+        nextStep += 4;
+      } else if (activeStep === 4 && !includesCurtainsInbetweens()) {
+        nextStep += 3;
       }
+      setActiveStep(nextStep);
     }
   };
 
   const handlePreviousStep = () => {
-    setActiveStep(Math.max(activeStep - 1, 0));
+    if (activeStep > 0) {
+      let previousStep = activeStep - 1;
+
+      if (activeStep === 8 && !shouldRenderWindowDecorationDetails()) {
+        previousStep -= 4;
+      } else if (activeStep === 7 && !includesCurtainsInbetweens()) {
+        previousStep -= 2;
+      }
+
+      setActiveStep(previousStep);
+    }
   };
 
   return (

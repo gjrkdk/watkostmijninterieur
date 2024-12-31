@@ -22,7 +22,16 @@ export const WindowSizes = () => {
     <Box>
       <Typography variant="h6">Select sizes for each window</Typography>
       {selectedFormValues.rooms
-        .filter((room) => room.isSelected)
+        .filter(
+          (room) =>
+            room.isSelected &&
+            room.windowDecoration?.some(
+              (decoration) =>
+                decoration.isSelected &&
+                decoration.label !== "Curtains" &&
+                decoration.label !== "Inbetweens",
+            ),
+        )
         .map((room) => (
           <Box key={room.id}>
             <Typography variant="subtitle1">{room.label}</Typography>
