@@ -1,28 +1,33 @@
 import { useFormContext } from "../../../../context/FormContext";
-import { Box, Typography, FormControl, FormControlLabel, Checkbox, FormGroup } from "@mui/material";
+import {
+  Box,
+  Typography,
+  FormControl,
+  FormControlLabel,
+  Checkbox,
+  FormGroup,
+  FormHelperText,
+} from "@mui/material";
 
 export const Rooms = () => {
-  const { selectedFormValues, setSelectedFormValues } = useFormContext();
+  const { selectedFormValues, setSelectedFormValues, error } = useFormContext();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
-    setSelectedFormValues((prevValues) => {
-      const updatedRooms = prevValues.rooms.map((room) => {
-        if (room.label === name) {
-          return { ...room, isSelected: checked };
-        }
-        return room;
-      });
-      return { ...prevValues, rooms: updatedRooms };
-    });
+    setSelectedFormValues((prevValues) => ({
+      ...prevValues,
+      rooms: prevValues.rooms.map((room) =>
+        room.label === name ? { ...room, isSelected: checked } : room,
+      ),
+    }));
   };
 
   return (
     <Box>
       <Typography variant="h6">Which room do you like to decorate?</Typography>
-      {selectedFormValues.rooms.map((room) => (
-        <FormControl key={room.id}>
-          <FormGroup>
+      <FormControl error={!!error.rooms}>
+        {selectedFormValues.rooms.map((room) => (
+          <FormGroup key={room.id}>
             <FormControlLabel
               control={
                 <Checkbox checked={room.isSelected} onChange={handleChange} name={room.label} />
@@ -30,8 +35,9 @@ export const Rooms = () => {
               label={room.label}
             />
           </FormGroup>
-        </FormControl>
-      ))}
+        ))}
+        {error.rooms && <FormHelperText>{error.rooms}</FormHelperText>}
+      </FormControl>
     </Box>
   );
 };

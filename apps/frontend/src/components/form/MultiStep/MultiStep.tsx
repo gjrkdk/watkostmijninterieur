@@ -1,12 +1,12 @@
 import { steps } from "../steps/steps";
-import { useFormContext } from "../../../context/FormContext";
+import { IFormDataType, useFormContext } from "../../../context/FormContext";
 import {
   shouldRenderWindowDecorationDetails,
   includesCurtainsInbetweens,
   shouldRenderFurnitureDetails,
 } from "../../../utils/utils";
 import { Box, Button } from "@mui/material";
-import { contactFormSchema } from "../../../validation/schema";
+import { multiStepFormSchema, contactFormSchema } from "../../../validation/schema";
 
 export const MultiStep = () => {
   const { activeStep, setActiveStep, selectedFormValues, contactDetails, setError } =
@@ -31,6 +31,23 @@ export const MultiStep = () => {
   const contactFormStep = activeStep === 10;
   const finalStep = activeStep === steps.length - 1;
 
+  const validateFormData = (data: IFormDataType): boolean => {
+    const result = multiStepFormSchema.safeParse(data);
+    if (!result.success) {
+      const formattedErrors: Record<string, string> = {};
+      result.error.errors.forEach((error) => {
+        if (error.path.length) {
+          formattedErrors[error.path[0] as string] = error.message;
+        }
+      });
+      setError(formattedErrors);
+      return false;
+    }
+
+    setError({});
+    return true;
+  };
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -40,19 +57,26 @@ export const MultiStep = () => {
       const formattedErrors: Record<string, string> = {};
       result.error.errors.forEach((error) => {
         if (error.path[0]) {
-          formattedErrors[error.path[0]] = error.message;
+          formattedErrors[error.path[0] as string] = error.message;
         }
         setError(formattedErrors);
         console.log("Form has errors: ", formattedErrors);
+        return false;
       });
     } else {
       setError({});
       handleNextStep();
       console.log("Form submitted with values: ", selectedFormValues);
+      return true;
     }
   };
 
   const handleNextStep = () => {
+    const isValid = validateFormData(selectedFormValues);
+    if (!isValid) {
+      return;
+    }
+
     if (activeStep < steps.length - 1) {
       let nextStep = activeStep + 1;
 
@@ -63,6 +87,7 @@ export const MultiStep = () => {
       } else if (activeStep === 8 && !shouldRenderFurnitureDetails(selectedFormValues)) {
         nextStep += 1;
       }
+
       setActiveStep(nextStep);
     }
   };

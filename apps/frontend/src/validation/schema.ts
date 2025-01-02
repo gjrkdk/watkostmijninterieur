@@ -5,3 +5,16 @@ export const contactFormSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
   phone: z.string().optional(),
 });
+
+export const multiStepFormSchema = z.object({
+  rooms: z
+    .array(
+      z.object({
+        isSelected: z.boolean(),
+      }),
+    )
+    .refine((rooms) => rooms.some((room) => room.isSelected), {
+      message: "At least one room must be selected",
+      path: ["rooms"],
+    }),
+});
