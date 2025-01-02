@@ -3,7 +3,7 @@ import { Box, TextField } from "@mui/material";
 import { IContactDetails } from "../../../context/FormContext";
 
 export const Contact = () => {
-  const { contactDetails, setContactDetails } = useFormContext();
+  const { contactDetails, setContactDetails, error } = useFormContext();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -13,7 +13,6 @@ export const Contact = () => {
       [name]: value,
     }));
 
-    // TODO: Implement validation
     // TODO: Invoke Lambda function to save contact details and send email
   };
 
@@ -27,6 +26,8 @@ export const Contact = () => {
         margin="normal"
         value={contactDetails.firstName}
         onChange={handleChange}
+        error={!!error.firstName}
+        helperText={error.firstName}
       />
       <TextField
         label="Email"
@@ -36,6 +37,8 @@ export const Contact = () => {
         margin="normal"
         value={contactDetails.email}
         onChange={handleChange}
+        error={!!error.email}
+        helperText={error.email}
       />
       <TextField
         label="Phone"

@@ -4,6 +4,8 @@ import { IOptions } from "./initialRoomState";
 export interface IFormContext {
   activeStep: number;
   setActiveStep: (step: number) => void;
+  error: Record<string, string>;
+  setError: Dispatch<SetStateAction<Record<string, string>>>;
   selectedFormValues: IFormDataType;
   setSelectedFormValues: Dispatch<SetStateAction<IFormDataType>>;
   contactDetails: IContactDetails;

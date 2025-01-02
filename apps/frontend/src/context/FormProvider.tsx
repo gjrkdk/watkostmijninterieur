@@ -8,6 +8,7 @@ interface IFormContext {
 
 export const FormProvider: React.FC<IFormContext> = ({ children }) => {
   const [activeStep, setActiveStep] = useState<number>(10);
+  const [error, setError] = useState<Record<string, string>>({});
   const [selectedFormValues, setSelectedFormValues] = useState<IFormDataType>({
     // rooms: initialRoomState
     rooms: initialRoomState.map((room, index) => ({
@@ -72,12 +73,12 @@ export const FormProvider: React.FC<IFormContext> = ({ children }) => {
     })),
   });
   const [contactDetails, setContactDetails] = useState<IContactDetails>({
-    // firstName: "",
-    // email: "",
-    // phone: "",
-    firstName: "John",
-    email: "john.doe@example.com",
-    phone: "123456789",
+    firstName: "",
+    email: "",
+    phone: "",
+    // firstName: "John",
+    // email: "john.doe@example.com",
+    // phone: "123456789",
   });
 
   console.log("selectedFormValues", selectedFormValues);
@@ -89,6 +90,8 @@ export const FormProvider: React.FC<IFormContext> = ({ children }) => {
       value={{
         activeStep,
         setActiveStep,
+        error,
+        setError,
         selectedFormValues,
         setSelectedFormValues,
         contactDetails,

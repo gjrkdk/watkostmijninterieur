@@ -6,9 +6,11 @@ import {
   shouldRenderFurnitureDetails,
 } from "../../../utils/utils";
 import { Box, Button } from "@mui/material";
+import { contactFormSchema } from "../../../validation/schema";
 
 export const MultiStep = () => {
-  const { activeStep, setActiveStep, selectedFormValues } = useFormContext();
+  const { activeStep, setActiveStep, selectedFormValues, contactDetails, setError } =
+    useFormContext();
 
   if (steps.length === 0) {
     return <div>Error: No steps available</div>;
@@ -25,6 +27,30 @@ export const MultiStep = () => {
   if (!StepComponent) {
     return <div>Error: No component found</div>;
   }
+
+  const contactFormStep = activeStep === 10;
+  const finalStep = activeStep === steps.length - 1;
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const result = contactFormSchema.safeParse(contactDetails);
+
+    if (!result.success) {
+      const formattedErrors: Record<string, string> = {};
+      result.error.errors.forEach((error) => {
+        if (error.path[0]) {
+          formattedErrors[error.path[0]] = error.message;
+        }
+        setError(formattedErrors);
+        console.log("Form has errors: ", formattedErrors);
+      });
+    } else {
+      setError({});
+      handleNextStep();
+      console.log("Form submitted with values: ", selectedFormValues);
+    }
+  };
 
   const handleNextStep = () => {
     if (activeStep < steps.length - 1) {
@@ -57,14 +83,13 @@ export const MultiStep = () => {
   };
 
   return (
-    <Box>
+    <Box component="form" onSubmit={handleSubmit}>
       <StepComponent />
       <Button onClick={handlePreviousStep} disabled={activeStep === 0}>
         Previous
       </Button>
-      <Button onClick={handleNextStep} disabled={activeStep >= steps.length - 1}>
-        Next
-      </Button>
+      {!contactFormStep && !finalStep && <Button onClick={handleNextStep}>Next</Button>}
+      {contactFormStep && <Button type="submit">Submit</Button>}
     </Box>
   );
 };
