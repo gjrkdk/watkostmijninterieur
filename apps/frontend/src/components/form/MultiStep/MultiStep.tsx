@@ -1,16 +1,14 @@
 import { steps } from "../steps/steps";
-import { IFormDataType, useFormContext } from "../../../context/FormContext";
+import { useFormContext } from "../../../context/FormContext";
 import {
   shouldRenderWindowDecorationDetails,
   includesCurtainsInbetweens,
   shouldRenderFurnitureDetails,
 } from "../../../utils/utils";
 import { Box, Button } from "@mui/material";
-import { multiStepFormSchema, contactFormSchema } from "../../../validation/schema";
 
 export const MultiStep = () => {
-  const { activeStep, setActiveStep, selectedFormValues, contactDetails, setError } =
-    useFormContext();
+  const { activeStep, setActiveStep, selectedFormValues } = useFormContext();
 
   if (steps.length === 0) {
     return <div>Error: No steps available</div>;
@@ -31,52 +29,7 @@ export const MultiStep = () => {
   const contactFormStep = activeStep === 10;
   const finalStep = activeStep === steps.length - 1;
 
-  const validateFormData = (data: IFormDataType): boolean => {
-    const result = multiStepFormSchema.safeParse(data);
-    if (!result.success) {
-      const formattedErrors: Record<string, string> = {};
-      result.error.errors.forEach((error) => {
-        if (error.path.length) {
-          formattedErrors[error.path[0] as string] = error.message;
-        }
-      });
-      setError(formattedErrors);
-      return false;
-    }
-
-    setError({});
-    return true;
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const result = contactFormSchema.safeParse(contactDetails);
-
-    if (!result.success) {
-      const formattedErrors: Record<string, string> = {};
-      result.error.errors.forEach((error) => {
-        if (error.path[0]) {
-          formattedErrors[error.path[0] as string] = error.message;
-        }
-        setError(formattedErrors);
-        console.log("Form has errors: ", formattedErrors);
-        return false;
-      });
-    } else {
-      setError({});
-      handleNextStep();
-      console.log("Form submitted with values: ", selectedFormValues);
-      return true;
-    }
-  };
-
   const handleNextStep = () => {
-    const isValid = validateFormData(selectedFormValues);
-    if (!isValid) {
-      return;
-    }
-
     if (activeStep < steps.length - 1) {
       let nextStep = activeStep + 1;
 
@@ -108,7 +61,7 @@ export const MultiStep = () => {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit}>
+    <Box>
       <StepComponent />
       <Button onClick={handlePreviousStep} disabled={activeStep === 0}>
         Previous
