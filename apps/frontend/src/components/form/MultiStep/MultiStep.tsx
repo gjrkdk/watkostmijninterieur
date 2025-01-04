@@ -6,9 +6,10 @@ import {
   shouldRenderFurnitureDetails,
 } from "../../../utils/utils";
 import { Box, Button } from "@mui/material";
+import { floorValidation, roomValidation } from "../../../validation/validation";
 
 export const MultiStep = () => {
-  const { activeStep, setActiveStep, selectedFormValues } = useFormContext();
+  const { activeStep, setActiveStep, selectedFormValues, setError } = useFormContext();
 
   if (steps.length === 0) {
     return <div>Error: No steps available</div>;
@@ -32,6 +33,14 @@ export const MultiStep = () => {
   const handleNextStep = () => {
     if (activeStep < steps.length - 1) {
       let nextStep = activeStep + 1;
+
+      if (activeStep === 0 && !roomValidation(activeStep, selectedFormValues, setError)) {
+        return;
+      }
+
+      if (activeStep === 1 && !floorValidation(activeStep, selectedFormValues, setError)) {
+        return;
+      }
 
       if (activeStep === 3 && !shouldRenderWindowDecorationDetails(selectedFormValues)) {
         nextStep += 4;

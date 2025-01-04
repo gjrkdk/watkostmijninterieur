@@ -25,7 +25,7 @@ export const Rooms = () => {
   return (
     <Box>
       <Typography variant="h6">Which room do you like to decorate?</Typography>
-      <FormControl error={!!error.rooms}>
+      <FormControl error={!!error.rooms} variant="standard">
         {selectedFormValues.rooms.map((room) => (
           <FormGroup key={room.id}>
             <FormControlLabel
