@@ -150,3 +150,25 @@ export const windowSizeValidation = (
   }
   return true;
 };
+
+export const curtainInbetweenValidation = (
+  activeStep: number,
+  selectedFormValues: IFormDataType,
+  setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
+) => {
+  if (activeStep === 7) {
+    const curtainInbetweenSizeSelected = selectedFormValues.rooms.every(
+      (room) => !room.isSelected || room.curtainInbetweenSizes?.some((size) => size.isSelected),
+    );
+
+    if (!curtainInbetweenSizeSelected) {
+      setError({
+        curtainInbetweenSizes: "At least one curtain or inbetween size must be selected",
+      });
+      return false;
+    }
+    setError({});
+    return true;
+  }
+  return true;
+};

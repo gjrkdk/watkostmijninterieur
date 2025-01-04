@@ -1,9 +1,17 @@
 import { useFormContext } from "../../../../context/FormContext";
-import { Box, FormControl, Typography, RadioGroup, FormControlLabel, Radio } from "@mui/material";
+import {
+  Box,
+  FormControl,
+  Typography,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  FormHelperText,
+} from "@mui/material";
 import { curtainInbetweenSizes } from "../../../../context/initialRoomState";
 
 export const CurtainSizes = () => {
-  const { selectedFormValues, setSelectedFormValues } = useFormContext();
+  const { selectedFormValues, setSelectedFormValues, error } = useFormContext();
 
   const handleChange = (roomId: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -38,7 +46,7 @@ export const CurtainSizes = () => {
             ),
         )
         .map((room) => (
-          <FormControl key={room.id}>
+          <FormControl key={room.id} error={!!error.curtainInbetweenSizes}>
             <Typography variant="subtitle1">{room.label}</Typography>
             <RadioGroup
               value={room.curtainInbetweenSizes?.find((size) => size.isSelected)?.label || ""}
@@ -53,6 +61,9 @@ export const CurtainSizes = () => {
                 />
               ))}
             </RadioGroup>
+            {error.curtainInbetweenSizes && (
+              <FormHelperText>{error.curtainInbetweenSizes}</FormHelperText>
+            )}
           </FormControl>
         ))}
     </Box>

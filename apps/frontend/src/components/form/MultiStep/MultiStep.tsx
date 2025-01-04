@@ -8,6 +8,7 @@ import {
 import { Box, Button } from "@mui/material";
 import {
   amountWindowValidation,
+  curtainInbetweenValidation,
   floorValidation,
   roomSizeValidation,
   roomValidation,
@@ -73,6 +74,13 @@ export const MultiStep = () => {
       }
 
       if (activeStep === 6 && !windowSizeValidation(activeStep, selectedFormValues, setError)) {
+        return;
+      }
+
+      if (
+        activeStep === 7 &&
+        !curtainInbetweenValidation(activeStep, selectedFormValues, setError)
+      ) {
         return;
       }
 
