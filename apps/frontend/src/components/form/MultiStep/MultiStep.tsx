@@ -8,6 +8,7 @@ import {
 import { Box, Button } from "@mui/material";
 import {
   amountWindowValidation,
+  contactFormValidation,
   curtainInbetweenValidation,
   floorValidation,
   furnitureDetailsValidation,
@@ -20,7 +21,8 @@ import {
 } from "../../../validation/validation";
 
 export const MultiStep = () => {
-  const { activeStep, setActiveStep, selectedFormValues, setError } = useFormContext();
+  const { activeStep, setActiveStep, selectedFormValues, setError, contactDetails } =
+    useFormContext();
 
   if (steps.length === 0) {
     return <div>Error: No steps available</div>;
@@ -40,6 +42,19 @@ export const MultiStep = () => {
 
   const contactFormStep = activeStep === 10;
   const finalStep = activeStep === steps.length - 1;
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!contactFormValidation(contactDetails, setError)) {
+      console.log("handleSubmit failed");
+      return false;
+    }
+
+    console.log("Successfully form submission");
+    handleNextStep();
+    return true;
+  };
 
   const handleNextStep = () => {
     if (activeStep < steps.length - 1) {
@@ -125,7 +140,7 @@ export const MultiStep = () => {
   };
 
   return (
-    <Box>
+    <Box component="form" onSubmit={handleSubmit}>
       <StepComponent />
       <Button onClick={handlePreviousStep} disabled={activeStep === 0}>
         Previous

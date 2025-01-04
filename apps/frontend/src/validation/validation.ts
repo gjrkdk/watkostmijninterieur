@@ -1,4 +1,4 @@
-import { IFormDataType } from "../context/FormContext";
+import { IContactDetails, IFormDataType } from "../context/FormContext";
 
 export const roomValidation = (
   activeStep: number,
@@ -221,4 +221,26 @@ export const furnitureDetailsValidation = (
     return true;
   }
   return true;
+};
+
+export const contactFormValidation = (
+  contactDetails: IContactDetails,
+  setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
+): boolean => {
+  const errors: Record<string, string> = {};
+
+  if (!contactDetails.firstName) {
+    errors.firstName = "Don't forget your firstname";
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!contactDetails.email) {
+    errors.email = "Don't forget your email";
+  } else if (!emailRegex.test(contactDetails.email)) {
+    errors.email = "Please enter a valid email address";
+  }
+
+  setError(errors);
+
+  return Object.keys(errors).length === 0;
 };
