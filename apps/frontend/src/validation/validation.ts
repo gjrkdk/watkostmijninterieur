@@ -74,3 +74,28 @@ export const windowDecorationValidation = (
   }
   return true;
 };
+
+export const windowDecorationDetailsValidation = (
+  activeStep: number,
+  selectedFormValues: IFormDataType,
+  setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
+): boolean => {
+  if (activeStep === 4) {
+    const windowDecorationDetailsSelected = selectedFormValues.rooms.every(
+      (room) =>
+        !room.isSelected ||
+        room.windowDecorationDetails?.some((detail) =>
+          detail.details.some((details) => details.isSelected),
+        ),
+    );
+    if (!windowDecorationDetailsSelected) {
+      setError({
+        windowDecorationDetails: "At least one window decoration detail must be selected",
+      });
+      return false;
+    }
+    setError({});
+    return true;
+  }
+  return true;
+};

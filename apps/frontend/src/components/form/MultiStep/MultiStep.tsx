@@ -10,6 +10,7 @@ import {
   floorValidation,
   roomSizeValidation,
   roomValidation,
+  windowDecorationDetailsValidation,
   windowDecorationValidation,
 } from "../../../validation/validation";
 
@@ -54,6 +55,13 @@ export const MultiStep = () => {
       if (
         activeStep === 3 &&
         !windowDecorationValidation(activeStep, selectedFormValues, setError)
+      ) {
+        return;
+      }
+
+      if (
+        activeStep === 4 &&
+        !windowDecorationDetailsValidation(activeStep, selectedFormValues, setError)
       ) {
         return;
       }

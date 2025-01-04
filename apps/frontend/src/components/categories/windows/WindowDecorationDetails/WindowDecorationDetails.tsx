@@ -7,10 +7,11 @@ import {
   FormLabel,
   FormControlLabel,
   Radio,
+  FormHelperText,
 } from "@mui/material";
 
 export const WindowDecorationDetails = () => {
-  const { selectedFormValues, setSelectedFormValues } = useFormContext();
+  const { selectedFormValues, setSelectedFormValues, error } = useFormContext();
 
   const handleDetailChange =
     (roomLabel: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,7 +63,11 @@ export const WindowDecorationDetails = () => {
           <Box key={room.id}>
             <Typography variant="subtitle1">{room.label}</Typography>
             {getRelevantDetails(room).map((detail) => (
-              <FormControl key={detail.id}>
+              <FormControl
+                key={detail.id}
+                error={!!error.windowDecorationDetails}
+                variant="standard"
+              >
                 <FormLabel>{detail.label}</FormLabel>
                 <RadioGroup
                   value={detail.details.find((d) => d.isSelected)?.label || ""}
@@ -77,6 +82,9 @@ export const WindowDecorationDetails = () => {
                     />
                   ))}
                 </RadioGroup>
+                {error.windowDecorationDetails && (
+                  <FormHelperText>{error.windowDecorationDetails}</FormHelperText>
+                )}
               </FormControl>
             ))}
           </Box>
