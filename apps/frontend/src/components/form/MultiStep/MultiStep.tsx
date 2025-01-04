@@ -7,6 +7,7 @@ import {
 } from "../../../utils/utils";
 import { Box, Button } from "@mui/material";
 import {
+  amountWindowValidation,
   floorValidation,
   roomSizeValidation,
   roomValidation,
@@ -63,6 +64,10 @@ export const MultiStep = () => {
         activeStep === 4 &&
         !windowDecorationDetailsValidation(activeStep, selectedFormValues, setError)
       ) {
+        return;
+      }
+
+      if (activeStep === 5 && !amountWindowValidation(activeStep, selectedFormValues, setError)) {
         return;
       }
 

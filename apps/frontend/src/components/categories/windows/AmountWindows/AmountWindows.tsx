@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 
 export const AmountWindows = () => {
-  const { selectedFormValues, setSelectedFormValues } = useFormContext();
+  const { selectedFormValues, setSelectedFormValues, error } = useFormContext();
 
   const handleChange = (roomId: number) => (event: SelectChangeEvent) => {
     const selectedAmount = event.target.value;
@@ -48,7 +48,7 @@ export const AmountWindows = () => {
             ),
         )
         .map((room) => (
-          <FormControl key={room.id}>
+          <FormControl key={room.id} error={!!error.amountWindows} variant="standard">
             <FormLabel>{room.label}</FormLabel>
             <Select
               value={room.amountWindows?.find((window) => window.isSelected)?.amount || ""}
@@ -70,6 +70,7 @@ export const AmountWindows = () => {
                 </MenuItem>
               ))}
             </Select>
+            {error.amountWindows && <FormLabel>{error.amountWindows}</FormLabel>}
           </FormControl>
         ))}
     </Box>
