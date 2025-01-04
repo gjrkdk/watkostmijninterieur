@@ -23,12 +23,50 @@ export const floorValidation = (
   setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
 ): boolean => {
   if (activeStep === 1) {
-    const floorIsSelected = selectedFormValues.rooms.some((room) =>
-      room.floors.some((floor) => floor.isSelected),
+    const floorIsSelected = selectedFormValues.rooms.every(
+      (room) => !room.isSelected || room.floors.some((floor) => floor.isSelected),
     );
-    console.log(floorIsSelected);
     if (!floorIsSelected) {
       setError({ floors: "At least one floor must be selected" });
+      return false;
+    }
+    setError({});
+    return true;
+  }
+  return true;
+};
+
+export const roomSizeValidation = (
+  activeStep: number,
+  selectedFormValues: IFormDataType,
+  setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
+): boolean => {
+  if (activeStep === 2) {
+    const roomSizeIsSelected = selectedFormValues.rooms.every(
+      (room) => !room.isSelected || room.roomSizes.some((size) => size.isSelected),
+    );
+    if (!roomSizeIsSelected) {
+      setError({ roomSizes: "At least one floor size must be selected" });
+      return false;
+    }
+    setError({});
+    return true;
+  }
+  return true;
+};
+
+export const windowDecorationValidation = (
+  activeStep: number,
+  selectedFormValues: IFormDataType,
+  setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
+): boolean => {
+  if (activeStep === 3) {
+    const windowDecorationSelected = selectedFormValues.rooms.every(
+      (room) =>
+        !room.isSelected || room.windowDecoration?.some((decoration) => decoration.isSelected),
+    );
+    if (!windowDecorationSelected) {
+      setError({ windowDecoration: "At least one window decoration must be selected" });
       return false;
     }
     setError({});

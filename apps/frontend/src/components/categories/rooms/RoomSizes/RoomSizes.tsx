@@ -7,10 +7,11 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
+  FormHelperText,
 } from "@mui/material";
 
 export const RoomSizes = () => {
-  const { selectedFormValues, setSelectedFormValues } = useFormContext();
+  const { selectedFormValues, setSelectedFormValues, error } = useFormContext();
 
   const handleChange = (roomLabel: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -35,7 +36,7 @@ export const RoomSizes = () => {
       {selectedFormValues.rooms
         .filter((room) => room.isSelected)
         .map((room) => (
-          <FormControl key={room.id}>
+          <FormControl key={room.id} error={!!error.roomSizes}>
             <FormLabel>{room.label}</FormLabel>
             <RadioGroup
               value={room.roomSizes.find((f) => f.isSelected)?.label || ""}
@@ -50,6 +51,7 @@ export const RoomSizes = () => {
                 />
               ))}
             </RadioGroup>
+            {error.roomSizes && <FormHelperText>{error.roomSizes}</FormHelperText>}
           </FormControl>
         ))}
     </Box>

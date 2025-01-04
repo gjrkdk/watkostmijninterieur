@@ -6,7 +6,12 @@ import {
   shouldRenderFurnitureDetails,
 } from "../../../utils/utils";
 import { Box, Button } from "@mui/material";
-import { floorValidation, roomValidation } from "../../../validation/validation";
+import {
+  floorValidation,
+  roomSizeValidation,
+  roomValidation,
+  windowDecorationValidation,
+} from "../../../validation/validation";
 
 export const MultiStep = () => {
   const { activeStep, setActiveStep, selectedFormValues, setError } = useFormContext();
@@ -39,6 +44,17 @@ export const MultiStep = () => {
       }
 
       if (activeStep === 1 && !floorValidation(activeStep, selectedFormValues, setError)) {
+        return;
+      }
+
+      if (activeStep === 2 && !roomSizeValidation(activeStep, selectedFormValues, setError)) {
+        return;
+      }
+
+      if (
+        activeStep === 3 &&
+        !windowDecorationValidation(activeStep, selectedFormValues, setError)
+      ) {
         return;
       }
 
