@@ -48,7 +48,7 @@ export const AmountWindows = () => {
             ),
         )
         .map((room) => (
-          <FormControl key={room.id} error={!!error.amountWindows} variant="standard">
+          <FormControl key={room.id} error={!!error.amountWindows}>
             <FormLabel>{room.label}</FormLabel>
             <Select
               value={room.amountWindows?.find((window) => window.isSelected)?.amount || ""}
