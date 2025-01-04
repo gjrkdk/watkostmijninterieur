@@ -155,7 +155,7 @@ export const curtainInbetweenValidation = (
   activeStep: number,
   selectedFormValues: IFormDataType,
   setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
-) => {
+): boolean => {
   if (activeStep === 7) {
     const curtainInbetweenSizeSelected = selectedFormValues.rooms.every(
       (room) => !room.isSelected || room.curtainInbetweenSizes?.some((size) => size.isSelected),
@@ -165,6 +165,56 @@ export const curtainInbetweenValidation = (
       setError({
         curtainInbetweenSizes: "At least one curtain or inbetween size must be selected",
       });
+      return false;
+    }
+    setError({});
+    return true;
+  }
+  return true;
+};
+
+export const furnitureValidation = (
+  activeStep: number,
+  selectedFormValues: IFormDataType,
+  setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
+): boolean => {
+  if (activeStep === 8) {
+    const furnitureSelected = selectedFormValues.rooms.every(
+      (room) => !room.isSelected || room.furniture?.some((furniture) => furniture.isSelected),
+    );
+
+    if (!furnitureSelected) {
+      setError({ furniture: "At least one furniture must be selected" });
+      return false;
+    }
+    setError({});
+    return true;
+  }
+  return true;
+};
+
+export const furnitureDetailsValidation = (
+  activeStep: number,
+  selectedFormValues: IFormDataType,
+  setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
+): boolean => {
+  if (activeStep === 9) {
+    const furnitureDetailsValid = selectedFormValues.rooms.every((room) => {
+      if (!room.isSelected) return true; // Skip non-selected rooms
+
+      const selectedFurniture = room.furniture?.filter((furniture) => furniture.isSelected);
+      if (!selectedFurniture || selectedFurniture.length === 0) return true; // Skip if no furniture is selected
+
+      const hasValidFurniture = selectedFurniture.some(
+        (furniture) => furniture.label !== "No furniture",
+      );
+      if (!hasValidFurniture) return true; // Skip if "No furniture" is selected
+
+      return room.furnitureDetails?.some((detail) => detail.isSelected) || false; // Validate furniture details
+    });
+
+    if (!furnitureDetailsValid) {
+      setError({ furnitureDetails: "At least one furniture detail should be selected" });
       return false;
     }
     setError({});

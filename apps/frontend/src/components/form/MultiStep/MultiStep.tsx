@@ -10,6 +10,8 @@ import {
   amountWindowValidation,
   curtainInbetweenValidation,
   floorValidation,
+  furnitureDetailsValidation,
+  furnitureValidation,
   roomSizeValidation,
   roomValidation,
   windowDecorationDetailsValidation,
@@ -80,6 +82,17 @@ export const MultiStep = () => {
       if (
         activeStep === 7 &&
         !curtainInbetweenValidation(activeStep, selectedFormValues, setError)
+      ) {
+        return;
+      }
+
+      if (activeStep === 8 && !furnitureValidation(activeStep, selectedFormValues, setError)) {
+        return;
+      }
+
+      if (
+        activeStep === 9 &&
+        !furnitureDetailsValidation(activeStep, selectedFormValues, setError)
       ) {
         return;
       }

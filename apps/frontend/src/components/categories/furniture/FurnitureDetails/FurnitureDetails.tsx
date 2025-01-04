@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 
 export const FurnitureDetails = () => {
-  const { selectedFormValues, setSelectedFormValues } = useFormContext();
+  const { selectedFormValues, setSelectedFormValues, error } = useFormContext();
 
   const handleChange = (roomIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -30,13 +30,14 @@ export const FurnitureDetails = () => {
     <Box>
       <Typography variant="h1">Which furniture details would you like to choose?</Typography>
       {selectedFormValues.rooms
+        .map((room, roomIndex) => ({ room, roomIndex }))
         .filter(
-          (room) =>
+          ({ room }) =>
             room.isSelected &&
             room.furniture?.some((item) => item.isSelected && item.label !== "No furniture"),
         )
-        .map((room, roomIndex) => (
-          <FormControl key={room.id}>
+        .map(({ room, roomIndex }) => (
+          <FormControl key={room.id} error={!!error.furnitureDetails} variant="standard">
             <FormLabel>{room.label}</FormLabel>
             <RadioGroup
               value={room.furnitureDetails?.find((detail) => detail.isSelected)?.label || ""}
@@ -51,6 +52,9 @@ export const FurnitureDetails = () => {
                 />
               ))}
             </RadioGroup>
+            {error.furnitureDetails && (
+              <Typography color="error">{error.furnitureDetails}</Typography>
+            )}
           </FormControl>
         ))}
     </Box>
