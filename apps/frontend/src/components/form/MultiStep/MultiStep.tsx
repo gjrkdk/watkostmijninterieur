@@ -6,23 +6,10 @@ import {
   shouldRenderFurnitureDetails,
 } from "../../../utils/utils";
 import { Box, Button } from "@mui/material";
-import {
-  amountWindowValidation,
-  contactFormValidation,
-  curtainInbetweenValidation,
-  floorValidation,
-  furnitureDetailsValidation,
-  furnitureValidation,
-  roomSizeValidation,
-  roomValidation,
-  windowDecorationDetailsValidation,
-  windowDecorationValidation,
-  windowSizeValidation,
-} from "../../../validation/validation";
+import { stepValidation } from "../../../validation";
 
 export const MultiStep = () => {
-  const { activeStep, setActiveStep, selectedFormValues, setError, contactDetails } =
-    useFormContext();
+  const { activeStep, setActiveStep, selectedFormValues, setError } = useFormContext();
 
   if (steps.length === 0) {
     return <div>Error: No steps available</div>;
@@ -46,10 +33,10 @@ export const MultiStep = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!contactFormValidation(contactDetails, setError)) {
-      console.log("handleSubmit failed");
-      return false;
-    }
+    // if (!contactFormValidation(contactDetails, setError)) {
+    //   console.log("handleSubmit failed");
+    //   return false;
+    // }
 
     console.log("Successfully form submission");
     handleNextStep();
@@ -60,56 +47,13 @@ export const MultiStep = () => {
     if (activeStep < steps.length - 1) {
       let nextStep = activeStep + 1;
 
-      if (activeStep === 0 && !roomValidation(activeStep, selectedFormValues, setError)) {
-        return;
-      }
+      const currentValidation = stepValidation[activeStep];
 
-      if (activeStep === 1 && !floorValidation(activeStep, selectedFormValues, setError)) {
-        return;
-      }
-
-      if (activeStep === 2 && !roomSizeValidation(activeStep, selectedFormValues, setError)) {
-        return;
-      }
-
-      if (
-        activeStep === 3 &&
-        !windowDecorationValidation(activeStep, selectedFormValues, setError)
-      ) {
-        return;
-      }
-
-      if (
-        activeStep === 4 &&
-        !windowDecorationDetailsValidation(activeStep, selectedFormValues, setError)
-      ) {
-        return;
-      }
-
-      if (activeStep === 5 && !amountWindowValidation(activeStep, selectedFormValues, setError)) {
-        return;
-      }
-
-      if (activeStep === 6 && !windowSizeValidation(activeStep, selectedFormValues, setError)) {
-        return;
-      }
-
-      if (
-        activeStep === 7 &&
-        !curtainInbetweenValidation(activeStep, selectedFormValues, setError)
-      ) {
-        return;
-      }
-
-      if (activeStep === 8 && !furnitureValidation(activeStep, selectedFormValues, setError)) {
-        return;
-      }
-
-      if (
-        activeStep === 9 &&
-        !furnitureDetailsValidation(activeStep, selectedFormValues, setError)
-      ) {
-        return;
+      if (currentValidation) {
+        const isValid = currentValidation(selectedFormValues, setError);
+        if (!isValid) {
+          return;
+        }
       }
 
       if (activeStep === 3 && !shouldRenderWindowDecorationDetails(selectedFormValues)) {
