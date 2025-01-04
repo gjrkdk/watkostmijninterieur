@@ -109,13 +109,44 @@ export const amountWindowValidation = (
     const amountWindowSelected = selectedFormValues.rooms.every(
       (room) => !room.isSelected || room.amountWindows?.some((amount) => amount.isSelected),
     );
-    console.log("amount windows", amountWindowSelected);
     if (!amountWindowSelected) {
       setError({ amountWindows: "At least one amount of windows must be selected" });
       return false;
     }
     setError({});
     return true;
+  }
+  return true;
+};
+
+export const windowSizeValidation = (
+  activeStep: number,
+  selectedFormValues: IFormDataType,
+  setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
+): boolean => {
+  if (activeStep === 6) {
+    const validationResults = selectedFormValues.rooms.map((room) => {
+      const requiredWindows = parseInt(
+        room.amountWindows?.find((window) => window.isSelected)?.amount || "0",
+      );
+
+      const selectedWindowSizes = room.windowSizes || [];
+      const missingSizes = requiredWindows - selectedWindowSizes.length;
+
+      return {
+        roomLabel: room.label,
+        missingSizes: missingSizes > 0 ? missingSizes : 0,
+      };
+    });
+
+    const hasErrors = validationResults.some((result) => result.missingSizes > 0);
+    if (hasErrors) {
+      setError({ windowSizes: "All windows must have sizes selected." });
+      return false;
+    } else {
+      setError({});
+      return true;
+    }
   }
   return true;
 };
