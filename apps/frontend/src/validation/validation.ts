@@ -82,6 +82,20 @@ export const windowDecorationDetailsValidation = (
   return true;
 };
 
+export const amountWindowsValidation = (
+  selectedFormValues: IFormDataType,
+  setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
+): boolean => {
+  const amountWindowSelected = selectedFormValues.rooms.every(
+    (room) => !room.isSelected || room.amountWindows?.some((amount) => amount.isSelected),
+  );
+  if (!amountWindowSelected) {
+    setError({ amountWindows: "At least one amount of windows must be selected" });
+    return false;
+  }
+  setError({});
+  return true;
+};
 // export const amountWindowValidation = (
 //   activeStep: number,
 //   selectedFormValues: IFormDataType,
