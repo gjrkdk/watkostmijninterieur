@@ -64,7 +64,7 @@ export const windowDecorationValidation = (
 export const windowDecorationDetailsValidation = (
   selectedFormValues: IFormDataType,
   setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
-): boolean => {
+) => {
   const windowDecorationDetailsSelected = selectedFormValues.rooms.every(
     (room) =>
       !room.isSelected ||
@@ -72,6 +72,7 @@ export const windowDecorationDetailsValidation = (
         detail.details.some((details) => details.isSelected),
       ),
   );
+  console.log("this function is being rendered", windowDecorationDetailsSelected);
   if (!windowDecorationDetailsSelected) {
     setError({
       windowDecorationDetails: "At least one window decoration detail must be selected",
@@ -125,89 +126,65 @@ export const windowSizeValidation = (
   }
 };
 
-//     const hasErrors = validationResults.some((result) => result.missingSizes > 0);
-//     if (hasErrors) {
-//       setError({ windowSizes: "All windows must have sizes selected." });
-//       return false;
-//     } else {
-//       setError({});
-//       return true;
-//     }
-//   }
-//   return true;
-// };
+export const curtainInbetweenValidation = (
+  selectedFormValues: IFormDataType,
+  setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
+): boolean => {
+  const curtainInbetweenSizeSelected = selectedFormValues.rooms.every(
+    (room) => !room.isSelected || room.curtainInbetweenSizes?.some((size) => size.isSelected),
+  );
 
-// export const curtainInbetweenValidation = (
-//   activeStep: number,
-//   selectedFormValues: IFormDataType,
-//   setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
-// ): boolean => {
-//   if (activeStep === 7) {
-//     const curtainInbetweenSizeSelected = selectedFormValues.rooms.every(
-//       (room) => !room.isSelected || room.curtainInbetweenSizes?.some((size) => size.isSelected),
-//     );
+  if (!curtainInbetweenSizeSelected) {
+    setError({
+      curtainInbetweenSizes: "At least one curtain or inbetween size must be selected",
+    });
+    return false;
+  }
+  setError({});
+  return true;
+};
 
-//     if (!curtainInbetweenSizeSelected) {
-//       setError({
-//         curtainInbetweenSizes: "At least one curtain or inbetween size must be selected",
-//       });
-//       return false;
-//     }
-//     setError({});
-//     return true;
-//   }
-//   return true;
-// };
+export const furnitureValidation = (
+  selectedFormValues: IFormDataType,
+  setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
+): boolean => {
+  const furnitureSelected = selectedFormValues.rooms.every(
+    (room) => !room.isSelected || room.furniture?.some((furniture) => furniture.isSelected),
+  );
 
-// export const furnitureValidation = (
-//   activeStep: number,
-//   selectedFormValues: IFormDataType,
-//   setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
-// ): boolean => {
-//   if (activeStep === 8) {
-//     const furnitureSelected = selectedFormValues.rooms.every(
-//       (room) => !room.isSelected || room.furniture?.some((furniture) => furniture.isSelected),
-//     );
+  if (!furnitureSelected) {
+    setError({ furniture: "At least one furniture must be selected" });
+    return false;
+  }
+  setError({});
+  return true;
+};
 
-//     if (!furnitureSelected) {
-//       setError({ furniture: "At least one furniture must be selected" });
-//       return false;
-//     }
-//     setError({});
-//     return true;
-//   }
-//   return true;
-// };
+export const furnitureDetailsValidation = (
+  selectedFormValues: IFormDataType,
+  setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
+): boolean => {
+  const furnitureDetailsValid = selectedFormValues.rooms.every((room) => {
+    if (!room.isSelected) return true; // Skip non-selected rooms
 
-// export const furnitureDetailsValidation = (
-//   activeStep: number,
-//   selectedFormValues: IFormDataType,
-//   setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
-// ): boolean => {
-//   if (activeStep === 9) {
-//     const furnitureDetailsValid = selectedFormValues.rooms.every((room) => {
-//       if (!room.isSelected) return true; // Skip non-selected rooms
+    const selectedFurniture = room.furniture?.filter((furniture) => furniture.isSelected);
+    if (!selectedFurniture || selectedFurniture.length === 0) return true; // Skip if no furniture is selected
 
-//       const selectedFurniture = room.furniture?.filter((furniture) => furniture.isSelected);
-//       if (!selectedFurniture || selectedFurniture.length === 0) return true; // Skip if no furniture is selected
+    const hasValidFurniture = selectedFurniture.some(
+      (furniture) => furniture.label !== "No furniture",
+    );
+    if (!hasValidFurniture) return true; // Skip if "No furniture" is selected
 
-//       const hasValidFurniture = selectedFurniture.some(
-//         (furniture) => furniture.label !== "No furniture",
-//       );
-//       if (!hasValidFurniture) return true; // Skip if "No furniture" is selected
+    return room.furnitureDetails?.some((detail) => detail.isSelected) || false; // Validate furniture details
+  });
 
-//       return room.furnitureDetails?.some((detail) => detail.isSelected) || false; // Validate furniture details
-//     });
-
-//     if (!furnitureDetailsValid) {
-//       setError({ furnitureDetails: "At least one furniture detail should be selected" });
-//       return false;
-//     }
-//     setError({});
-//     return true;
-//   }
-//   return true;
-// };
+  if (!furnitureDetailsValid) {
+    setError({ furnitureDetails: "At least one furniture detail should be selected" });
+    return false;
+  }
+  setError({});
+  return true;
+};
 
 // export const contactFormValidation = (
 //   contactDetails: IContactDetails,
