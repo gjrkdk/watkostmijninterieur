@@ -61,50 +61,26 @@ export const windowDecorationValidation = (
   return true;
 };
 
-// export const windowDecorationValidation = (
-//   activeStep: number,
-//   selectedFormValues: IFormDataType,
-//   setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
-// ): boolean => {
-//   if (activeStep === 3) {
-//     const windowDecorationSelected = selectedFormValues.rooms.every(
-//       (room) =>
-//         !room.isSelected || room.windowDecoration?.some((decoration) => decoration.isSelected),
-//     );
-//     if (!windowDecorationSelected) {
-//       setError({ windowDecoration: "At least one window decoration must be selected" });
-//       return false;
-//     }
-//     setError({});
-//     return true;
-//   }
-//   return true;
-// };
-
-// export const windowDecorationDetailsValidation = (
-//   activeStep: number,
-//   selectedFormValues: IFormDataType,
-//   setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
-// ): boolean => {
-//   if (activeStep === 4) {
-//     const windowDecorationDetailsSelected = selectedFormValues.rooms.every(
-//       (room) =>
-//         !room.isSelected ||
-//         room.windowDecorationDetails?.some((detail) =>
-//           detail.details.some((details) => details.isSelected),
-//         ),
-//     );
-//     if (!windowDecorationDetailsSelected) {
-//       setError({
-//         windowDecorationDetails: "At least one window decoration detail must be selected",
-//       });
-//       return false;
-//     }
-//     setError({});
-//     return true;
-//   }
-//   return true;
-// };
+export const windowDecorationDetailsValidation = (
+  selectedFormValues: IFormDataType,
+  setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
+): boolean => {
+  const windowDecorationDetailsSelected = selectedFormValues.rooms.every(
+    (room) =>
+      !room.isSelected ||
+      room.windowDecorationDetails?.some((detail) =>
+        detail.details.some((details) => details.isSelected),
+      ),
+  );
+  if (!windowDecorationDetailsSelected) {
+    setError({
+      windowDecorationDetails: "At least one window decoration detail must be selected",
+    });
+    return false;
+  }
+  setError({});
+  return true;
+};
 
 // export const amountWindowValidation = (
 //   activeStep: number,

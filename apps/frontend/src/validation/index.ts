@@ -3,6 +3,7 @@ import {
   floorValidation,
   roomSizeValidation,
   windowDecorationValidation,
+  windowDecorationDetailsValidation,
 } from "./validation";
 
 export const stepValidation = [
@@ -10,4 +11,5 @@ export const stepValidation = [
   floorValidation,
   roomSizeValidation,
   windowDecorationValidation,
+  windowDecorationDetailsValidation,
 ];
