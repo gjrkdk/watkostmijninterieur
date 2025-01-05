@@ -9,6 +9,7 @@ import {
   curtainInbetweenValidation,
   furnitureValidation,
   furnitureDetailsValidation,
+  contactValidation,
 } from "./validation";
 
 export const stepValidation = [
@@ -23,3 +24,5 @@ export const stepValidation = [
   furnitureValidation,
   furnitureDetailsValidation,
 ];
+
+export const contactFormValidation = contactValidation;

@@ -6,10 +6,11 @@ import {
   shouldRenderFurnitureDetails,
 } from "../../../utils/utils";
 import { Box, Button } from "@mui/material";
-import { stepValidation } from "../../../validation";
+import { stepValidation, contactFormValidation } from "../../../validation";
 
 export const MultiStep = () => {
-  const { activeStep, setActiveStep, selectedFormValues, setError } = useFormContext();
+  const { activeStep, setActiveStep, selectedFormValues, contactDetails, setError } =
+    useFormContext();
 
   if (steps.length === 0) {
     return <div>Error: No steps available</div>;
@@ -33,10 +34,10 @@ export const MultiStep = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // if (!contactFormValidation(contactDetails, setError)) {
-    //   console.log("handleSubmit failed");
-    //   return false;
-    // }
+    if (!contactFormValidation(contactDetails, setError)) {
+      console.log("handleSubmit failed");
+      return false;
+    }
 
     console.log("Successfully form submission");
     handleNextStep();
