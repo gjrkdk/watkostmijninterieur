@@ -1,3 +1,13 @@
-import { roomValidation, floorValidation, roomSizeValidation } from "./validation";
+import {
+  roomValidation,
+  floorValidation,
+  roomSizeValidation,
+  windowDecorationValidation,
+} from "./validation";
 
-export const stepValidation = [roomValidation, floorValidation, roomSizeValidation];
+export const stepValidation = [
+  roomValidation,
+  floorValidation,
+  roomSizeValidation,
+  windowDecorationValidation,
+];

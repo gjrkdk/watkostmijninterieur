@@ -44,6 +44,23 @@ export const roomSizeValidation = (
   return true;
 };
 
+export const windowDecorationValidation = (
+  selectedFormValues: IFormDataType,
+  setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
+): boolean => {
+  const windowDecorationSelected = selectedFormValues.rooms.every(
+    (room) =>
+      !room.isSelected || room.windowDecoration?.some((decoration) => decoration.isSelected),
+  );
+
+  if (!windowDecorationSelected) {
+    setError({ windowDecoration: "At least one window decoration must be selected" });
+    return false;
+  }
+  setError({});
+  return true;
+};
+
 // export const windowDecorationValidation = (
 //   activeStep: number,
 //   selectedFormValues: IFormDataType,
