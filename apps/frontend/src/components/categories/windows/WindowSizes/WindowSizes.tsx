@@ -28,7 +28,7 @@ export const WindowSizes = () => {
 
   return (
     <Box>
-      <Typography variant="h6">Select sizes for each window</Typography>
+      <Typography variant="h1">Select sizes for each window</Typography>
       {selectedFormValues.rooms
         .filter(
           (room) =>

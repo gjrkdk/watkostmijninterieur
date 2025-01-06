@@ -33,7 +33,7 @@ export const Floors = () => {
 
   return (
     <Box>
-      <Typography variant="h6">Which floor do you like to decorate?</Typography>
+      <Typography variant="h1">Which floor do you like to decorate?</Typography>
       {selectedFormValues.rooms
         .filter((room) => room.isSelected)
         .map((room) => (

@@ -35,7 +35,7 @@ export const WindowDecoration = () => {
 
   return (
     <Box>
-      <Typography variant="h6">Which window decoration would you like to choose?</Typography>
+      <Typography variant="h1">Which window decoration would you like to choose?</Typography>
       {selectedFormValues.rooms
         .filter((room) => room.isSelected)
         .map((room) => (

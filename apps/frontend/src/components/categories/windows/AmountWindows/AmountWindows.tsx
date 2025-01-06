@@ -35,7 +35,7 @@ export const AmountWindows = () => {
 
   return (
     <Box>
-      <Typography variant="h6">How many windows do you want to decorate?</Typography>
+      <Typography variant="h1">How many windows do you want to decorate?</Typography>
       {selectedFormValues.rooms
         .filter(
           (room) =>
