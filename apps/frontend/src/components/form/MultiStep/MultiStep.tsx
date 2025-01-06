@@ -5,8 +5,14 @@ import {
   includesCurtainsInbetweens,
   shouldRenderFurnitureDetails,
 } from "../../../utils/utils";
-import { Box, Button, Paper } from "@mui/material";
+import { Box, Button, Paper, styled } from "@mui/material";
 import { stepValidation, contactFormValidation } from "../../../validation";
+
+const ButtonContainer = styled(Box)({
+  marginTop: "16px",
+  display: "flex",
+  justifyContent: "space-between",
+});
 
 export const MultiStep = () => {
   const { activeStep, setActiveStep, selectedFormValues, contactDetails, setError } =
@@ -91,15 +97,21 @@ export const MultiStep = () => {
           <StepComponent />
         </Box>
       </Paper>
-      <Button onClick={handlePreviousStep} disabled={activeStep === 0}>
-        Previous
-      </Button>
-      {!contactFormStep && !finalStep && <Button onClick={handleNextStep}>Next</Button>}
-      {contactFormStep && (
-        <Button type="submit" form="multi-step-form">
-          Submit
+      <ButtonContainer>
+        <Button onClick={handlePreviousStep} disabled={activeStep === 0} variant="contained">
+          Previous
         </Button>
-      )}
+        {!contactFormStep && !finalStep && (
+          <Button onClick={handleNextStep} variant="contained">
+            Next
+          </Button>
+        )}
+        {contactFormStep && (
+          <Button type="submit" form="multi-step-form" variant="contained">
+            Submit
+          </Button>
+        )}
+      </ButtonContainer>
     </>
   );
 };

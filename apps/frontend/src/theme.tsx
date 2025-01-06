@@ -27,6 +27,11 @@ export const theme = createTheme({
       fontSize: "20px",
       fontWeight: "bold",
     },
+    body1: {
+      fontFamily: "DM Sans",
+      fontSize: "16px",
+      fontWeight: "normal",
+    },
   },
   breakpoints: {
     values: {
@@ -57,10 +62,10 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           padding: "20px",
-          width: "100%",
           height: "550px",
           borderRadius: "15px",
-          boxShadow: "0px 5px 16px 0px rgba(8, 15, 52, 0.08)",
+          boxShadow: "0px 5px 16px 0px rgba(8, 15, 52, 0.2)",
+          overflowY: "auto",
         },
       },
     },
@@ -68,7 +73,38 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: "15px",
-          padding: "20px",
+          padding: "10px",
+          width: "100px",
+        },
+      },
+    },
+    MuiFormControl: {
+      styleOverrides: {
+        root: {
+          width: "100%",
+        },
+      },
+    },
+    MuiFormGroup: {
+      styleOverrides: {
+        root: {
+          flexDirection: "row",
+          display: "flex",
+          width: "100%",
+        },
+      },
+    },
+    MuiFormControlLabel: {
+      styleOverrides: {
+        root: {
+          width: "100%",
+        },
+      },
+    },
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: {
+          color: "black",
         },
       },
     },
