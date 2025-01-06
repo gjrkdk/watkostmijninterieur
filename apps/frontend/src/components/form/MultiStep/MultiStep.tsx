@@ -5,7 +5,7 @@ import {
   includesCurtainsInbetweens,
   shouldRenderFurnitureDetails,
 } from "../../../utils/utils";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Paper } from "@mui/material";
 import { stepValidation, contactFormValidation } from "../../../validation";
 
 export const MultiStep = () => {
@@ -85,13 +85,21 @@ export const MultiStep = () => {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit}>
-      <StepComponent />
+    <>
+      <Paper>
+        <Box component="form" onSubmit={handleSubmit} id="multi-step-form">
+          <StepComponent />
+        </Box>
+      </Paper>
       <Button onClick={handlePreviousStep} disabled={activeStep === 0}>
         Previous
       </Button>
       {!contactFormStep && !finalStep && <Button onClick={handleNextStep}>Next</Button>}
-      {contactFormStep && <Button type="submit">Submit</Button>}
-    </Box>
+      {contactFormStep && (
+        <Button type="submit" form="multi-step-form">
+          Submit
+        </Button>
+      )}
+    </>
   );
 };
