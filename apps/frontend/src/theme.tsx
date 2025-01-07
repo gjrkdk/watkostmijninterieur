@@ -98,6 +98,12 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           width: "100%",
+          border: "1px solid #e0e0e0",
+          borderRadius: "15px",
+          boxShadow: "0 2px 6px 0px rgba(8, 15, 52, 0.08)",
+          padding: "10px",
+          margin: "0 0 10px 0",
+          marginTop: "10px",
         },
       },
     },
