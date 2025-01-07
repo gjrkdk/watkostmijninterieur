@@ -15,7 +15,7 @@ const CustomFormGroup = styled(FormGroup)({
   borderRadius: "15px",
   boxShadow: "0 2px 6px 0px rgba(8, 15, 52, 0.08)",
   marginTop: "10px",
-  padding: "10px",
+  padding: "10px 10px 10px 20px",
 });
 
 export const Rooms = () => {
