@@ -83,6 +83,8 @@ export const windowDecorationDetailsValidation = (
   return true;
 };
 
+// FIXME: This validation is not working as expected
+
 export const amountWindowsValidation = (
   selectedFormValues: IFormDataType,
   setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
@@ -209,25 +211,3 @@ export const contactValidation = (
 
   return Object.keys(errors).length === 0;
 };
-
-// export const contactFormValidation = (
-//   contactDetails: IContactDetails,
-//   setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
-// ): boolean => {
-//   const errors: Record<string, string> = {};
-
-//   if (!contactDetails.firstName) {
-//     errors.firstName = "Don't forget your firstname";
-//   }
-
-//   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//   if (!contactDetails.email) {
-//     errors.email = "Don't forget your email";
-//   } else if (!emailRegex.test(contactDetails.email)) {
-//     errors.email = "Please enter a valid email address";
-//   }
-
-//   setError(errors);
-
-//   return Object.keys(errors).length === 0;
-// };
