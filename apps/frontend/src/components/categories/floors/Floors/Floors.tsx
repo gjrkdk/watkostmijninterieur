@@ -50,6 +50,7 @@ export const Floors = () => {
                   value={floor.label}
                   control={<Radio />}
                   label={floor.label}
+                  className={floor.isSelected ? "MuiFormControlLabel-selected" : ""}
                 />
               ))}
             </RadioGroup>

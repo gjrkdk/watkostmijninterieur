@@ -50,6 +50,7 @@ export const FurnitureDetails = () => {
                   value={furnitureDetail.label}
                   control={<Radio />}
                   label={furnitureDetail.label}
+                  className={furnitureDetail.isSelected ? "MuiFormControlLabel-selected" : ""}
                 />
               ))}
             </RadioGroup>

@@ -113,13 +113,11 @@ export const theme = createTheme({
           boxShadow: "0 2px 11px 0px rgba(68, 65, 164, 0.2)",
           padding: "10px",
           margin: "0 0 10px 0",
-          marginTop: "10px",
-        },
-        label: {
-          fontFamily: "DM Sans",
-          fontSize: "15px",
-          fontWeight: "normal",
-          color: "#170F49",
+          transition: "border 0.3s ease",
+          "&.MuiFormControlLabel-selected": {
+            border: "5px solid #4A3AFF",
+            boxShadow: "0 2px 11px 0px rgba(74, 58, 255, 0.5)",
+          },
         },
       },
     },

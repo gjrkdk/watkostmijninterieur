@@ -61,6 +61,11 @@ export const WindowSizes = () => {
                       value={windowSizes}
                       control={<Radio />}
                       label={windowSizes}
+                      className={
+                        windowSizes === room.windowSizes?.[windowIndex]
+                          ? "MuiFormControlLabel-selected"
+                          : ""
+                      }
                     />
                   ))}
                 </RadioGroup>

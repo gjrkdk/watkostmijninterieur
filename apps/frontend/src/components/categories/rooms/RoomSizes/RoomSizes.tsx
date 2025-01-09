@@ -49,6 +49,7 @@ export const RoomSizes = () => {
                   value={roomSize.label}
                   control={<Radio />}
                   label={roomSize.label}
+                  className={roomSize.isSelected ? "MuiFormControlLabel-selected" : ""}
                 />
               ))}
             </RadioGroup>

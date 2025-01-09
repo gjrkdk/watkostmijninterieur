@@ -52,6 +52,7 @@ export const WindowDecoration = () => {
                   value={decoration.label}
                   control={<Radio />}
                   label={decoration.label}
+                  className={decoration.isSelected ? "MuiFormControlLabel-selected" : ""}
                 />
               ))}
             </RadioGroup>

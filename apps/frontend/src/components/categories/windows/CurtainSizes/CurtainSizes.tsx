@@ -59,6 +59,7 @@ export const CurtainSizes = () => {
                   value={curtainInbetweenSize.label}
                   control={<Radio />}
                   label={curtainInbetweenSize.label}
+                  className={curtainInbetweenSize.isSelected ? "MuiFormControlLabel-selected" : ""}
                 />
               ))}
             </RadioGroup>
