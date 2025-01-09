@@ -28,7 +28,8 @@ export const FurnitureDetails = () => {
 
   return (
     <Box>
-      <Typography variant="h1">Which furniture details would you like to choose?</Typography>
+      <Typography variant="h1">Furniture details</Typography>
+      <Typography variant="h2">Which furniture details would you like to choose?</Typography>
       {selectedFormValues.rooms
         .map((room, roomIndex) => ({ room, roomIndex }))
         .filter(

@@ -32,7 +32,8 @@ export const CurtainSizes = () => {
 
   return (
     <Box>
-      <Typography variant="h1">
+      <Typography variant="h1">Curtain sizes</Typography>
+      <Typography variant="h2">
         Select one of the most common curtain or inbetween widths
       </Typography>
       {selectedFormValues.rooms

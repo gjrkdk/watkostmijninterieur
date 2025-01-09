@@ -32,7 +32,8 @@ export const RoomSizes = () => {
 
   return (
     <Box>
-      <Typography variant="h1">What is the average m² for each selected room?</Typography>
+      <Typography variant="h1">Room sizes</Typography>
+      <Typography variant="h2">What is the average m² for each selected room?</Typography>
       {selectedFormValues.rooms
         .filter((room) => room.isSelected)
         .map((room) => (

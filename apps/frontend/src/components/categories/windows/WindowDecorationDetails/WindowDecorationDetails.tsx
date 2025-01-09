@@ -51,7 +51,8 @@ export const WindowDecorationDetails = () => {
 
   return (
     <Box>
-      <Typography variant="h1">Select details for your window decoration</Typography>
+      <Typography variant="h1">Window decoration details</Typography>
+      <Typography variant="h2">Select details for your window decoration</Typography>
       {selectedFormValues.rooms
         .filter((room) =>
           room.windowDecoration?.some(
@@ -61,13 +62,13 @@ export const WindowDecorationDetails = () => {
         )
         .map((room) => (
           <Box key={room.id}>
-            <Typography variant="subtitle1">{room.label}</Typography>
             {getRelevantDetails(room).map((detail) => (
               <FormControl
                 key={detail.id}
                 error={!!error.windowDecorationDetails}
                 variant="standard"
               >
+                <Typography variant="subtitle1">{room.label}</Typography>
                 <FormLabel>{detail.label}</FormLabel>
                 <RadioGroup
                   value={detail.details.find((d) => d.isSelected)?.label || ""}
