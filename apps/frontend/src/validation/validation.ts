@@ -72,7 +72,7 @@ export const windowDecorationDetailsValidation = (
         detail.details.some((details) => details.isSelected),
       ),
   );
-  console.log("this function is being rendered", windowDecorationDetailsSelected);
+
   if (!windowDecorationDetailsSelected) {
     setError({
       windowDecorationDetails: "At least one window decoration detail must be selected",
