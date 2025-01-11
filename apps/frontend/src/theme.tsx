@@ -146,13 +146,6 @@ export const theme = createTheme({
         },
       },
     },
-    MuiOutlinedInput: {
-      styleOverrides: {
-        notchedOutline: {
-          border: "none",
-        },
-      },
-    },
     MuiSelect: {
       styleOverrides: {
         root: {
@@ -165,10 +158,19 @@ export const theme = createTheme({
         },
       },
     },
-    MuiSvgIcon: {
+    MuiInputLabel: {
       styleOverrides: {
         root: {
-          color: "#170F49",
+          fontFamily: "DM Sans",
+          fontWeight: "bold",
+          fontSize: "15px",
+        },
+      },
+    },
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          margin: 0,
         },
       },
     },

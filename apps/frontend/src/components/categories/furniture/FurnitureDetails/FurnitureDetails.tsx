@@ -3,6 +3,7 @@ import {
   Box,
   FormControl,
   FormControlLabel,
+  FormHelperText,
   FormLabel,
   Radio,
   RadioGroup,
@@ -55,7 +56,7 @@ export const FurnitureDetails = () => {
               ))}
             </RadioGroup>
             {error.furnitureDetails && (
-              <Typography color="error">{error.furnitureDetails}</Typography>
+              <FormHelperText color="error">{error.furnitureDetails}</FormHelperText>
             )}
           </FormControl>
         ))}

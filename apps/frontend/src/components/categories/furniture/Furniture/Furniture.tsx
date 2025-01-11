@@ -5,6 +5,7 @@ import {
   FormControl,
   FormControlLabel,
   FormGroup,
+  FormHelperText,
   FormLabel,
   Typography,
 } from "@mui/material";
@@ -66,7 +67,7 @@ export const Furniture = () => {
                 />
               </FormGroup>
             ))}
-            {error.furniture && <Typography color="error">{error.furniture}</Typography>}
+            {error.furniture && <FormHelperText color="error">{error.furniture}</FormHelperText>}
           </FormControl>
         ))}
     </Box>
