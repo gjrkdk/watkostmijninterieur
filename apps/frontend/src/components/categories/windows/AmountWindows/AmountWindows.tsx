@@ -46,7 +46,8 @@ export const AmountWindows = () => {
               (decoration) =>
                 decoration.isSelected &&
                 decoration.label !== "Curtains" &&
-                decoration.label !== "Inbetweens",
+                decoration.label !== "Inbetweens" &&
+                decoration.label !== "No window decoration needed",
             ),
         )
         .map((room) => (
