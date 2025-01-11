@@ -2,6 +2,7 @@ interface IBase {
   id: number;
   label: string;
   isSelected: boolean;
+  isDisabled?: boolean;
 }
 
 interface IWindowDecorationDetail {
@@ -136,7 +137,7 @@ const furniture: IBase[] = [
   { id: 4, label: "Dining room chair", isSelected: false },
   { id: 5, label: "TV furniture", isSelected: false },
   { id: 6, label: "Carpet", isSelected: false },
-  { id: 7, label: "No furniture", isSelected: false },
+  { id: 7, label: "No furniture", isSelected: false, isDisabled: false },
 ];
 
 export const furnitureDetails: IBase[] = [

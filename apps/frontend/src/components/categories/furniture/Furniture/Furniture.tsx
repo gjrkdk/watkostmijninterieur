@@ -15,14 +15,28 @@ export const Furniture = () => {
   const handleChange =
     (roomIndex: number, furnitureIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
       const { checked } = event.target;
+      const selectedFurnitureLabel =
+        selectedFormValues.rooms[roomIndex].furniture?.[furnitureIndex].label;
+
       setSelectedFormValues((prevValues) => {
         const updatedRooms = [...prevValues.rooms];
-        const room = updatedRooms[roomIndex];
-        const updatedFurniture = room.furniture?.map((furniture, index) => ({
-          ...furniture,
-          isSelected: index === furnitureIndex ? checked : furniture.isSelected,
-        }));
-        updatedRooms[roomIndex] = { ...room, furniture: updatedFurniture };
+        const updatedFurniture = updatedRooms[roomIndex].furniture?.map((furniture, index) => {
+          if (index === furnitureIndex) {
+            return { ...furniture, isSelected: checked };
+          } else if (selectedFurnitureLabel === "No furniture" && checked) {
+            return { ...furniture, isSelected: false, isDisabled: true };
+          } else if (
+            selectedFurnitureLabel !== "No furniture" &&
+            checked &&
+            furniture.label === "No furniture"
+          ) {
+            return { ...furniture, isSelected: false, isDisabled: true };
+          } else {
+            return { ...furniture, isDisabled: false };
+          }
+        });
+
+        updatedRooms[roomIndex] = { ...updatedRooms[roomIndex], furniture: updatedFurniture };
         return { ...prevValues, rooms: updatedRooms };
       });
     };
@@ -45,6 +59,7 @@ export const Furniture = () => {
                       checked={furniture.isSelected}
                       onChange={handleChange(roomIndex, furnitureIndex)}
                       name={furniture.label}
+                      disabled={furniture.isDisabled}
                     />
                   }
                   label={furniture.label}
