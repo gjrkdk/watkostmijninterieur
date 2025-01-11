@@ -7,6 +7,7 @@ import {
   FormControlLabel,
   Radio,
   FormHelperText,
+  FormLabel,
 } from "@mui/material";
 import { curtainInbetweenSizes } from "../../../../context/initialRoomState";
 
@@ -15,6 +16,8 @@ export const CurtainSizes = () => {
 
   const handleChange = (roomId: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
+
+    console.log("Selected value:", value, "Room ID:", roomId);
 
     setSelectedFormValues((prevValues) => {
       const updatedRooms = prevValues.rooms.map((room) => {
@@ -26,6 +29,7 @@ export const CurtainSizes = () => {
         }
         return room;
       });
+
       return { ...prevValues, rooms: updatedRooms };
     });
   };
@@ -47,8 +51,8 @@ export const CurtainSizes = () => {
             ),
         )
         .map((room) => (
-          <FormControl key={room.id} error={!!error.curtainInbetweenSizes}>
-            <Typography variant="subtitle1">{room.label}</Typography>
+          <FormControl key={room.id} error={!!error.curtainInbetweenSizes} component="fieldset">
+            <FormLabel>{room.label}</FormLabel>
             <RadioGroup
               value={room.curtainInbetweenSizes?.find((size) => size.isSelected)?.label || ""}
               onChange={handleChange(room.id)}
@@ -59,7 +63,13 @@ export const CurtainSizes = () => {
                   value={curtainInbetweenSize.label}
                   control={<Radio />}
                   label={curtainInbetweenSize.label}
-                  className={curtainInbetweenSize.isSelected ? "MuiFormControlLabel-selected" : ""}
+                  className={
+                    room.curtainInbetweenSizes?.find(
+                      (size) => size.label === curtainInbetweenSize.label && size.isSelected,
+                    )
+                      ? "MuiFormControlLabel-selected"
+                      : ""
+                  }
                 />
               ))}
             </RadioGroup>

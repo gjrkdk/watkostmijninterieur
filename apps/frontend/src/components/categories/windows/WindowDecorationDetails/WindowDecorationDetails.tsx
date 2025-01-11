@@ -68,8 +68,10 @@ export const WindowDecorationDetails = () => {
                 error={!!error.windowDecorationDetails}
                 variant="standard"
               >
-                <Typography variant="subtitle1">{room.label}</Typography>
-                <FormLabel>{detail.label}</FormLabel>
+                <FormLabel>{room.label}</FormLabel>
+                <Typography variant="h4" sx={{ marginBottom: "10px" }}>
+                  {detail.label}
+                </Typography>
                 <RadioGroup
                   value={detail.details.find((d) => d.isSelected)?.label || ""}
                   onChange={handleDetailChange(room.label)}

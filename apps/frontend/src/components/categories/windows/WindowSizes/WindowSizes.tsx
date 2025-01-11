@@ -43,14 +43,19 @@ export const WindowSizes = () => {
         )
         .map((room) => (
           <Box key={room.id}>
-            <Typography variant="subtitle1">{room.label}</Typography>
+            <Typography variant="h3" sx={{ marginTop: "10px" }}>
+              {room.label}
+            </Typography>
             {Array.from({
               length: parseInt(
                 room.amountWindows?.find((window) => window.isSelected)?.amount || "0",
               ),
             }).map((_, windowIndex) => (
               <FormControl key={windowIndex} error={!!error.windowSizes}>
-                <Typography variant="subtitle1">{`Window ${windowIndex + 1}`}</Typography>
+                <Typography
+                  variant="h4"
+                  sx={{ marginBottom: "10px" }}
+                >{`Window ${windowIndex + 1}`}</Typography>
                 <RadioGroup
                   value={room.windowSizes?.[windowIndex] || ""}
                   onChange={handleChange(room.id, windowIndex)}

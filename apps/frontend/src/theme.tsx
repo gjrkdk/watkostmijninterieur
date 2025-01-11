@@ -33,7 +33,18 @@ export const theme = createTheme({
       fontSize: "18px",
       fontWeight: "normal",
       color: " #6F6C90",
-      marginTop: "10px",
+    },
+    h3: {
+      fontFamily: "DM Sans",
+      fontSize: "18px",
+      fontWeight: "bold",
+      color: "#170F49",
+    },
+    h4: {
+      fontFamily: "DM Sans",
+      fontSize: "15px",
+      fontWeight: "normal",
+      color: "#6F6C90",
     },
   },
   breakpoints: {
@@ -131,6 +142,7 @@ export const theme = createTheme({
           fontSize: "18px",
           fontWeight: "bold",
           color: "#170F49",
+          marginBottom: "10px",
         },
       },
     },
@@ -145,6 +157,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           border: "1px solid black",
+          transition: "border 0.3s ease",
           "&.MuiSelect-selected": {
             border: "5px solid #4A3AFF",
             boxShadow: "0 2px 11px 0px rgba(74, 58, 255, 0.5)",

@@ -7,6 +7,7 @@ import {
   Select,
   MenuItem,
   SelectChangeEvent,
+  FormHelperText,
 } from "@mui/material";
 
 export const AmountWindows = () => {
@@ -49,7 +50,7 @@ export const AmountWindows = () => {
             ),
         )
         .map((room) => (
-          <FormControl key={room.id} error={!!error.amountWindows}>
+          <FormControl key={room.id} error={!!error.amountWindows} variant="outlined">
             <FormLabel>{room.label}</FormLabel>
             <Select
               value={room.amountWindows?.find((window) => window.isSelected)?.amount || ""}
@@ -74,7 +75,7 @@ export const AmountWindows = () => {
                 </MenuItem>
               ))}
             </Select>
-            {error.amountWindows && <FormLabel>{error.amountWindows}</FormLabel>}
+            {error.amountWindows && <FormHelperText>{error.amountWindows}</FormHelperText>}
           </FormControl>
         ))}
     </Box>
