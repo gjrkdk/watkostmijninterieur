@@ -140,16 +140,24 @@ export const curtainInbetweenValidation = (
   selectedFormValues: IFormDataType,
   setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
 ): boolean => {
-  const curtainInbetweenSizeSelected = selectedFormValues.rooms.every(
-    (room) => !room.isSelected || room.curtainInbetweenSizes?.some((size) => size.isSelected),
+  const invalidCurtainInbetweenSize = selectedFormValues.rooms.filter(
+    (room) =>
+      room.isSelected &&
+      room.windowDecoration?.some(
+        (decoration) =>
+          decoration.isSelected &&
+          (decoration.label === "Curtains" || decoration.label === "Inbetweens"),
+      ) &&
+      (!room.curtainInbetweenSizes || !room.curtainInbetweenSizes.some((size) => size.isSelected)),
   );
 
-  if (!curtainInbetweenSizeSelected) {
+  if (invalidCurtainInbetweenSize.length > 0) {
     setError({
-      curtainInbetweenSizes: "At least one curtain or inbetween size must be selected",
+      curtainInbetweenSizes: "At least one curtain or inbetween size must be selected.",
     });
     return false;
   }
+
   setError({});
   return true;
 };
