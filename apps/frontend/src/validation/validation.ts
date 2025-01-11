@@ -83,15 +83,23 @@ export const windowDecorationDetailsValidation = (
   return true;
 };
 
-// FIXME: This validation is not working as expected
-
 export const amountWindowsValidation = (
   selectedFormValues: IFormDataType,
   setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
 ): boolean => {
-  const amountWindowSelected = selectedFormValues.rooms.every(
-    (room) => !room.isSelected || room.amountWindows?.some((amount) => amount.isSelected),
+  const amountWindowSelected = selectedFormValues.rooms.some(
+    (room) =>
+      room.isSelected &&
+      room.windowDecoration?.some(
+        (decoration) =>
+          decoration.isSelected &&
+          decoration.label !== "Curtains" &&
+          decoration.isSelected &&
+          decoration.label !== "Inbetweens",
+      ) &&
+      room.amountWindows?.some((amount) => amount.isSelected),
   );
+
   if (!amountWindowSelected) {
     setError({ amountWindows: "At least one amount of windows must be selected" });
     return false;
