@@ -68,8 +68,13 @@ export const windowDecorationDetailsValidation = (
   const windowDecorationDetailsSelected = selectedFormValues.rooms.every(
     (room) =>
       !room.isSelected ||
-      room.windowDecorationDetails?.some((detail) =>
-        detail.details.some((details) => details.isSelected),
+      room.windowDecoration?.some(
+        (decoration) =>
+          decoration.isSelected &&
+          (decoration.label === "No window decoration needed" ||
+            room.windowDecorationDetails?.some((detail) =>
+              detail.details.some((details) => details.isSelected),
+            )),
       ),
   );
 
