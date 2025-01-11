@@ -39,12 +39,12 @@ export const Furniture = () => {
             {room.furniture?.map((furniture, furnitureIndex) => (
               <FormGroup key={furniture.id}>
                 <FormControlLabel
+                  className={furniture.isSelected ? "MuiFormControlLabel-selected" : ""}
                   control={
                     <Checkbox
                       checked={furniture.isSelected}
                       onChange={handleChange(roomIndex, furnitureIndex)}
                       name={furniture.label}
-                      className={furniture.isSelected ? "MuiFormControlLabel-selected" : ""}
                     />
                   }
                   label={furniture.label}

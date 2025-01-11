@@ -16,9 +16,6 @@ export const CurtainSizes = () => {
 
   const handleChange = (roomId: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-
-    console.log("Selected value:", value, "Room ID:", roomId);
-
     setSelectedFormValues((prevValues) => {
       const updatedRooms = prevValues.rooms.map((room) => {
         if (room.id === roomId) {
@@ -29,7 +26,6 @@ export const CurtainSizes = () => {
         }
         return room;
       });
-
       return { ...prevValues, rooms: updatedRooms };
     });
   };
