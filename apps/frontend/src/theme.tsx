@@ -71,6 +71,9 @@ export const theme = createTheme({
           width: "100%",
           overflowY: "auto",
         },
+        elevation8: {
+          height: "fit-content",
+        },
       },
     },
     MuiButton: {
@@ -128,6 +131,24 @@ export const theme = createTheme({
           fontSize: "18px",
           fontWeight: "bold",
           color: "#170F49",
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        notchedOutline: {
+          border: "none",
+        },
+      },
+    },
+    MuiSelect: {
+      styleOverrides: {
+        root: {
+          border: "1px solid black",
+          "&.MuiSelect-selected": {
+            border: "5px solid #4A3AFF",
+            boxShadow: "0 2px 11px 0px rgba(74, 58, 255, 0.5)",
+          },
         },
       },
     },

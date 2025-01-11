@@ -61,6 +61,9 @@ export const AmountWindows = () => {
                 }
                 return selected;
               }}
+              className={
+                room.amountWindows?.find((amount) => amount.isSelected) ? "MuiSelect-selected" : ""
+              }
             >
               <MenuItem disabled value="">
                 <em>Select amount</em>
