@@ -48,17 +48,17 @@ export const Furniture = () => {
       <Typography variant="h2">Which furniture would you like to choose?</Typography>
       {selectedFormValues.rooms
         .filter((room) => room.isSelected)
-        .map((room, roomIndex) => (
+        .map((room) => (
           <FormControl key={room.id} error={!!error.furniture}>
             <FormLabel>{room.label}</FormLabel>
-            {room.furniture?.map((furniture, furnitureIndex) => (
+            {room.furniture?.map((furniture) => (
               <FormGroup key={furniture.id}>
                 <FormControlLabel
                   className={furniture.isSelected ? "MuiFormControlLabel-selected" : ""}
                   control={
                     <Checkbox
                       checked={furniture.isSelected}
-                      onChange={handleChange(roomIndex, furnitureIndex)}
+                      onChange={handleChange(room.id, furniture.id)}
                       name={furniture.label}
                       disabled={furniture.isDisabled}
                     />
