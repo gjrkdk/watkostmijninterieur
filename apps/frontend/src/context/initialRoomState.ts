@@ -44,7 +44,7 @@ const roomSizes: IBase[] = [
 const windowDecorations: IBase[] = [
   { id: 0, label: "Curtains", isSelected: false },
   { id: 1, label: "Wooden Blinds", isSelected: false },
-  { id: 2, label: "Aluminum Blinds", isSelected: false },
+  { id: 2, label: "Aluminium Blinds", isSelected: false },
   { id: 3, label: "Duet Curtains", isSelected: false },
   { id: 4, label: "Pleated Curtains", isSelected: false },
   { id: 5, label: "Inbetweens", isSelected: false },
@@ -71,7 +71,7 @@ const windowDecorationDetails: IWindowDecorationDetail[] = [
   },
   {
     id: 2,
-    label: "Aluminum Blinds",
+    label: "Aluminium Blinds",
     details: [
       { id: 0, label: "25mm", isSelected: false },
       { id: 1, label: "50mm", isSelected: false },
