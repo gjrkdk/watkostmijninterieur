@@ -64,7 +64,7 @@ export const theme = createTheme({
         },
         body: {
           margin: 0,
-          padding: "20px 20px 100px 20px",
+          padding: "100px 20px 100px 20px",
           height: "100vh",
           display: "flex",
           alignItems: "center",
@@ -76,7 +76,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           padding: "20px",
-          height: "600px",
+          height: "550px",
           borderRadius: "15px",
           boxShadow: "0px 5px 16px 0px rgba(8, 15, 52, 0.2)",
           width: "100%",

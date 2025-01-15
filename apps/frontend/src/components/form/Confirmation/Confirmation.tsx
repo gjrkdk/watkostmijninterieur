@@ -5,9 +5,7 @@ export const Confirmation = () => {
     <Box>
       <Typography variant="h1">Thank you for your request!</Typography>
       {/* TODO: Create and add Summary component */}
-      <Typography variant="body1">
-        You will receive an email with the estimations. Here is a summary of your selection:
-      </Typography>
+      <Typography variant="body1">You will receive an email with the estimations.</Typography>
     </Box>
   );
 };
