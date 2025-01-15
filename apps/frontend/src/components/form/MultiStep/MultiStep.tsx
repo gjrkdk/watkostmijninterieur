@@ -1,9 +1,11 @@
 import { steps } from "../steps/steps";
 import { useFormContext } from "../../../context/FormContext";
 import {
-  shouldRenderWindowDecorationDetails,
-  includesCurtainsInbetweens,
-  shouldRenderFurnitureDetails,
+  stepFurniture,
+  stepCurtainsOrInbetweens,
+  skipWindowAmountDetails,
+  skipCurtainInbetweens,
+  stepContactDetails,
 } from "../../../utils/utils";
 import { Box, Button, Paper, styled } from "@mui/material";
 import { stepValidation, contactFormValidation } from "../../../validation";
@@ -63,11 +65,23 @@ export const MultiStep = () => {
         }
       }
 
-      if (activeStep === 3 && !shouldRenderWindowDecorationDetails(selectedFormValues)) {
+      if (activeStep === 3 && stepFurniture(selectedFormValues)) {
         nextStep += 4;
-      } else if (activeStep === 4 && !includesCurtainsInbetweens(selectedFormValues)) {
+      }
+
+      if (activeStep === 4 && stepCurtainsOrInbetweens(selectedFormValues)) {
         nextStep += 2;
-      } else if (activeStep === 8 && !shouldRenderFurnitureDetails(selectedFormValues)) {
+      }
+
+      if (activeStep === 4 && skipWindowAmountDetails(selectedFormValues)) {
+        nextStep += 2;
+      }
+
+      if (activeStep === 6 && skipCurtainInbetweens(selectedFormValues)) {
+        nextStep += 1;
+      }
+
+      if (activeStep === 8 && stepContactDetails(selectedFormValues)) {
         nextStep += 1;
       }
 
@@ -79,13 +93,26 @@ export const MultiStep = () => {
     if (activeStep > 0) {
       let previousStep = activeStep - 1;
 
-      if (activeStep === 8 && !shouldRenderWindowDecorationDetails(selectedFormValues)) {
-        previousStep -= 4;
-      } else if (activeStep === 7 && !includesCurtainsInbetweens(selectedFormValues)) {
+      if (activeStep === 8 && stepFurniture(selectedFormValues)) {
         previousStep -= 2;
-      } else if (activeStep === 10 && !shouldRenderFurnitureDetails(selectedFormValues)) {
+      }
+
+      if (activeStep === 7 && stepCurtainsOrInbetweens(selectedFormValues)) {
+        previousStep -= 2;
+      }
+
+      if (activeStep === 7 && skipWindowAmountDetails(selectedFormValues)) {
+        previousStep -= 2;
+      }
+
+      if (activeStep === 8 && skipCurtainInbetweens(selectedFormValues)) {
+        previousStep -= 2;
+      }
+
+      if (activeStep === 10 && stepContactDetails(selectedFormValues)) {
         previousStep -= 1;
       }
+
       setActiveStep(previousStep);
     }
   };
