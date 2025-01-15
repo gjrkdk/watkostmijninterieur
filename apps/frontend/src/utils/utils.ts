@@ -6,9 +6,10 @@ export const stepFurniture = (selectedFormValues: IFormDataType) => {
   const selectedNoWindowDecorationNeeded = selectedRooms.every(
     (room) =>
       room.isSelected &&
-      room.windowDecoration?.some(
-        (decoration) => decoration.isSelected && decoration.label === "No window decoration needed",
-      ),
+      room.windowDecoration?.some((decoration) => {
+        const selectedLabels = ["No window decoration needed"];
+        return decoration.isSelected && selectedLabels.includes(decoration.label);
+      }),
   );
   return selectedNoWindowDecorationNeeded;
 };
@@ -19,11 +20,10 @@ export const stepCurtainsOrInbetweens = (selectedFormValues: IFormDataType) => {
   const selectedCurtainsOrInbetweens = selectedRooms.every(
     (room) =>
       room.isSelected &&
-      room.windowDecoration?.some(
-        (decoration) =>
-          (decoration.isSelected && decoration.label === "Curtains") ||
-          (decoration.isSelected && decoration.label === "Inbetweens"),
-      ),
+      room.windowDecoration?.some((decoration) => {
+        const selectedLabels = ["Curtains", "Inbetweens"];
+        return decoration.isSelected && selectedLabels.includes(decoration.label);
+      }),
   );
   return selectedCurtainsOrInbetweens;
 };
@@ -49,7 +49,13 @@ export const skipCurtainInbetweens = (selectedFormValues: IFormDataType) => {
     (room) =>
       room.isSelected &&
       room.windowDecoration?.some((decoration) => {
-        const selectedLabels = ["No window decoration needed", "Wooden Blinds"];
+        const selectedLabels = [
+          "No window decoration needed",
+          "Wooden Blinds",
+          "Aluminium Blinds",
+          "Duet Curtains",
+          "Pleated Curtains",
+        ];
         return decoration.isSelected && selectedLabels.includes(decoration.label);
       }),
   );
@@ -61,7 +67,11 @@ export const stepContactDetails = (selectedFormValues: IFormDataType) => {
 
   const selectedNoFurniture = selectedRooms.every(
     (room) =>
-      room.isSelected && room.furniture?.some((f) => f.isSelected && f.label === "No furniture"),
+      room.isSelected &&
+      room.furniture?.some((f) => {
+        const selectedLabels = ["No furniture"];
+        return f.isSelected && selectedLabels.includes(f.label);
+      }),
   );
   return selectedNoFurniture;
 };
