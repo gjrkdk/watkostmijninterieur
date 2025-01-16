@@ -7,13 +7,10 @@ export const Contact = () => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    console.log("name", name, "value", value);
     setContactDetails((prevValues: IContactDetails) => ({
       ...prevValues,
       [name]: value,
     }));
-
-    // TODO: Invoke Lambda function to save contact details and send email
   };
 
   return (
