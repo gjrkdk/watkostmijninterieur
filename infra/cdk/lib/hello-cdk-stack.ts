@@ -1,7 +1,7 @@
 import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
-// Import the Lambda module
 import * as lambda from "aws-cdk-lib/aws-lambda";
+import * as path from "path";
 
 export class HelloCdkStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -9,16 +9,9 @@ export class HelloCdkStack extends cdk.Stack {
 
     // Define the Lambda function resource
     const myFunction = new lambda.Function(this, "HelloWorldFunction", {
-      runtime: lambda.Runtime.NODEJS_20_X, // Provide any supported Node.js runtime
-      handler: "index.handler",
-      code: lambda.Code.fromInline(`
-        exports.handler = async function(event) {
-          return {
-            statusCode: 200,
-            body: JSON.stringify('Hello World!'),
-          };
-        };
-      `),
+      runtime: lambda.Runtime.NODEJS_20_X,
+      handler: "ports/lambdaHandler.handler", // Updated handler path
+      code: lambda.Code.fromAsset(path.join(__dirname, "../../../apps/backend/dist")),
     });
 
     // Define the Lambda function URL resource
