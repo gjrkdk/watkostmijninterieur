@@ -5,5 +5,5 @@ import { HelloCdkStack } from "../lib/hello-cdk-stack";
 
 const app = new cdk.App();
 new HelloCdkStack(app, "HelloCdkStack", {
-  env: { account: "123456789", region: "eu-west-1" }, //TODO: change this to real account id
+  env: { account: "654654432492", region: "eu-west-1" },
 });
