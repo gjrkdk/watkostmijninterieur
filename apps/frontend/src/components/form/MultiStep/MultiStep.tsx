@@ -39,7 +39,7 @@ export const MultiStep = () => {
   const contactFormStep = activeStep === 10;
   const finalStep = activeStep === steps.length - 1;
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!contactFormValidation(contactDetails, setError)) {
@@ -47,7 +47,29 @@ export const MultiStep = () => {
       return false;
     }
 
-    console.log("Successfully form submission");
+    // const data = {
+    //   selectedFormValues,
+    //   contactDetails,
+    // };
+
+    try {
+      const response = await fetch(`${process.env.API_URL}/hello/${contactDetails.firstName}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        mode: "cors",
+        credentials: "omit",
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const result = await response.json();
+      console.log(result);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+
     handleNextStep();
     return true;
   };

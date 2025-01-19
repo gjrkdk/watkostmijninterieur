@@ -5,6 +5,11 @@
   "author": "GJRKZB <89792219+GJRKZB@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
+    "local:backend": "ts-node apps/backend/src/local/server.ts",
+    "build:backend": "tsc -p apps/backend",
+    "synth:infra": "cd infra/cdk && cdk synth",
+    "deploy:infra": "cd infra/cdk && cdk deploy",
+    "watch:infra": "cd infra/cdk && cdk watch",
     "prettier:check": "prettier --check 'apps/frontend/src/**/*.{ts,tsx}'",
     "prettier:write": "prettier --write 'apps/frontend/src/**/*.{ts,tsx}'"
   },
