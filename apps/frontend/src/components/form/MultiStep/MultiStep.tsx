@@ -53,16 +53,12 @@ export const MultiStep = () => {
     // };
 
     try {
-      // const response = await fetch("/api", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify(data),
-      // });
-
-      const response = {
-        ok: true,
-        json: () => ({ message: "Success" }),
-      };
+      const response = await fetch(`${process.env.API_URL}/hello/${contactDetails.firstName}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        mode: "cors",
+        credentials: "omit",
+      });
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
