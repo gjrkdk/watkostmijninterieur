@@ -4,3 +4,6 @@ apps/frontend/coverage
 apps/frontend/dist
 apps/frontend/node_modules
 apps/frontend/.env
+apps/backend/dist
+apps/backend/node_modules
+yarn.lock

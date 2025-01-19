@@ -10,7 +10,7 @@ export class HelloCdkStack extends cdk.Stack {
     // Define the Lambda function resource
     const myFunction = new lambda.Function(this, "HelloWorldFunction", {
       runtime: lambda.Runtime.NODEJS_20_X,
-      handler: "ports/lambdaHandler.handler", // Updated handler path
+      handler: "handlers/lambdaHandler.handler", // Updated handler path
       code: lambda.Code.fromAsset(path.join(__dirname, "../../../apps/backend/dist")),
     });
 
