@@ -3,14 +3,17 @@ import { greetingController } from "../controllers/greetingController";
 
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   try {
+    console.log("Event:", JSON.stringify(event, null, 2));
+
     const name = event.pathParameters?.name || "World";
+    console.log("Name:", name);
+
     const response = greetingController.handleGreeting(name);
 
     return {
       statusCode: 200,
       headers: {
         "Content-Type": "application/json",
-        // Enable CORS if needed
         "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify(response),

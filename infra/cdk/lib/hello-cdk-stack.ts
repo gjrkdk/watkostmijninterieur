@@ -1,6 +1,7 @@
 import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
 import * as lambda from "aws-cdk-lib/aws-lambda";
+import * as apigateway from "aws-cdk-lib/aws-apigateway";
 import * as path from "path";
 
 export class HelloCdkStack extends cdk.Stack {
@@ -10,18 +11,26 @@ export class HelloCdkStack extends cdk.Stack {
     // Define the Lambda function resource
     const myFunction = new lambda.Function(this, "HelloWorldFunction", {
       runtime: lambda.Runtime.NODEJS_20_X,
-      handler: "handlers/lambdaHandler.handler", // Updated handler path
+      handler: "handlers/lambdaHandler.handler",
       code: lambda.Code.fromAsset(path.join(__dirname, "../../../apps/backend/dist")),
     });
 
-    // Define the Lambda function URL resource
-    const myFunctionUrl = myFunction.addFunctionUrl({
-      authType: lambda.FunctionUrlAuthType.NONE,
+    // Create the API Gateway
+    const api = new apigateway.RestApi(this, "GreetingApi", {
+      restApiName: "Greeting Service",
     });
 
-    // Define a CloudFormation output for your URL
-    new cdk.CfnOutput(this, "myFunctionUrlOutput", {
-      value: myFunctionUrl.url,
+    // Create the /greeting endpoint
+    const greetingResource = api.root.addResource("hello");
+    greetingResource.addMethod("GET", new apigateway.LambdaIntegration(myFunction));
+
+    // Create the /greeting/{name} endpoint
+    const nameResource = greetingResource.addResource("{name}");
+    nameResource.addMethod("GET", new apigateway.LambdaIntegration(myFunction));
+
+    // Output the API URL
+    new cdk.CfnOutput(this, "apiUrl", {
+      value: api.url,
     });
   }
 }
