@@ -18,13 +18,18 @@ export class HelloCdkStack extends cdk.Stack {
     // Create the API Gateway
     const api = new apigateway.RestApi(this, "GreetingApi", {
       restApiName: "Greeting Service",
+      defaultCorsPreflightOptions: {
+        allowOrigins: ["http://localhost:3000"], // Your frontend's origin
+        allowMethods: ["GET"], // Allowed HTTP methods
+        allowHeaders: ["Content-Type"], // Allowed headers
+      },
     });
 
-    // Create the /greeting endpoint
+    // Create the /hello endpoint
     const greetingResource = api.root.addResource("hello");
     greetingResource.addMethod("GET", new apigateway.LambdaIntegration(myFunction));
 
-    // Create the /greeting/{name} endpoint
+    // Create the /hello/{name} endpoint
     const nameResource = greetingResource.addResource("{name}");
     nameResource.addMethod("GET", new apigateway.LambdaIntegration(myFunction));
 
