@@ -1,5 +1,4 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
-import { greetingController } from "../controllers/greetingController";
 
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   if (event.httpMethod === "OPTIONS") {
@@ -18,16 +17,16 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
   try {
     console.log("Event:", JSON.stringify(event, null, 2));
 
-    const name = event.pathParameters?.name || "World";
-    console.log("Name:", name);
+    const body = event.body ? JSON.parse(event.body) : {};
+    console.log("Request Body:", body);
 
-    const response = greetingController.handleGreeting(name);
+    const response = body;
 
     return {
       statusCode: 200,
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*", // Allow requests from all origins
+        "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify(response),
     };

@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import "source-map-support/register";
 import * as cdk from "aws-cdk-lib";
-import { HelloCdkStack } from "../lib/hello-cdk-stack";
+import { WatKostMijnInterieurCdkStack } from "../lib/WatKostMijnInterieurCDKStack";
 
 const app = new cdk.App();
-new HelloCdkStack(app, "HelloCdkStack", {
+new WatKostMijnInterieurCdkStack(app, "WatKostMijnInterieurCdkStack", {
   env: {
     account: process.env.AWS_ACCOUNT_ID,
     region: process.env.AWS_REGION || "eu-west-1",

@@ -4,7 +4,7 @@ import * as lambda from "aws-cdk-lib/aws-lambda";
 import * as apigateway from "aws-cdk-lib/aws-apigateway";
 import * as path from "path";
 
-export class HelloCdkStack extends cdk.Stack {
+export class WatKostMijnInterieurCdkStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
@@ -16,24 +16,18 @@ export class HelloCdkStack extends cdk.Stack {
     });
 
     // Create the API Gateway
-    const api = new apigateway.RestApi(this, "GreetingApi", {
-      restApiName: "Greeting Service",
+    const api = new apigateway.RestApi(this, "PriceEstimationApi", {
+      restApiName: "Price Estimation Service",
       defaultCorsPreflightOptions: {
-        allowOrigins: ["http://localhost:3000"], // Your frontend's origin
-        allowMethods: ["GET"], // Allowed HTTP methods
-        allowHeaders: ["Content-Type"], // Allowed headers
+        allowOrigins: ["http://localhost:3000"],
+        allowMethods: ["POST"],
+        allowHeaders: ["Content-Type"],
       },
     });
 
-    // Create the /hello endpoint
-    const greetingResource = api.root.addResource("hello");
-    greetingResource.addMethod("GET", new apigateway.LambdaIntegration(myFunction));
+    const priceEstimationResource = api.root.addResource("price-estimation");
+    priceEstimationResource.addMethod("POST", new apigateway.LambdaIntegration(myFunction));
 
-    // Create the /hello/{name} endpoint
-    const nameResource = greetingResource.addResource("{name}");
-    nameResource.addMethod("GET", new apigateway.LambdaIntegration(myFunction));
-
-    // Output the API URL
     new cdk.CfnOutput(this, "apiUrl", {
       value: api.url,
     });
