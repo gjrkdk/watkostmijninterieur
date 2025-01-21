@@ -14,6 +14,6 @@ module.exports = {
     new webpack.DefinePlugin({
       "process.env.name": JSON.stringify("development"),
     }),
-    new Dotenv({ path: path.resolve(__dirname, ".env") }),
+    new Dotenv({ path: path.resolve(__dirname, "../.env") }),
   ],
 };
