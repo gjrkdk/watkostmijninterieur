@@ -47,18 +47,13 @@ export const MultiStep = () => {
       return false;
     }
 
-    const data = {
-      selectedFormValues,
-      contactDetails,
-    };
-
     try {
       const response = await fetch(`${process.env.API_URL}/price-estimation`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         mode: "cors",
         credentials: "omit",
-        body: JSON.stringify(data),
+        body: JSON.stringify(selectedFormValues),
       });
 
       if (!response.ok) {
