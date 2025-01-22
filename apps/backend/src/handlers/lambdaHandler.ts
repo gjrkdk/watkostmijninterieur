@@ -1,4 +1,5 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
+import { priceCalculation } from "../services/priceService";
 
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   if (event.httpMethod === "OPTIONS") {
@@ -20,7 +21,9 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     const body = event.body ? JSON.parse(event.body) : {};
     console.log("Request Body:", body);
 
-    const response = body;
+    const response = priceCalculation(body);
+
+    console.log(response);
 
     return {
       statusCode: 200,
