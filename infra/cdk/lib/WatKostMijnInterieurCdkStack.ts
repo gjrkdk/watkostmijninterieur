@@ -9,7 +9,7 @@ export class WatKostMijnInterieurCdkStack extends cdk.Stack {
     super(scope, id, props);
 
     // Define the Lambda function resource
-    const myFunction = new lambda.Function(this, "HelloWorldFunction", {
+    const myFunction = new lambda.Function(this, "PriceCalculatorFunction", {
       runtime: lambda.Runtime.NODEJS_20_X,
       handler: "handlers/lambdaHandler.handler",
       code: lambda.Code.fromAsset(path.join(__dirname, "../../../apps/backend/dist")),
