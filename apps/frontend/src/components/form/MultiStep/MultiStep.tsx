@@ -52,7 +52,6 @@ export const MultiStep = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         mode: "cors",
-        credentials: "omit",
         body: JSON.stringify(selectedFormValues),
       });
 
