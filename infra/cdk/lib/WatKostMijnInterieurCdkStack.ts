@@ -12,7 +12,7 @@ export class WatKostMijnInterieurCdkStack extends cdk.Stack {
     const myFunction = new lambda.Function(this, "PriceCalculatorFunction", {
       runtime: lambda.Runtime.NODEJS_20_X,
       handler: "handlers/lambdaHandler.handler",
-      code: lambda.Code.fromAsset(path.join(__dirname, "../../../apps/backend/dist")),
+      code: lambda.Code.fromAsset(path.join(__dirname, "../../../apps/backend/src")),
     });
 
     // Create the API Gateway
