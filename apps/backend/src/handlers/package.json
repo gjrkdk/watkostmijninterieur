@@ -1,0 +1,8 @@
+{
+  "name": "handlers",
+  "version": "1.0.0",
+  "main": "lambdaHandler.js",
+  "dependencies": {
+    "@GJRKDK/price-calculator": "^0.3.5"
+  }
+}
