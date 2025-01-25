@@ -1,0 +1,18 @@
+{
+  "name": "backend",
+  "main": "dist/lambdaHandler.js",
+  "types": "dist/lambdaHandler.d.ts",
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "outDir": "dist",
+    "strict": true,
+    "declaration": true,
+    "esModuleInterop": false
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "include": ["src/**/*"]
+}

@@ -1,19 +1,7 @@
-const { priceCalculation } = require("@GJRKDK/price-calculator");
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
+import { priceCalculation } from "@GJRKDK/price-calculator";
 
-exports.handler = async (event) => {
-  // if (event.httpMethod === "OPTIONS") {
-  // return {
-  // statusCode: 200,
-  // headers: {
-  // "Access-Control-Allow-Origin": "*",
-  // "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-  // "Access-Control-Allow-Headers": "Content-Type",
-  // "Access-Control-Max-Age": "3600", // Cache the preflight response
-  // },
-  // body: "",
-  // };
-  // }
-
+export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   try {
     console.log("Event:", JSON.stringify(event, null, 2));
 
