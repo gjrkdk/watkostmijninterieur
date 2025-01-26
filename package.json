@@ -5,6 +5,7 @@
   "author": "GJRKZB <89792219+GJRKZB@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
+    "start": "cd apps/frontend && yarn start",
     "build:backend": "cd apps/backend && yarn build",
     "synth:infra": "cd infra/cdk && cdk synth",
     "deploy:infra": "cd infra/cdk && cdk deploy",
