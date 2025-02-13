@@ -17,8 +17,7 @@ export const FormProvider: React.FC<IFormContext> = ({ children }) => {
       floors: room.floors.map((floor) => ({
         ...floor,
         isSelected:
-          (index === 0 && floor.label === "First floor") ||
-          (index === 1 && floor.label === "Ground floor"),
+          (index === 0 && floor.label === "Carpet") || (index === 1 && floor.label === "Hardwood"),
       })),
       roomSizes: room.roomSizes.map((roomSize) => ({
         ...roomSize,
@@ -72,6 +71,9 @@ export const FormProvider: React.FC<IFormContext> = ({ children }) => {
       })),
     })),
   });
+
+  console.log(selectedFormValues);
+
   const [contactDetails, setContactDetails] = useState<IContactDetails>({
     // firstName: "",
     // email: "",

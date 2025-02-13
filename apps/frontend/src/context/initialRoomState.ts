@@ -30,9 +30,9 @@ export interface IOptions extends IBase {
 }
 
 const floors: IBase[] = [
-  { id: 0, label: "Ground floor", isSelected: false },
-  { id: 1, label: "First floor", isSelected: false },
-  { id: 2, label: "Second floor", isSelected: false },
+  { id: 0, label: "Hardwood", isSelected: false },
+  { id: 1, label: "Carpet", isSelected: false },
+  { id: 2, label: "Tile", isSelected: false },
 ];
 
 const roomSizes: IBase[] = [
