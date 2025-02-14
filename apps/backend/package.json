@@ -7,7 +7,7 @@
     "build": "tsc && cp .npmrc dist/ && cp -r node_modules dist/"
   },
   "dependencies": {
-    "@GJRKDK/price-calculator": "^0.5.0",
+    "@GJRKDK/price-calculator": "^0.5.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   }

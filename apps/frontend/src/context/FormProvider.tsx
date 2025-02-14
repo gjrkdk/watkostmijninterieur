@@ -17,7 +17,7 @@ export const FormProvider: React.FC<IFormContext> = ({ children }) => {
       floors: room.floors.map((floor) => ({
         ...floor,
         isSelected:
-          (index === 0 && floor.label === "Carpet") || (index === 1 && floor.label === "Hardwood"),
+          (index === 0 && floor.label === "Hardwood") || (index === 1 && floor.label === "Carpet"),
       })),
       roomSizes: room.roomSizes.map((roomSize) => ({
         ...roomSize,
@@ -61,7 +61,7 @@ export const FormProvider: React.FC<IFormContext> = ({ children }) => {
         ...furniture,
         isSelected:
           (index === 0 && furniture.label === "Couch") ||
-          (index === 1 && furniture.label === "Armhair"),
+          (index === 1 && furniture.label === "Carpet"),
       })),
       furnitureDetails: room.furnitureDetails?.map((furnitureDetail) => ({
         ...furnitureDetail,
