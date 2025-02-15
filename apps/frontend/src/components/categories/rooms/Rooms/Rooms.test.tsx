@@ -10,9 +10,9 @@ describe("Rooms Component", () => {
     setError: jest.fn(),
     selectedFormValues: {
       rooms: [
-        { id: 1, label: "Living Room", isSelected: false, floors: [], roomSizes: [] },
-        { id: 2, label: "Kitchen", isSelected: true, floors: [], roomSizes: [] },
-        { id: 3, label: "Bedroom", isSelected: false, floors: [], roomSizes: [] },
+        { id: 0, label: "Living Room", isSelected: false, floors: [], roomSizes: [] },
+        { id: 1, label: "Kitchen", isSelected: true, floors: [], roomSizes: [] },
+        { id: 2, label: "Bedroom", isSelected: false, floors: [], roomSizes: [] },
       ],
     },
     setSelectedFormValues: jest.fn(),
@@ -45,11 +45,11 @@ describe("Rooms Component", () => {
   it("displays error messages if error.rooms is set", () => {
     const contextWithError = {
       ...mockContextValue,
-      error: { rooms: "Please select at least one room." },
+      error: { rooms: "Please select at least one room" },
     };
 
     renderWithContext(contextWithError);
 
-    expect(screen.getByText("Please select at least one room.")).toBeInTheDocument();
+    expect(screen.getByText("Please select at least one room")).toBeInTheDocument();
   });
 });

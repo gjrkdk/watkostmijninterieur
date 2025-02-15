@@ -7,7 +7,7 @@ export const roomValidation = (
   const roomIsSelected = selectedFormValues.rooms.some((room) => room.isSelected);
 
   if (!roomIsSelected) {
-    setError({ rooms: "At least one room must be selected." });
+    setError({ rooms: "At least one room must be selected" });
     return false;
   }
   setError({});
