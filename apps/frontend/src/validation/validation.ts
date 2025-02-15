@@ -133,7 +133,7 @@ export const windowSizeValidation = (
 
   const hasErrors = validationResults.some((result) => result.missingSizes > 0);
   if (hasErrors) {
-    setError({ windowSizes: "All windows must have sizes selected." });
+    setError({ windowSizes: "All windows must have sizes selected" });
     return false;
   } else {
     setError({});
