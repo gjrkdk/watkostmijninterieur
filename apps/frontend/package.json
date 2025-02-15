@@ -7,7 +7,9 @@
     "start": "webpack serve --config webpack/webpack.config.js --env env=dev",
     "build": "webpack --config webpack/webpack.config.js --env env=prod",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
-    "test": "jest --passWithNoTests"
+    "test": "jest",
+    "test:coverage": "jest --passWithNoTests --coverage",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
