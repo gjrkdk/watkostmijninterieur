@@ -158,7 +158,7 @@ export const curtainInbetweenValidation = (
 
   if (invalidCurtainInbetweenSize.length > 0) {
     setError({
-      curtainInbetweenSizes: "At least one curtain or inbetween size must be selected.",
+      curtainInbetweenSizes: "At least one curtain or inbetween size must be selected",
     });
     return false;
   }
