@@ -62,7 +62,7 @@ describe("RoomSizes Component", () => {
     );
   }
 
-  it("renders radio buttons for each room size", () => {
+  it("renders radio buttons for each room at room size selection step", () => {
     renderWithContext();
     const livingRoomSection = screen.getByRole("radiogroup", { name: "Living Room" });
     expect(
