@@ -50,6 +50,7 @@ export const CurtainSizes = () => {
           <FormControl key={room.id} error={!!error.curtainInbetweenSizes} component="fieldset">
             <FormLabel>{room.label}</FormLabel>
             <RadioGroup
+              aria-label={room.label}
               value={room.curtainInbetweenSizes?.find((size) => size.isSelected)?.label || ""}
               onChange={handleChange(room.id)}
             >
