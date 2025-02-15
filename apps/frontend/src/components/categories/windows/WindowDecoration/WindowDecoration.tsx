@@ -43,6 +43,7 @@ export const WindowDecoration = () => {
           <FormControl key={room.id} error={!!error.windowDecoration} variant="standard">
             <FormLabel>{room.label}</FormLabel>
             <RadioGroup
+              aria-label={room.label}
               value={room.windowDecoration?.find((d) => d.isSelected)?.label || ""}
               onChange={handleChange(room.label)}
             >
