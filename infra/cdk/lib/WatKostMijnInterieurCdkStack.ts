@@ -22,11 +22,36 @@ export class WatKostMijnInterieurCdkStack extends cdk.Stack {
         allowOrigins: ["http://localhost:3000"],
         allowMethods: ["POST"],
         allowHeaders: ["Content-Type"],
+        statusCode: 200,
       },
     });
 
     const priceEstimationResource = api.root.addResource("price-estimation");
-    priceEstimationResource.addMethod("POST", new apigateway.LambdaIntegration(myFunction));
+
+    priceEstimationResource.addMethod(
+      "POST",
+      new apigateway.LambdaIntegration(myFunction, {
+        // Add CORS headers to the response
+        integrationResponses: [
+          {
+            statusCode: "200",
+            responseParameters: {
+              "method.response.header.Access-Control-Allow-Origin": "'http://localhost:3000'",
+            },
+          },
+        ],
+      }),
+      {
+        methodResponses: [
+          {
+            statusCode: "200",
+            responseParameters: {
+              "method.response.header.Access-Control-Allow-Origin": true,
+            },
+          },
+        ],
+      },
+    );
 
     new cdk.CfnOutput(this, "apiUrl", {
       value: api.url,
