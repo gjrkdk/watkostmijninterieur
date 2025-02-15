@@ -1,37 +1,55 @@
 import { render, screen } from "@testing-library/react";
 import { Rooms } from "./Rooms";
-import { FormContext } from "../../../../context/FormContext";
+import { FormContext, IFormContext } from "../../../../context/FormContext";
 
 describe("Rooms Component", () => {
-  const mockSetSelectedFormValues = jest.fn();
-
-  const mockContextValue = {
-    selectedFormValues: {
-      rooms: [
-        { id: 1, label: "Living Room", isSelected: false, floors: [], roomSizes: [] },
-        { id: 2, label: "Kitchen", isSelected: true, floors: [], roomSizes: [] },
-      ],
-    },
-    setSelectedFormValues: mockSetSelectedFormValues,
+  const mockContextValue: IFormContext = {
     activeStep: 0,
     setActiveStep: jest.fn(),
     error: {},
     setError: jest.fn(),
+    selectedFormValues: {
+      rooms: [
+        { id: 1, label: "Living Room", isSelected: false, floors: [], roomSizes: [] },
+        { id: 2, label: "Kitchen", isSelected: true, floors: [], roomSizes: [] },
+        { id: 3, label: "Bedroom", isSelected: false, floors: [], roomSizes: [] },
+      ],
+    },
+    setSelectedFormValues: jest.fn(),
     contactDetails: { firstName: "", email: "" },
     setContactDetails: jest.fn(),
   };
 
-  const renderRooms = () => {
+  function renderWithContext(contextValue = mockContextValue) {
     return render(
-      <FormContext.Provider value={mockContextValue}>
+      <FormContext.Provider value={contextValue}>
         <Rooms />
       </FormContext.Provider>,
     );
-  };
+  }
 
   it("renders checkboxes for each room", () => {
-    renderRooms();
+    renderWithContext();
+
     expect(screen.getByRole("checkbox", { name: "Living Room" })).toBeInTheDocument();
     expect(screen.getByRole("checkbox", { name: "Kitchen" })).toBeInTheDocument();
+    expect(screen.getByRole("checkbox", { name: "Bedroom" })).toBeInTheDocument();
+  });
+
+  it("shows Kitchen as already selected", () => {
+    renderWithContext();
+    const kitchenCheckbox = screen.getByRole("checkbox", { name: "Kitchen" });
+    expect(kitchenCheckbox).toBeChecked();
+  });
+
+  it("displays error messages if error.rooms is set", () => {
+    const contextWithError = {
+      ...mockContextValue,
+      error: { rooms: "Please select at least one room." },
+    };
+
+    renderWithContext(contextWithError);
+
+    expect(screen.getByText("Please select at least one room.")).toBeInTheDocument();
   });
 });
