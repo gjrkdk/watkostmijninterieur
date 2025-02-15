@@ -4,7 +4,7 @@ import { FormContext, IFormContext } from "../../../../context/FormContext";
 
 describe("WindowDecoration Component", () => {
   const mockContextValue: IFormContext = {
-    activeStep: 3,
+    activeStep: 4,
     setActiveStep: jest.fn(),
     error: {},
     setError: jest.fn(),
