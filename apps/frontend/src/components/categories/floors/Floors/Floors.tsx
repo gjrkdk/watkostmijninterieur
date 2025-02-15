@@ -41,6 +41,7 @@ export const Floors = () => {
           <FormControl key={room.id} error={!!error.floors} variant="standard">
             <FormLabel>{room.label}</FormLabel>
             <RadioGroup
+              aria-label={room.label}
               value={room.floors.find((f) => f.isSelected)?.label || ""}
               onChange={handleChange(room.label)}
             >
