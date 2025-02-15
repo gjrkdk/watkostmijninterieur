@@ -73,6 +73,7 @@ export const WindowDecorationDetails = () => {
                   {detail.label}
                 </Typography>
                 <RadioGroup
+                  aria-label={room.label}
                   value={detail.details.find((d) => d.isSelected)?.label || ""}
                   onChange={handleDetailChange(room.label)}
                 >
