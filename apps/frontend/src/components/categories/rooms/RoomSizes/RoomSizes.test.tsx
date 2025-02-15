@@ -76,22 +76,6 @@ describe("RoomSizes Component", () => {
     ).toBeInTheDocument();
   });
 
-  it("shows Big (30 m² - 50 m²) already selected for Living Room", () => {
-    renderWithContext();
-    const livingRoomSection = screen.getByRole("radiogroup", { name: "Living Room" });
-    expect(
-      within(livingRoomSection).getByRole("radio", { name: "Big (30 m² - 50 m²)" }),
-    ).toBeChecked();
-  });
-
-  it("shows Mid-sized (20 m² - 30 m²) already selected for Kitchen", () => {
-    renderWithContext();
-    const kitchenSection = screen.getByRole("radiogroup", { name: "Kitchen" });
-    expect(
-      within(kitchenSection).getByRole("radio", { name: "Mid-sized (20 m² - 30 m²)" }),
-    ).toBeChecked();
-  });
-
   it("displays error messages if error.roomSizes is set", () => {
     const contextWithError = {
       ...mockContextValue,

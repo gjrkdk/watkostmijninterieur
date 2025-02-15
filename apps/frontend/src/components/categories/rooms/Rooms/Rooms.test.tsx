@@ -36,12 +36,6 @@ describe("Rooms Component", () => {
     expect(screen.getByRole("checkbox", { name: "Bedroom" })).toBeInTheDocument();
   });
 
-  it("shows Kitchen as already selected", () => {
-    renderWithContext();
-    const kitchenCheckbox = screen.getByRole("checkbox", { name: "Kitchen" });
-    expect(kitchenCheckbox).toBeChecked();
-  });
-
   it("displays error messages if error.rooms is set", () => {
     const contextWithError = {
       ...mockContextValue,

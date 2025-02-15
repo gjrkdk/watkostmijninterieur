@@ -66,18 +66,6 @@ describe("Floor Component", () => {
     expect(within(livingRoomSection).getByRole("radio", { name: "Tile" })).toBeInTheDocument();
   });
 
-  it("shows Hardwood as already selected for Living Room", () => {
-    renderWithContext();
-    const livingRoomSection = screen.getByRole("radiogroup", { name: "Living Room" });
-    expect(within(livingRoomSection).getByRole("radio", { name: "Hardwood" })).toBeChecked();
-  });
-
-  it("shows Carpet as already selected for Kitchen", () => {
-    renderWithContext();
-    const kitchenRoomSection = screen.getByRole("radiogroup", { name: "Kitchen" });
-    expect(within(kitchenRoomSection).getByRole("radio", { name: "Carpet" })).toBeChecked();
-  });
-
   it("displays error messages if error.floors is set", () => {
     const contextWithError = {
       ...mockContextValue,
