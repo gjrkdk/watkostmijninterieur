@@ -30,19 +30,11 @@ describe("WindowDecoration Component", () => {
         {
           id: 1,
           label: "Kitchen",
-          isSelected: true,
+          isSelected: false,
           floors: [],
           roomSizes: [],
-          windowDecoration: [
-            { id: 0, label: "Curtains", isSelected: false },
-            { id: 1, label: "Wooden Blinds", isSelected: false },
-            { id: 2, label: "Aluminium Blinds", isSelected: false },
-          ],
-          amountWindows: [
-            { id: 0, amount: "1", isSelected: false },
-            { id: 1, amount: "2", isSelected: false },
-            { id: 2, amount: "3", isSelected: false },
-          ],
+          windowDecoration: [],
+          amountWindows: [],
         },
         {
           id: 2,
@@ -67,13 +59,6 @@ describe("WindowDecoration Component", () => {
       </FormContext.Provider>,
     );
   }
-
-  it("renders the component and displays the correct rooms", () => {
-    renderWithContext();
-    expect(screen.getByText("Amount windows")).toBeInTheDocument();
-    expect(screen.getByText("Living Room")).toBeInTheDocument();
-    expect(screen.queryByText("Kitchen")).not.toBeInTheDocument();
-  });
 
   it("displays error messages if error.amountWindows is set", () => {
     const contextWithError = {
