@@ -58,6 +58,7 @@ export const WindowSizes = () => {
                   sx={{ marginBottom: "10px" }}
                 >{`Window ${windowIndex + 1}`}</Typography>
                 <RadioGroup
+                  aria-label={room.label}
                   value={room.windowSizes?.[windowIndex] || ""}
                   onChange={handleChange(room.id, windowIndex)}
                 >
