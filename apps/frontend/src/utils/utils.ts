@@ -1,5 +1,10 @@
 import { IFormDataType } from "../context/FormContext";
 
+/**
+ * Checks if all selected rooms have "No window decoration needed" selected.
+ * Returns true if all selected rooms have "No window decoration needed" selected, otherwise false.
+ */
+
 export const stepFurniture = (selectedFormValues: IFormDataType) => {
   const selectedRooms = selectedFormValues.rooms.filter((room) => room.isSelected);
 
@@ -13,6 +18,11 @@ export const stepFurniture = (selectedFormValues: IFormDataType) => {
   );
   return selectedNoWindowDecorationNeeded;
 };
+
+/**
+ * Checks if all selected rooms have either "Curtains" or "Inbetweens" selected.
+ * Returns true if all selected rooms have either "Curtains" or "Inbetweens" selected, otherwise false.
+ */
 
 export const stepCurtainsOrInbetweens = (selectedFormValues: IFormDataType) => {
   const selectedRooms = selectedFormValues.rooms.filter((room) => room.isSelected);
@@ -28,6 +38,11 @@ export const stepCurtainsOrInbetweens = (selectedFormValues: IFormDataType) => {
   return selectedCurtainsOrInbetweens;
 };
 
+/**
+ * Checks if all selected rooms have either "Curtains", "Inbetweens", or "No window decoration needed" selected.
+ * Returns true if all selected rooms have either "Curtains", "Inbetweens", or "No window decoration needed" selected, otherwise false.
+ */
+
 export const skipWindowAmountDetails = (selectedFormValues: IFormDataType) => {
   const selectedRooms = selectedFormValues.rooms.filter((room) => room.isSelected);
 
@@ -41,6 +56,11 @@ export const skipWindowAmountDetails = (selectedFormValues: IFormDataType) => {
   );
   return selectedCurtainsInbetweensOrNoWindowDecoration;
 };
+
+/**
+ * Checks if all selected rooms have window decorations that do not require curtains or inbetweens.
+ * Returns true if all selected rooms have window decorations that do not require curtains or inbetweens, otherwise false.
+ */
 
 export const skipCurtainInbetweens = (selectedFormValues: IFormDataType) => {
   const selectedRooms = selectedFormValues.rooms.filter((room) => room.isSelected);
@@ -61,6 +81,11 @@ export const skipCurtainInbetweens = (selectedFormValues: IFormDataType) => {
   );
   return selectedWindowDecorationNoWindowDecoration;
 };
+
+/**
+ * Checks if all selected rooms have "No furniture" selected.
+ * Returns true if all selected rooms have "No furniture" selected, otherwise false.
+ */
 
 export const stepContactDetails = (selectedFormValues: IFormDataType) => {
   const selectedRooms = selectedFormValues.rooms.filter((room) => room.isSelected);
