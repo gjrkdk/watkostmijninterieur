@@ -35,13 +35,11 @@ export const WindowDecorationDetails = () => {
     };
 
   const getRelevantDetails = (room: (typeof selectedFormValues.rooms)[0]) => {
-    // Find the selected window decoration for the room
     const selectedWindowDecoration = room.windowDecoration?.find(
       (decoration) => decoration.isSelected,
     );
     if (!selectedWindowDecoration) return [];
 
-    // Filter the relevant details based on the selected decoration's label
     return (
       room.windowDecorationDetails?.filter(
         (detail) => detail.label === selectedWindowDecoration.label,

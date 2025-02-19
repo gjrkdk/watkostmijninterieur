@@ -188,17 +188,17 @@ export const furnitureDetailsValidation = (
   setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
 ): boolean => {
   const furnitureDetailsValid = selectedFormValues.rooms.every((room) => {
-    if (!room.isSelected) return true; // Skip non-selected rooms
+    if (!room.isSelected) return true;
 
     const selectedFurniture = room.furniture?.filter((furniture) => furniture.isSelected);
-    if (!selectedFurniture || selectedFurniture.length === 0) return true; // Skip if no furniture is selected
+    if (!selectedFurniture || selectedFurniture.length === 0) return true;
 
     const hasValidFurniture = selectedFurniture.some(
       (furniture) => furniture.label !== "No furniture",
     );
-    if (!hasValidFurniture) return true; // Skip if "No furniture" is selected
+    if (!hasValidFurniture) return true;
 
-    return room.furnitureDetails?.some((detail) => detail.isSelected) || false; // Validate furniture details
+    return room.furnitureDetails?.some((detail) => detail.isSelected) || false;
   });
 
   if (!furnitureDetailsValid) {

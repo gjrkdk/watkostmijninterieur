@@ -32,7 +32,6 @@ describe("WatKostMijnInterieurCdkStack", () => {
       Name: "Price Estimation Service",
     });
 
-    // Test CORS configuration on the OPTIONS method
     template.hasResourceProperties("AWS::ApiGateway::Method", {
       HttpMethod: "OPTIONS",
       Integration: {

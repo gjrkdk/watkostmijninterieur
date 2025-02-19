@@ -1,4 +1,3 @@
-// FurnitureDetails.test.tsx
 import { render, screen } from "@testing-library/react";
 import { FurnitureDetails } from "./FurnitureDetails";
 import { FormContext, IFormContext } from "../../../../context/FormContext";
