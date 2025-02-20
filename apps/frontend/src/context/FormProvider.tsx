@@ -72,8 +72,6 @@ export const FormProvider: React.FC<IFormContext> = ({ children }) => {
     })),
   });
 
-  console.log(selectedFormValues);
-
   const [contactDetails, setContactDetails] = useState<IContactDetails>({
     // firstName: "",
     // email: "",
