@@ -1,5 +1,5 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
-import { calculateRoomPricing } from "@GJRKDK/price-calculator";
+import { calculateRoomPricing } from "@gjrkdk/price-calculator";
 
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   try {
