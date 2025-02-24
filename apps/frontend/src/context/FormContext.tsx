@@ -10,6 +10,8 @@ export interface IFormContext {
   setSelectedFormValues: Dispatch<SetStateAction<IFormDataType>>;
   contactDetails: IContactDetails;
   setContactDetails: Dispatch<SetStateAction<IContactDetails>>;
+  response?: string;
+  setResponse?: Dispatch<SetStateAction<string>>;
 }
 
 export interface IFormDataType {

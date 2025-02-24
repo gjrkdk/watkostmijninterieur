@@ -17,7 +17,7 @@ const ButtonContainer = styled(Box)({
 });
 
 export const MultiStep = () => {
-  const { activeStep, setActiveStep, selectedFormValues, contactDetails, setError } =
+  const { activeStep, setActiveStep, selectedFormValues, contactDetails, setError, setResponse } =
     useFormContext();
 
   if (steps.length === 0) {
@@ -48,11 +48,10 @@ export const MultiStep = () => {
     }
 
     try {
-      const response = await fetch(`${process.env.API_URL}/price-estimation`, {
-        method: "POST",
+      const response = await fetch(`${process.env.API_URL}/hello`, {
+        method: "GET",
         headers: { "Content-Type": "application/json" },
-        mode: "cors",
-        body: JSON.stringify(selectedFormValues),
+        // body: JSON.stringify(selectedFormValues),
       });
 
       if (!response.ok) {
@@ -61,6 +60,12 @@ export const MultiStep = () => {
 
       const result = await response.json();
       console.log(result);
+
+      if (setResponse) {
+        setResponse(result);
+      } else {
+        console.log("undefined jongen");
+      }
     } catch (error) {
       console.error("Error:", error);
     }

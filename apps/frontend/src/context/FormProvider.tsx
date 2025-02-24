@@ -81,6 +81,8 @@ export const FormProvider: React.FC<IFormContext> = ({ children }) => {
     phone: "123456789",
   });
 
+  const [response, setResponse] = useState<string>("");
+
   return (
     <FormContext.Provider
       value={{
@@ -92,6 +94,8 @@ export const FormProvider: React.FC<IFormContext> = ({ children }) => {
         setSelectedFormValues,
         contactDetails,
         setContactDetails,
+        response,
+        setResponse,
       }}
     >
       {children}
