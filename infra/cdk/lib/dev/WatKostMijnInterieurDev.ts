@@ -24,6 +24,7 @@ export class WatKostMijnInterieurDev extends cdk.Stack {
       corsPreflight: {
         allowOrigins: ["*"],
         allowMethods: [apigatewayv2.CorsHttpMethod.GET, apigatewayv2.CorsHttpMethod.POST],
+        allowHeaders: ["Content-Type", "Authorization"],
       },
     });
 
