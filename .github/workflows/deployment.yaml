@@ -8,7 +8,7 @@ on:
       - dev
 
 env:
-  AWS_REGION: "eu-west-1"
+  AWS_REGION: ${{ secrets.AWS_REGION }}
 
 permissions:
   id-token: write
@@ -22,22 +22,18 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v3
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           role-session-name: GitHub_to_AWS_via_FederatedOIDC
-          aws-region: eu-west-1
+          aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Sts GetCallerIdentity
+      - name: Build Frontend
         run: |
-          aws sts get-caller-identity
+          cd apps/frontend
+          yarn install
+          yarn build
 
-      # - name: Build Frontend
-      #   run: |
-      #     cd apps/frontend
-      #     yarn install
-      #     yarn build
-
-      # - name: Sync Files to S3
-      #   run: |
-      #     aws s3 sync apps/frontend/dist s3://watkostmijninterieur --delete
+      - name: Deploy to S3
+        run: |
+          aws s3 sync apps/frontend/dist s3://${{ secrets.S3_BUCKET }} --delete
