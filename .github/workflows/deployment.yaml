@@ -3,20 +3,32 @@ on:
   push:
     branches:
       - dev
+  pull_request:
+    branches:
+      - dev
+
+env:
+  AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
+  AWS_REGION: ${{ secrets.AWS_REGION }}
+  S3_BUCKET: ${{ secrets.S3_BUCKET }}
+
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
-  sync:
+  Deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v3
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-west-1
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Build Frontend
         run: |
@@ -24,6 +36,6 @@ jobs:
           yarn install
           yarn build
 
-      - name: Sync Files to S3
+      - name: Deploy to S3
         run: |
-          aws s3 sync apps/frontend/dist s3://watkostmijninterieur --delete
+          aws s3 sync apps/frontend/dist s3://${{ env.S3_BUCKET }} --delete
