@@ -8,14 +8,16 @@ on:
       - dev
 
 env:
+  AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
   AWS_REGION: ${{ secrets.AWS_REGION }}
+  S3_BUCKET: ${{ secrets.S3_BUCKET }}
 
 permissions:
   id-token: write
   contents: read
 
 jobs:
-  AssumeRoleAndCallIdentity:
+  Deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -24,9 +26,9 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
           role-session-name: GitHub_to_AWS_via_FederatedOIDC
-          aws-region: ${{ secrets.AWS_REGION }}
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Build Frontend
         run: |
@@ -36,4 +38,4 @@ jobs:
 
       - name: Deploy to S3
         run: |
-          aws s3 sync apps/frontend/dist s3://${{ secrets.S3_BUCKET }} --delete
+          aws s3 sync apps/frontend/dist s3://${{ env.S3_BUCKET }} --delete
