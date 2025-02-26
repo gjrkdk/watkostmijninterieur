@@ -3,27 +3,41 @@ on:
   push:
     branches:
       - dev
+  pull_request:
+    branches:
+      - dev
+
+env:
+  AWS_REGION: "eu-west-1"
+
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
-  sync:
+  AssumeRoleAndCallIdentity:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: arn:aws:iam::515966496575:oidc-provider/token.actions.githubusercontent.com
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
           aws-region: eu-west-1
 
-      - name: Build Frontend
+      - name: Sts GetCallerIdentity
         run: |
-          cd apps/frontend
-          yarn install
-          yarn build
+          aws sts get-caller-identity
 
-      - name: Sync Files to S3
-        run: |
-          aws s3 sync apps/frontend/dist s3://watkostmijninterieur --delete
+      # - name: Build Frontend
+      #   run: |
+      #     cd apps/frontend
+      #     yarn install
+      #     yarn build
+
+      # - name: Sync Files to S3
+      #   run: |
+      #     aws s3 sync apps/frontend/dist s3://watkostmijninterieur --delete
