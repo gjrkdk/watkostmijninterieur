@@ -10,7 +10,7 @@ on:
 env:
   AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
   AWS_REGION: ${{ secrets.AWS_REGION }}
-  S3_BUCKET: ${{ secrets.S3_BUCKET }}
+  S3_BUCKET: ${{ secrets.S3_BUCKET_DEV }}
 
 permissions:
   id-token: write
@@ -38,4 +38,4 @@ jobs:
 
       - name: Deploy to S3
         run: |
-          aws s3 sync apps/frontend/dist s3://${{ env.S3_BUCKET }} --delete
+          aws s3 sync apps/frontend/dist s3://${{ env.S3_BUCKET_DEV }} --delete
