@@ -5,5 +5,3 @@ const rootElement = document.getElementById("root") as Element;
 const root = createRoot(rootElement);
 
 root.render(<App />);
-
-// Testing new env variable
