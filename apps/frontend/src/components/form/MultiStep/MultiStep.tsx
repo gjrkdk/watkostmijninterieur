@@ -11,6 +11,12 @@ import {
 import { Box, Button, Paper, styled, Typography } from "@mui/material";
 import { stepValidation, contactFormValidation } from "../../../validation";
 
+const TitleQuestionContainer = styled(Box)({
+  marginBottom: "16px",
+  paddingLeft: "20px",
+  paddingRight: "20px",
+});
+
 const ButtonContainer = styled(Box)({
   marginTop: "16px",
   display: "flex",
@@ -34,6 +40,14 @@ export const MultiStep = () => {
   const StepTitle = steps[safeActiveStep].title;
   const StepQuestion = steps[safeActiveStep].question;
   const StepComponent = steps[safeActiveStep].component;
+
+  if (!StepTitle) {
+    <div>Error: No title to be found</div>;
+  }
+
+  if (!StepQuestion) {
+    <div>Error: No question to be found</div>;
+  }
 
   if (!StepComponent) {
     return <div>Error: No component found</div>;
@@ -144,8 +158,10 @@ export const MultiStep = () => {
 
   return (
     <Fragment>
-      <Typography variant="h1">{StepTitle}</Typography>
-      <Typography variant="h2">{StepQuestion}</Typography>
+      <TitleQuestionContainer>
+        <Typography variant="h1">{StepTitle}</Typography>
+        <Typography variant="h2">{StepQuestion}</Typography>
+      </TitleQuestionContainer>
       <Paper>
         <Box component="form" onSubmit={handleSubmit} id="multi-step-form">
           <StepComponent />
