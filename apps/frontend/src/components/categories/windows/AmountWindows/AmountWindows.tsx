@@ -3,7 +3,6 @@ import {
   Box,
   FormControl,
   FormLabel,
-  Typography,
   Select,
   MenuItem,
   SelectChangeEvent,
@@ -36,8 +35,6 @@ export const AmountWindows = () => {
 
   return (
     <Box>
-      <Typography variant="h1">Amount windows</Typography>
-      <Typography variant="h2">How many windows do you want to decorate?</Typography>
       {selectedFormValues.rooms
         .filter(
           (room) =>

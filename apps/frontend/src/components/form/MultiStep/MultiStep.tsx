@@ -1,3 +1,4 @@
+import { Fragment } from "react/jsx-runtime";
 import { steps } from "../steps/steps";
 import { useFormContext } from "../../../context/FormContext";
 import {
@@ -7,7 +8,7 @@ import {
   skipCurtainInbetweens,
   stepContactDetails,
 } from "../../../utils/utils";
-import { Box, Button, Paper, styled } from "@mui/material";
+import { Box, Button, Paper, styled, Typography } from "@mui/material";
 import { stepValidation, contactFormValidation } from "../../../validation";
 
 const ButtonContainer = styled(Box)({
@@ -30,6 +31,8 @@ export const MultiStep = () => {
     return <div>Error: Invalid step</div>;
   }
 
+  const StepTitle = steps[safeActiveStep].title;
+  const StepQuestion = steps[safeActiveStep].question;
   const StepComponent = steps[safeActiveStep].component;
 
   if (!StepComponent) {
@@ -140,7 +143,9 @@ export const MultiStep = () => {
   };
 
   return (
-    <>
+    <Fragment>
+      <Typography variant="h1">{StepTitle}</Typography>
+      <Typography variant="h2">{StepQuestion}</Typography>
       <Paper>
         <Box component="form" onSubmit={handleSubmit} id="multi-step-form">
           <StepComponent />
@@ -161,6 +166,6 @@ export const MultiStep = () => {
           </Button>
         )}
       </ButtonContainer>
-    </>
+    </Fragment>
   );
 };

@@ -49,8 +49,6 @@ export const WindowDecorationDetails = () => {
 
   return (
     <Box>
-      <Typography variant="h1">Window decoration details</Typography>
-      <Typography variant="h2">Select details for your window decoration</Typography>
       {selectedFormValues.rooms
         .filter((room) =>
           room.windowDecoration?.some(

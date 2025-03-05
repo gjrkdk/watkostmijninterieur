@@ -1,7 +1,6 @@
 import { useFormContext } from "../../../../context/FormContext";
 import {
   Box,
-  Typography,
   FormControl,
   FormControlLabel,
   FormLabel,
@@ -33,8 +32,6 @@ export const Floors = () => {
 
   return (
     <Box>
-      <Typography variant="h1">Floors</Typography>
-      <Typography variant="h2">Which floor do you like to decorate?</Typography>
       {selectedFormValues.rooms
         .filter((room) => room.isSelected)
         .map((room) => (
