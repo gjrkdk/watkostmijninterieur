@@ -43,14 +43,10 @@ export const MultiStep = () => {
 
   if (!StepTitle) {
     <div>Error: No title to be found</div>;
-  }
-
-  if (!StepQuestion) {
+  } else if (!StepQuestion) {
     <div>Error: No question to be found</div>;
-  }
-
-  if (!StepComponent) {
-    return <div>Error: No component found</div>;
+  } else if (!StepComponent) {
+    <div>Error: No component found</div>;
   }
 
   const contactFormStep = activeStep === 10;
