@@ -64,7 +64,6 @@ export const MultiStep = () => {
       const response = await fetch(`${process.env.API_URL}/hello`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
-        // body: JSON.stringify(selectedFormValues),
       });
 
       if (!response.ok) {
