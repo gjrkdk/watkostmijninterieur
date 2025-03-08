@@ -24,7 +24,7 @@ const ButtonContainer = styled(Box)({
 });
 
 export const MultiStep = () => {
-  const { activeStep, setActiveStep, selectedFormValues, contactDetails, setError, setResponse } =
+  const { activeStep, setActiveStep, selectedFormValues, contactDetails, setError } =
     useFormContext();
 
   if (steps.length === 0) {
@@ -72,12 +72,6 @@ export const MultiStep = () => {
 
       const result = await response.json();
       console.log(result);
-
-      if (setResponse) {
-        setResponse(result);
-      } else {
-        console.log("undefined jongen");
-      }
     } catch (error) {
       console.error("Error:", error);
     }
