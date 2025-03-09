@@ -8,7 +8,8 @@ on:
       - dev
 
 env:
-  AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
+  AWS_ACCESS_KEY_ID_DEV: ${{ secrets.AWS_ACCESS_KEY_ID_DEV}}
+  AWS_SECRET_ACCESS_KEY_DEV: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
   AWS_REGION: ${{ secrets.AWS_REGION }}
   S3_BUCKET_DEV: ${{ secrets.S3_BUCKET_DEV }}
 
@@ -22,8 +23,8 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: ${{ env.AWS_ROLE_ARN }}
-          role-session-name: Github-Actions-AWS-S3
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID_DEV }}
+          aws-secret-access-key: ${{ AWS_SECRET_ACCESS_KEY_DEV }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Build Frontend
