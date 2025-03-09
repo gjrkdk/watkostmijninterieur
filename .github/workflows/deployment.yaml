@@ -3,31 +3,24 @@ on:
   push:
     branches:
       - dev
-  pull_request:
-    branches:
-      - dev
 
 env:
   AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
   AWS_REGION: ${{ secrets.AWS_REGION }}
   S3_BUCKET_DEV: ${{ secrets.S3_BUCKET_DEV }}
 
-permissions:
-  id-token: write
-  contents: read
-
 jobs:
   Deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Git clone the repository
         uses: actions/checkout@v4
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
           role-to-assume: ${{ env.AWS_ROLE_ARN }}
-          role-session-name: GitHub_to_AWS_via_FederatedOIDC
+          role-session-name: Github-Actions-AWS-S3
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Build Frontend
