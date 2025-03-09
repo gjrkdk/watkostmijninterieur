@@ -24,7 +24,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v3
         with:
           aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID_DEV }}
-          aws-secret-access-key: ${{ AWS_SECRET_ACCESS_KEY_DEV }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY_DEV }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Build Frontend
