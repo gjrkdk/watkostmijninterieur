@@ -1,0 +1,76 @@
+name: Deploy Website
+on:
+  pull_request:
+    branches:
+      - dev
+      - main
+
+env:
+  AWS_ROLE_ARN_DEV: ${{ secrets.AWS_ROLE_ARN_DEV }}
+  AWS_ROLE_ARN_PROD: ${{ secrets.AWS_ROLE_ARN_PROD }}
+  AWS_REGION: ${{ secrets.AWS_REGION }}
+  S3_BUCKET_DEV: ${{ secrets.S3_BUCKET_DEV }}
+  S3_BUCKET_PROD: ${{ secrets.S3_BUCKET_PROD }}
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  dev:
+    if: github.event_name == 'pull_request' && github.base_ref == 'dev'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN_DEV }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Install Dependencies and Build
+        run: |
+          cd apps/frontend
+          yarn install --frozen-lockfile
+          yarn build
+
+      - name: Deploy to S3 (Dev)
+        run: |
+          aws s3 sync apps/frontend/dist s3://${{ env.S3_BUCKET_DEV }} --delete
+
+  wait-for-approval:
+    if: github.event_name == 'pull_request' && github.base_ref == 'main'
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Wait for manual approval
+        run: echo "Deployment waiting for manual approval"
+
+  prod:
+    if: github.event_name == 'pull_request' && github.base_ref == 'main'
+    runs-on: ubuntu-latest
+    needs: wait-for-approval
+    environment: production
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN_PROD }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Build Frontend
+        run: |
+          cd apps/frontend
+          yarn install --frozen-lockfile
+          yarn build
+
+      - name: Deploy to S3 (Prod)
+        run: |
+          aws s3 sync apps/frontend/dist s3://${{ env.S3_BUCKET_PROD }} --delete

@@ -7,7 +7,6 @@ import {
   FormGroup,
   FormHelperText,
   FormLabel,
-  Typography,
 } from "@mui/material";
 
 export const Furniture = () => {
@@ -44,8 +43,6 @@ export const Furniture = () => {
 
   return (
     <Box>
-      <Typography variant="h1">Furniture</Typography>
-      <Typography variant="h2">Which furniture would you like to choose?</Typography>
       {selectedFormValues.rooms
         .filter((room) => room.isSelected)
         .map((room) => (
