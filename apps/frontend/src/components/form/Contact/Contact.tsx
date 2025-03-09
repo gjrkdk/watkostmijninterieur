@@ -1,5 +1,5 @@
 import { useFormContext } from "../../../context/FormContext";
-import { Box, TextField, Typography } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import { IContactDetails } from "../../../context/FormContext";
 
 export const Contact = () => {
@@ -15,10 +15,6 @@ export const Contact = () => {
 
   return (
     <Box>
-      <Typography variant="h1">Contact Details</Typography>
-      <Typography variant="h2" sx={{ marginTop: "10px" }}>
-        Please fill the form below to receive a price estimation
-      </Typography>
       <TextField
         label="Name"
         name="firstName"

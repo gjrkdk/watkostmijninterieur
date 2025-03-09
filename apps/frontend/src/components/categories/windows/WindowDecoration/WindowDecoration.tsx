@@ -1,7 +1,6 @@
 import { useFormContext } from "../../../../context/FormContext";
 import {
   Box,
-  Typography,
   FormControl,
   RadioGroup,
   FormLabel,
@@ -35,8 +34,6 @@ export const WindowDecoration = () => {
 
   return (
     <Box>
-      <Typography variant="h1">Window decoration</Typography>
-      <Typography variant="h2">Which window decoration would you like to choose?</Typography>
       {selectedFormValues.rooms
         .filter((room) => room.isSelected)
         .map((room) => (

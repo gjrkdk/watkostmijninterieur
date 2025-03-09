@@ -1,7 +1,6 @@
 import { useFormContext } from "../../../../context/FormContext";
 import {
   Box,
-  Typography,
   FormControl,
   FormControlLabel,
   Checkbox,
@@ -24,8 +23,6 @@ export const Rooms = () => {
 
   return (
     <Box>
-      <Typography variant="h1">Rooms</Typography>
-      <Typography variant="h2">Which room do you like to decorate?</Typography>
       <FormControl error={!!error.rooms} variant="standard">
         {selectedFormValues.rooms.map((room) => (
           <FormGroup key={room.id}>

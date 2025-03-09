@@ -105,7 +105,6 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           width: "100%",
-          marginTop: "20px",
         },
       },
     },

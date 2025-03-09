@@ -1,5 +1,6 @@
 import { IContactDetails, IFormDataType } from "../context/FormContext";
 
+// Validates if at least one room is selected
 export const roomValidation = (
   selectedFormValues: IFormDataType,
   setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
@@ -14,6 +15,7 @@ export const roomValidation = (
   return true;
 };
 
+// Validates if at least one floor is selected for each selected room
 export const floorValidation = (
   selectedFormValues: IFormDataType,
   setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
@@ -29,6 +31,7 @@ export const floorValidation = (
   return true;
 };
 
+// Validates if at least one room size is selected for each selected room
 export const roomSizeValidation = (
   selectedFormValues: IFormDataType,
   setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
@@ -44,6 +47,7 @@ export const roomSizeValidation = (
   return true;
 };
 
+// Validates if at least one window decoration is selected for each selected room
 export const windowDecorationValidation = (
   selectedFormValues: IFormDataType,
   setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
@@ -61,6 +65,7 @@ export const windowDecorationValidation = (
   return true;
 };
 
+// Validates if at least one window decoration detail is selected for each selected room
 export const windowDecorationDetailsValidation = (
   selectedFormValues: IFormDataType,
   setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
@@ -88,6 +93,7 @@ export const windowDecorationDetailsValidation = (
   return true;
 };
 
+// Validates if at least one amount of windows is selected for each selected room
 export const amountWindowsValidation = (
   selectedFormValues: IFormDataType,
   setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
@@ -113,6 +119,7 @@ export const amountWindowsValidation = (
   return true;
 };
 
+// Validates if all windows have sizes selected for each selected room
 export const windowSizeValidation = (
   selectedFormValues: IFormDataType,
   setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
@@ -141,6 +148,7 @@ export const windowSizeValidation = (
   }
 };
 
+// Validates if at least one curtain or inbetween size is selected for each selected room
 export const curtainInbetweenValidation = (
   selectedFormValues: IFormDataType,
   setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
@@ -167,6 +175,7 @@ export const curtainInbetweenValidation = (
   return true;
 };
 
+// Validates if at least one furniture is selected for each selected room
 export const furnitureValidation = (
   selectedFormValues: IFormDataType,
   setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
@@ -183,6 +192,7 @@ export const furnitureValidation = (
   return true;
 };
 
+// Validates if at least one furniture detail is selected for each selected room
 export const furnitureDetailsValidation = (
   selectedFormValues: IFormDataType,
   setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,
@@ -209,6 +219,7 @@ export const furnitureDetailsValidation = (
   return true;
 };
 
+// Validates the contact details
 export const contactValidation = (
   contactDetails: IContactDetails,
   setError: React.Dispatch<React.SetStateAction<Record<string, string>>>,

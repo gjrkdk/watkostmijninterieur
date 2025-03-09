@@ -1,3 +1,4 @@
+import { Fragment } from "react/jsx-runtime";
 import { steps } from "../steps/steps";
 import { useFormContext } from "../../../context/FormContext";
 import {
@@ -7,8 +8,14 @@ import {
   skipCurtainInbetweens,
   stepContactDetails,
 } from "../../../utils/utils";
-import { Box, Button, Paper, styled } from "@mui/material";
+import { Box, Button, Paper, styled, Typography } from "@mui/material";
 import { stepValidation, contactFormValidation } from "../../../validation";
+
+const TitleQuestionContainer = styled(Box)({
+  marginBottom: "16px",
+  paddingLeft: "20px",
+  paddingRight: "20px",
+});
 
 const ButtonContainer = styled(Box)({
   marginTop: "16px",
@@ -17,7 +24,7 @@ const ButtonContainer = styled(Box)({
 });
 
 export const MultiStep = () => {
-  const { activeStep, setActiveStep, selectedFormValues, contactDetails, setError, setResponse } =
+  const { activeStep, setActiveStep, selectedFormValues, contactDetails, setError } =
     useFormContext();
 
   if (steps.length === 0) {
@@ -30,10 +37,16 @@ export const MultiStep = () => {
     return <div>Error: Invalid step</div>;
   }
 
+  const StepTitle = steps[safeActiveStep].title;
+  const StepQuestion = steps[safeActiveStep].question;
   const StepComponent = steps[safeActiveStep].component;
 
-  if (!StepComponent) {
-    return <div>Error: No component found</div>;
+  if (!StepTitle) {
+    <div>Error: No title to be found</div>;
+  } else if (!StepQuestion) {
+    <div>Error: No question to be found</div>;
+  } else if (!StepComponent) {
+    <div>Error: No component found</div>;
   }
 
   const contactFormStep = activeStep === 10;
@@ -51,7 +64,6 @@ export const MultiStep = () => {
       const response = await fetch(`${process.env.API_URL}/hello`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
-        // body: JSON.stringify(selectedFormValues),
       });
 
       if (!response.ok) {
@@ -60,12 +72,6 @@ export const MultiStep = () => {
 
       const result = await response.json();
       console.log(result);
-
-      if (setResponse) {
-        setResponse(result);
-      } else {
-        console.log("undefined jongen");
-      }
     } catch (error) {
       console.error("Error:", error);
     }
@@ -140,7 +146,11 @@ export const MultiStep = () => {
   };
 
   return (
-    <>
+    <Fragment>
+      <TitleQuestionContainer>
+        <Typography variant="h1">{StepTitle}</Typography>
+        <Typography variant="h2">{StepQuestion}</Typography>
+      </TitleQuestionContainer>
       <Paper>
         <Box component="form" onSubmit={handleSubmit} id="multi-step-form">
           <StepComponent />
@@ -161,6 +171,6 @@ export const MultiStep = () => {
           </Button>
         )}
       </ButtonContainer>
-    </>
+    </Fragment>
   );
 };
