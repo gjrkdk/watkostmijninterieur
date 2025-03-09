@@ -1,5 +1,8 @@
 name: Deploy Website
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - dev
