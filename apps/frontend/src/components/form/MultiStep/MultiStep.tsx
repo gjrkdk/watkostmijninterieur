@@ -60,16 +60,22 @@ export const MultiStep = () => {
       return false;
     }
 
+    const data = {
+      firstName: contactDetails.firstName,
+      email: contactDetails.email,
+      phoneNumber: contactDetails.phone,
+    };
+
     try {
-      const response = await fetch(`${process.env.API_URL}/hello`, {
-        method: "GET",
+      const response = await fetch(`${process.env.API_URL_DEV}/price-calculation`, {
+        method: "POST",
         headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
       });
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-
       const result = await response.json();
       console.log(result);
     } catch (error) {
