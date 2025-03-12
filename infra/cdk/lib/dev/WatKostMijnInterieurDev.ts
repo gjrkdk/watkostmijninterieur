@@ -26,7 +26,7 @@ export class WatKostMijnInterieurDev extends cdk.Stack {
       code: lambda.Code.fromAsset(path.join(__dirname, "../../../../apps/backend/dist")),
       environment: {
         ENV: "dev",
-        TABLE_NAME: contactsTable.tableName,
+        TABLE_NAME_DEV: contactsTable.tableName,
       },
     });
 

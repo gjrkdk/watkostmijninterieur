@@ -11,15 +11,15 @@ export const handler = async (
   context: Context,
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const tableName = process.env.TABLE_NAME || "Default";
+    const tableName = process.env.TABLE_NAME_DEV || "Default";
     const stage = process.env.ENV || "dev";
 
     if (!tableName) {
-      console.error("TABLE_NAME environment variable is missing");
+      console.error("TABLE_NAME_DEV environment variable is missing");
       return {
         statusCode: 500,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: "Server configuration error: TABLE_NAME not set" }),
+        body: JSON.stringify({ message: "Server configuration error: TABLE_NAME_DEV not set" }),
       };
     }
 
