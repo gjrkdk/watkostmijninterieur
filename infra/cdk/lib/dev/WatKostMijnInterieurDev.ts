@@ -14,7 +14,7 @@ export class WatKostMijnInterieurDev extends cdk.Stack {
     const tableName = process.env.TABLE_NAME_DEV || "Default";
 
     const contactsTable = new Table(this, "contactsTable", {
-      tableName,
+      tableName: tableName,
       partitionKey: { name: "id", type: AttributeType.STRING },
       billingMode: BillingMode.PAY_PER_REQUEST,
       removalPolicy: cdk.RemovalPolicy.DESTROY,
