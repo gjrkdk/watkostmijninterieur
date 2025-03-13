@@ -46,8 +46,7 @@ export const handler = async (
       return {
         statusCode: 400,
         headers: {
-          "Access-Control-Allow-Origin": "http://localhost:3000",
-          "Access-Control-Allow-Headers": "Content-Type",
+          "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Methods": "POST, OPTIONS",
           "Content-Type": "application/json",
         },
