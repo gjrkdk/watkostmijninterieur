@@ -5,7 +5,6 @@ import { Table, AttributeType, BillingMode } from "aws-cdk-lib/aws-dynamodb";
 import * as path from "path";
 import * as apigatewayv2 from "aws-cdk-lib/aws-apigatewayv2";
 import * as integrations from "aws-cdk-lib/aws-apigatewayv2-integrations";
-// import { CfnOutput } from "aws-cdk-lib";
 
 export class WatKostMijnInterieurDev extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -31,7 +30,7 @@ export class WatKostMijnInterieurDev extends cdk.Stack {
       },
     });
 
-    contactsTable.grantWriteData(priceCalculation);
+    contactsTable.grantReadWriteData(priceCalculation);
 
     const httpApi = new apigatewayv2.HttpApi(this, "HttpApi", {
       apiName: "PriceCalculationService",
