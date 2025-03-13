@@ -11,10 +11,8 @@ export class WatKostMijnInterieurDev extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const tableName = process.env.TABLE_NAME_DEV || "Default";
-
     const contactsTable = new Table(this, "contactsTable", {
-      tableName: tableName,
+      tableName: "Contacts",
       partitionKey: { name: "id", type: AttributeType.STRING },
       billingMode: BillingMode.PAY_PER_REQUEST,
       removalPolicy: cdk.RemovalPolicy.DESTROY,
@@ -26,7 +24,6 @@ export class WatKostMijnInterieurDev extends cdk.Stack {
       code: lambda.Code.fromAsset(path.join(__dirname, "../../../../apps/backend/dist")),
       environment: {
         ENV: "dev",
-        TABLE_NAME_DEV: contactsTable.tableName,
       },
     });
 
