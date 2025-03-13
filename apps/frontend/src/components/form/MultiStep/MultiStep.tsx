@@ -24,7 +24,7 @@ const ButtonContainer = styled(Box)({
 });
 
 export const MultiStep = () => {
-  const { activeStep, setActiveStep, selectedFormValues, contactDetails, setError } =
+  const { activeStep, setActiveStep, selectedFormValues, contactDetails, setError, setResponse } =
     useFormContext();
 
   if (steps.length === 0) {
@@ -60,18 +60,28 @@ export const MultiStep = () => {
       return false;
     }
 
+    // const data = {
+    //   firstName: contactDetails.firstName,
+    //   email: contactDetails.email,
+    //   phoneNumber: contactDetails.phone,
+    // };
+
     try {
-      const response = await fetch(`${process.env.API_URL}/hello`, {
-        method: "GET",
+      const response = await fetch(`${process.env.API_URL_DEV}/price-calculation`, {
+        method: "POST",
         headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(selectedFormValues),
       });
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-
       const result = await response.json();
       console.log(result);
+
+      if (setResponse) {
+        setResponse(result);
+      }
     } catch (error) {
       console.error("Error:", error);
     }

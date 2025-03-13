@@ -51,12 +51,12 @@ export const FormProvider: React.FC<IFormContext> = ({ children }) => {
     //       : index === 1
     //         ? ["250cm B x 200cm HG", "150cm B x 100cm HG"]
     //         : [],
-    //   curtainInbetweenSizes: room.curtainInbetweenSizes?.map((curtainAndInbetweenSize) => ({
-    //     ...curtainAndInbetweenSize,
-    //     isSelected:
-    //       (index === 0 && curtainAndInbetweenSize.label === "550cm B") ||
-    //       (index === 1 && curtainAndInbetweenSize.label === "250cm B"),
-    //   })),
+    // curtainInbetweenSizes: room.curtainInbetweenSizes?.map((curtainAndInbetweenSize) => ({
+    //   ...curtainAndInbetweenSize,
+    //   isSelected:
+    //     (index === 0 && curtainAndInbetweenSize.label === "550cm B") ||
+    //     (index === 1 && curtainAndInbetweenSize.label === "250cm B"),
+    // })),
     // furniture: room.furniture?.map((furniture) => ({
     //   ...furniture,
     //   isSelected:
@@ -73,12 +73,12 @@ export const FormProvider: React.FC<IFormContext> = ({ children }) => {
   });
 
   const [contactDetails, setContactDetails] = useState<IContactDetails>({
-    firstName: "",
-    email: "",
-    phone: "",
-    // firstName: "John",
-    // email: "john.doe@example.com",
-    // phone: "123456789",
+    // firstName: "",
+    // email: "",
+    // phone: "",
+    firstName: "John",
+    email: "john.doe@example.com",
+    phone: "123456789",
   });
 
   const [response, setResponse] = useState<string>("");
