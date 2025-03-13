@@ -73,12 +73,12 @@ export const FormProvider: React.FC<IFormContext> = ({ children }) => {
   });
 
   const [contactDetails, setContactDetails] = useState<IContactDetails>({
-    firstName: "",
-    email: "",
-    phone: "",
-    // firstName: "John",
-    // email: "john.doe@example.com",
-    // phone: "123456789",
+    // firstName: "",
+    // email: "",
+    // phone: "",
+    firstName: "John",
+    email: "john.doe@example.com",
+    phone: "123456789",
   });
 
   const [response, setResponse] = useState<string>("");
