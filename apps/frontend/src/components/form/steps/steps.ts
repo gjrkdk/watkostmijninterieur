@@ -24,7 +24,7 @@ export const steps: IStepConfig[] = [
   {
     id: 0,
     component: Rooms,
-    title: "Rooms",
+    title: "This is changed",
     question: "Which room do you like to decorate?",
   },
   {
@@ -84,7 +84,7 @@ export const steps: IStepConfig[] = [
   {
     id: 10,
     component: Contact,
-    title: "Contact Details",
+    title: "This is changed",
     question: "Please fill the form below to receive a price estimation",
   },
   {
