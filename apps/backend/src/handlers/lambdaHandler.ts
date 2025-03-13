@@ -73,7 +73,11 @@ export const handler = async (
     console.error("Error:", error);
     return {
       statusCode: 500,
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "OPTIONS, GET, POST",
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ message: "Internal server error" }),
     };
   }
