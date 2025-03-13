@@ -24,7 +24,7 @@ const ButtonContainer = styled(Box)({
 });
 
 export const MultiStep = () => {
-  const { activeStep, setActiveStep, selectedFormValues, contactDetails, setError, setResponse } =
+  const { activeStep, setActiveStep, selectedFormValues, contactDetails, setError } =
     useFormContext();
 
   if (steps.length === 0) {
@@ -60,17 +60,18 @@ export const MultiStep = () => {
       return false;
     }
 
-    // const data = {
-    //   firstName: contactDetails.firstName,
-    //   email: contactDetails.email,
-    //   phoneNumber: contactDetails.phone,
-    // };
-
     try {
+      const requestBody = {
+        contactDetails,
+        selectedFormValues,
+      };
+
+      console.log(requestBody);
+
       const response = await fetch(`${process.env.API_URL_DEV}/price-calculation`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(selectedFormValues),
+        body: JSON.stringify(requestBody),
       });
 
       if (!response.ok) {
@@ -78,10 +79,6 @@ export const MultiStep = () => {
       }
       const result = await response.json();
       console.log(result);
-
-      if (setResponse) {
-        setResponse(result);
-      }
     } catch (error) {
       console.error("Error:", error);
     }
