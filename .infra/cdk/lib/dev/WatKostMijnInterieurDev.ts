@@ -30,7 +30,7 @@ export class WatKostMijnInterieurDev extends cdk.Stack {
       },
     });
 
-    contactsTable.grantReadWriteData(priceCalculation);
+    contactsTable.grantWriteData(priceCalculation);
 
     const httpApi = new apigatewayv2.HttpApi(this, "HttpApi", {
       apiName: "PriceCalculationService",
