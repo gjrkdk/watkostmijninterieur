@@ -13,7 +13,6 @@ export const handler = async (
 ): Promise<APIGatewayProxyResult> => {
   try {
     const stage = process.env.ENV || "dev";
-    const tableName = process.env.TABLE_NAME_DEV || "Default";
 
     let body;
     try {
@@ -57,7 +56,7 @@ export const handler = async (
 
     await dynamoDB.send(
       new PutCommand({
-        TableName: tableName,
+        TableName: "Contacts",
         Item: {
           id: contactId,
           email: email,
