@@ -39,6 +39,10 @@ jobs:
       - name: Debug Environment Variables
         run: cat apps/frontend/.env || echo ".env file is missing!"
 
+      - name: Set up environment variables
+        run: |
+          echo "API_URL_DEV=${{ secrets.API_URL_DEV }}" >> $GITHUB_ENV
+
       - name: Install Dependencies and Build
         run: |
           cd apps/frontend
