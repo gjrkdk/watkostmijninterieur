@@ -36,6 +36,9 @@ jobs:
           role-session-name: GitHub_to_AWS_via_FederatedOIDC
           aws-region: ${{ env.AWS_REGION }}
 
+      - name: Debug Environment Variables
+        run: cat apps/frontend/.env || echo ".env file is missing!"
+
       - name: Install Dependencies and Build
         run: |
           cd apps/frontend
