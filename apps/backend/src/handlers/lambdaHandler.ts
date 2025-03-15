@@ -29,7 +29,11 @@ export const handler = async (
       console.error("Invalid JSON received:", event.body);
       return {
         statusCode: 400,
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "POST, OPTIONS",
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({ error: "Invalid JSON format" }),
       };
     }
@@ -41,7 +45,11 @@ export const handler = async (
     if (!firstName || !email) {
       return {
         statusCode: 400,
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "POST, OPTIONS",
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({ message: "First name and email are required" }),
       };
     }
@@ -113,7 +121,7 @@ export const handler = async (
         });
     };
 
-    const response = await calculateRoomPricing(selectedFormValues);
+    const response = calculateRoomPricing(selectedFormValues);
     console.log("Price Calculation Response:", response);
 
     const { totalPrice } = response;
