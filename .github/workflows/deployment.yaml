@@ -16,6 +16,7 @@ env:
   S3_BUCKET_PROD: ${{ secrets.S3_BUCKET_PROD }}
   CLOUDFRONT_DISTRIBUTION_ID_DEV: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV }}
   # CLOUDFRONT_DISTRIBUTION_ID_PROD: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_PROD }}
+  API_URL_DEV: ${{ secrets.API_URL_DEV }}
 
 permissions:
   id-token: write
@@ -41,7 +42,7 @@ jobs:
 
       - name: Set up environment variables
         run: |
-          echo "API_URL_DEV=${{ secrets.API_URL_DEV }}" >> $GITHUB_ENV
+          echo "API_URL_DEV=${{ env.API_URL_DEV }}" >> $GITHUB_ENV
 
       - name: Install Dependencies and Build
         run: |
