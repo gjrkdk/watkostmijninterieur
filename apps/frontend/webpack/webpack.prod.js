@@ -1,7 +1,5 @@
 const webpack = require("webpack");
 const TerserPlugin = require("terser-webpack-plugin");
-const path = require("path");
-const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   mode: "production",
@@ -10,7 +8,6 @@ module.exports = {
     new webpack.DefinePlugin({
       "process.env.name": JSON.stringify("production"),
     }),
-    new Dotenv({ path: path.resolve(__dirname, "../.env") }),
   ],
   optimization: {
     minimize: true,
