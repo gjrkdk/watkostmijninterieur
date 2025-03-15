@@ -76,6 +76,6 @@ jobs:
           aws s3 sync apps/frontend/dist s3://${{ env.S3_BUCKET_PROD }} --delete
 
       # TODO: Add a step to invalidate CloudFront cache for production
-      - name: Invalidate CloudFront Cache
-        run: |
-          aws cloudfront create-invalidation --distribution-id ${{ env.CLOUDFRONT_DISTRIBUTION_ID_PROD }} --paths "/*"
+      # - name: Invalidate CloudFront Cache
+      #   run: |
+      #     aws cloudfront create-invalidation --distribution-id ${{ env.CLOUDFRONT_DISTRIBUTION_ID_PROD }} --paths "/*"
