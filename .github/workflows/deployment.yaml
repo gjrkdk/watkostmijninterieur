@@ -14,6 +14,8 @@ env:
   AWS_REGION: ${{ secrets.AWS_REGION }}
   S3_BUCKET_DEV: ${{ secrets.S3_BUCKET_DEV }}
   S3_BUCKET_PROD: ${{ secrets.S3_BUCKET_PROD }}
+  CLOUDFRONT_DISTRIBUTION_ID_DEV: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV }}
+  # CLOUDFRONT_DISTRIBUTION_ID_PROD: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_PROD }}
 
 permissions:
   id-token: write
@@ -44,6 +46,10 @@ jobs:
         run: |
           aws s3 sync apps/frontend/dist s3://${{ env.S3_BUCKET_DEV }} --delete
 
+      - name: Invalidate CloudFront Cache
+        run: |
+          aws cloudfront create-invalidation --distribution-id ${{ env.CLOUDFRONT_DISTRIBUTION_ID_DEV }} --paths "/*"
+
   prod:
     if: github.event_name == 'pull_request' && github.base_ref == 'main'
     runs-on: ubuntu-latest
@@ -68,3 +74,8 @@ jobs:
       - name: Deploy to S3 (Prod)
         run: |
           aws s3 sync apps/frontend/dist s3://${{ env.S3_BUCKET_PROD }} --delete
+
+      # TODO: Add a step to invalidate CloudFront cache for production
+      # - name: Invalidate CloudFront Cache
+      #   run: |
+      #     aws cloudfront create-invalidation --distribution-id ${{ env.CLOUDFRONT_DISTRIBUTION_ID_PROD }} --paths "/*"
