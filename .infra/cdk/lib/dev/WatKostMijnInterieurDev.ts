@@ -11,6 +11,8 @@ export class WatKostMijnInterieurDev extends cdk.Stack {
     super(scope, id, props);
 
     const stageName = "dev";
+    const sendgridApiKey = process.env.SENDGRID_API_KEY || "";
+    const senderEmail = process.env.SENDER_EMAIL || "";
 
     const contactsTable = new Table(this, "contactsTable", {
       tableName: "Contacts",
@@ -25,6 +27,8 @@ export class WatKostMijnInterieurDev extends cdk.Stack {
       code: lambda.Code.fromAsset(path.join(__dirname, "../../../../apps/backend/dist")),
       environment: {
         ENV: "dev",
+        SENDGRID_API_KEY: sendgridApiKey,
+        SENDER_EMAIL: senderEmail,
       },
     });
 

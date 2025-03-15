@@ -3,9 +3,14 @@ import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { v4 as uuidv4 } from "uuid";
 import { calculateRoomPricing } from "@gjrkdk/price-calculator";
+import sgMail from "@sendgrid/mail";
 
 const client = new DynamoDBClient({});
 const dynamoDB = DynamoDBDocumentClient.from(client);
+const sendgridApiKey = process.env.SENDGRID_API_KEY || "";
+const senderEmail = process.env.SENDER_EMAIL || "";
+
+sgMail.setApiKey(sendgridApiKey);
 
 export const handler = async (
   event: APIGatewayProxyEvent,
@@ -67,6 +72,23 @@ export const handler = async (
         },
       }),
     );
+
+    const msg = {
+      to: email,
+      from: senderEmail,
+      subject: "Thank you for submitting the form",
+      text: "and easy to do anywhere, even with Node.js",
+      html: "<strong>and easy to do anywhere, even with Node.js</strong>",
+    };
+
+    await sgMail
+      .send(msg)
+      .then(() => {
+        console.log("Email sent");
+      })
+      .catch((error) => {
+        console.error("Error sending email:", error);
+      });
 
     const response = calculateRoomPricing(selectedFormValues);
     console.log("Price Calculation Response:", response);
