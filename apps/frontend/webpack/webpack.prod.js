@@ -7,6 +7,7 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       "process.env.name": JSON.stringify("production"),
+      "process.env.API_URL_DEV": JSON.stringify(process.env.API_URL_DEV),
     }),
   ],
   optimization: {
