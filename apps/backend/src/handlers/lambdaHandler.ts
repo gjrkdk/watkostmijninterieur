@@ -74,26 +74,40 @@ export const handler = async (
       }),
     );
 
-    const msg = {
-      to: email,
-      from: senderEmail,
-      templateId: sendgridEmailTemplate,
-      dynamicTemplateData: {
-        firstName: firstName,
-      },
+    const sendConfirmationEmail = async (
+      firstName: string,
+      email: string,
+      totalPrice: { min: number; max: number },
+    ) => {
+      const msg = {
+        to: email,
+        from: senderEmail,
+        templateId: sendgridEmailTemplate,
+        dynamicTemplateData: {
+          firstName: firstName,
+          min: totalPrice.min,
+          max: totalPrice.max,
+        },
+      };
+      await sgMail
+        .send(msg)
+        .then(() => {
+          console.log(
+            `Email sent to ${email} with price details: ${totalPrice.min} - ${totalPrice.max}`,
+          );
+        })
+        .catch((error) => {
+          console.error("Error sending email:", error);
+        });
     };
-
-    await sgMail
-      .send(msg)
-      .then(() => {
-        console.log("Email sent");
-      })
-      .catch((error) => {
-        console.error("Error sending email:", error);
-      });
 
     const response = calculateRoomPricing(selectedFormValues);
     console.log("Price Calculation Response:", response);
+
+    const { totalPrice } = response;
+
+    await sendConfirmationEmail(firstName, email, totalPrice);
+    console.log("Confirmation email sent");
 
     return {
       statusCode: 200,
