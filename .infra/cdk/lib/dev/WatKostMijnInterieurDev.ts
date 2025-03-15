@@ -13,6 +13,7 @@ export class WatKostMijnInterieurDev extends cdk.Stack {
     const stageName = "dev";
     const sendgridApiKey = process.env.SENDGRID_API_KEY || "";
     const senderEmail = process.env.SENDER_EMAIL || "";
+    const sendgridEmailTemplate = process.env.SENDGRID_EMAIL_TEMPLATE_ID || "";
 
     const contactsTable = new Table(this, "contactsTable", {
       tableName: "Contacts",
@@ -29,6 +30,7 @@ export class WatKostMijnInterieurDev extends cdk.Stack {
         ENV: "dev",
         SENDGRID_API_KEY: sendgridApiKey,
         SENDER_EMAIL: senderEmail,
+        SENDGRID_EMAIL_TEMPLATE_ID: sendgridEmailTemplate,
       },
     });
 

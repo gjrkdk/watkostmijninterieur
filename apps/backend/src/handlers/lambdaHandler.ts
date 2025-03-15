@@ -9,6 +9,7 @@ const client = new DynamoDBClient({});
 const dynamoDB = DynamoDBDocumentClient.from(client);
 const sendgridApiKey = process.env.SENDGRID_API_KEY || "";
 const senderEmail = process.env.SENDER_EMAIL || "";
+const sendgridEmailTemplate = process.env.SENDGRID_EMAIL_TEMPLATE_ID || "";
 
 sgMail.setApiKey(sendgridApiKey);
 
@@ -76,9 +77,10 @@ export const handler = async (
     const msg = {
       to: email,
       from: senderEmail,
-      subject: "Thank you for submitting the form",
-      text: "and easy to do anywhere, even with Node.js",
-      html: "<strong>and easy to do anywhere, even with Node.js</strong>",
+      templateId: sendgridEmailTemplate,
+      dynamicTemplateData: {
+        firstName: firstName,
+      },
     };
 
     await sgMail
