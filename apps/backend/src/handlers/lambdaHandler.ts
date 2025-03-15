@@ -121,7 +121,7 @@ export const handler = async (
         });
     };
 
-    const response = calculateRoomPricing(selectedFormValues);
+    const response = await calculateRoomPricing(selectedFormValues);
     console.log("Price Calculation Response:", response);
 
     const { totalPrice } = response;
