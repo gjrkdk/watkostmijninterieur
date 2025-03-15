@@ -5,17 +5,18 @@ import { Table, AttributeType, BillingMode } from "aws-cdk-lib/aws-dynamodb";
 import * as path from "path";
 import * as apigatewayv2 from "aws-cdk-lib/aws-apigatewayv2";
 import * as integrations from "aws-cdk-lib/aws-apigatewayv2-integrations";
-// import { CfnOutput } from "aws-cdk-lib";
 
 export class WatKostMijnInterieurDev extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
     const stageName = "dev";
-    const tableName = process.env.TABLE_NAME_DEV || "Default";
+    const sendgridApiKey = process.env.SENDGRID_API_KEY || "";
+    const senderEmail = process.env.SENDER_EMAIL || "";
+    const sendgridEmailTemplate = process.env.SENDGRID_EMAIL_TEMPLATE_ID || "";
 
     const contactsTable = new Table(this, "contactsTable", {
-      tableName: tableName,
+      tableName: "Contacts",
       partitionKey: { name: "id", type: AttributeType.STRING },
       billingMode: BillingMode.PAY_PER_REQUEST,
       removalPolicy: cdk.RemovalPolicy.DESTROY,
@@ -27,11 +28,13 @@ export class WatKostMijnInterieurDev extends cdk.Stack {
       code: lambda.Code.fromAsset(path.join(__dirname, "../../../../apps/backend/dist")),
       environment: {
         ENV: "dev",
-        tableName: contactsTable.tableName,
+        SENDGRID_API_KEY: sendgridApiKey,
+        SENDER_EMAIL: senderEmail,
+        SENDGRID_EMAIL_TEMPLATE_ID: sendgridEmailTemplate,
       },
     });
 
-    contactsTable.grantWriteData(priceCalculation);
+    contactsTable.grantReadWriteData(priceCalculation);
 
     const httpApi = new apigatewayv2.HttpApi(this, "HttpApi", {
       apiName: "PriceCalculationService",

@@ -8,7 +8,7 @@
     "outDir": "dist",
     "strict": true,
     "declaration": true,
-    "esModuleInterop": false
+    "esModuleInterop": true
   },
   "devDependencies": {
     "ts-node": "^10.9.2",
