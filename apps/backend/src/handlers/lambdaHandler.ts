@@ -13,6 +13,8 @@ const sendgridEmailTemplate = process.env.SENDGRID_EMAIL_TEMPLATE_ID || "";
 
 sgMail.setApiKey(sendgridApiKey);
 
+// TODO: Modularize this handler
+
 export const handler = async (
   event: APIGatewayProxyEvent,
   context: Context,
@@ -60,19 +62,29 @@ export const handler = async (
 
     const contactId = uuidv4();
 
-    await dynamoDB.send(
-      new PutCommand({
-        TableName: "Contacts",
-        Item: {
-          id: contactId,
-          email: email,
-          firstName: firstName,
-          ...(phone && { phone }),
-          createdAt: new Date().toISOString(),
-          environment: stage,
-        },
-      }),
-    );
+    const saveDataDynamoDB = async (
+      contactId: string,
+      email: string,
+      firstName: string,
+      totalPrice: { min: number; max: number },
+      phone?: string,
+    ) => {
+      await dynamoDB.send(
+        new PutCommand({
+          TableName: "Contacts",
+          Item: {
+            id: contactId,
+            email: email,
+            firstName: firstName,
+            ...(phone && { phone }),
+            minPrice: totalPrice.min,
+            maxPrice: totalPrice.max,
+            createdAt: new Date().toISOString(),
+            environment: stage,
+          },
+        }),
+      );
+    };
 
     const sendConfirmationEmail = async (
       firstName: string,
@@ -101,10 +113,13 @@ export const handler = async (
         });
     };
 
-    const response = calculateRoomPricing(selectedFormValues);
+    const response = await calculateRoomPricing(selectedFormValues);
     console.log("Price Calculation Response:", response);
 
     const { totalPrice } = response;
+
+    await saveDataDynamoDB(contactId, email, firstName, totalPrice, phone);
+    console.log("Data saved to DynamoDB");
 
     await sendConfirmationEmail(firstName, email, totalPrice);
     console.log("Confirmation email sent");
